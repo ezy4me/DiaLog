@@ -1,31 +1,69 @@
-import { StyleSheet } from 'react-native';
+import { Link } from "expo-router";
+import { View, Text, VStack, Box, ScrollView, HStack } from "native-base";
+import React from "react";
 
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
-
-export default function TabOneScreen() {
+const Page = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    <ScrollView>
+      <VStack alignItems="center" space="2.5" mt="4" px="4">
+        <ScrollView horizontal>
+          <HStack space={3}>
+            <Box
+              bg={"blue.100"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+              py={6}
+              px={4}
+              borderRadius={16}>
+              <Text w={72} textAlign={"center"} fontSize={"xl"}>
+                Перед приемом пищи:
+              </Text>
+              <Text fontSize={"md"}>3,9-5,6 ммоль/л</Text>
+            </Box>
+            <Box
+              bg={"amber.100"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+              py={6}
+              px={4}
+              borderRadius={16}>
+              <Text w={72} textAlign={"center"} fontSize={"xl"}>
+                После приема пищи (через 2 часа):
+              </Text>
+              <Text fontSize={"md"}>7,8 ммоль/л</Text>
+            </Box>
+            <Box
+              bg={"green.100"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+              py={6}
+              px={4}
+              borderRadius={16}>
+              <Text w={72} textAlign={"center"} fontSize={"xl"}>
+                Случайный показатель (в любое время дня):
+              </Text>
+              <Text fontSize={"md"}>7,0 ммоль/л</Text>
+            </Box>
+          </HStack>
+        </ScrollView>
+      </VStack>
+    </ScrollView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+export default Page;
+/* <Box borderRadius={8} py={4} px={16} bg="indigo.500">
+        <Link style={{ color: "white" }} href={"/(modals)/login"}>
+          Войти
+        </Link>
+      </Box>
+      <Box borderRadius={8} py={4} px={16} bg="indigo.500">
+        <Link style={{ color: "white" }} href={"/(modals)/diary"}>
+          Мой дневник
+        </Link>
+      </Box>
+      <Box borderRadius={8} py={4} px={16} bg="indigo.500">
+        <Link style={{ color: "white" }} href={"/(modals)/bookInfo"}>
+          Про диабет
+        </Link>
+      </Box> */

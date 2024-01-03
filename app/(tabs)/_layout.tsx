@@ -1,55 +1,106 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import { View, Text, ViewStyle } from "react-native";
+import React from "react";
+import { Tabs } from "expo-router";
+import Colors from "@/constants/Colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import Colors from '../../constants/Colors';
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;
+  focused: boolean;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  const iconStyles: ViewStyle = {
+    top: 0,
+    position: "relative",
+    padding: 0,
+    borderRadius: 0,
+    backgroundColor: "white",
+  };
+
+  if (props.focused) {
+    iconStyles.top = -12;
+    iconStyles.position = "absolute";
+    iconStyles.padding = 8;
+    iconStyles.borderRadius = 50;
+    iconStyles.backgroundColor = Colors.secondary;
+  }
+
+  return <MaterialCommunityIcons size={28} style={iconStyles} {...props} />;
 }
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const Layout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors.primary,
+        headerTitleAlign: "center",
+        headerTitleStyle: {
+          textTransform: "uppercase",
+          fontFamily: "mon-sb",
+        },
+        headerStyle: {
+          backgroundColor: Colors.secondary,
+        },
+        tabBarLabelStyle: {
+          fontFamily: "mon-sb",
+        },
       }}>
       <Tabs.Screen
-        name="index"
+        name="diary"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+          headerTitle: "Дневник",
+          tabBarLabel: "Дневник",
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabBarIcon
+              name="google-analytics"
+              focused={focused}
+              color={color}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="nutrition"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerTitle: "Питание",
+          tabBarLabel: "Питание",
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabBarIcon name="food-apple" focused={focused} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="index"
+        options={{
+          headerTitle: "Дом",
+          tabBarLabel: "Дом",
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabBarIcon name="home" focused={focused} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="book"
+        options={{
+          headerTitle: "Знания",
+          tabBarLabel: "Знания",
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabBarIcon name="book" focused={focused} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          headerTitle: "Профиль",
+          tabBarLabel: "Профиль",
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabBarIcon name="account" focused={focused} color={color} />
+          ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default Layout;

@@ -2,7 +2,7 @@
   "expo": {
     "name": "dialog",
     "slug": "dialog",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fefefe"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -21,8 +21,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#fefefe"
+      },
+      "package": "com.ezy4me.dialog"
     },
     "web": {
       "bundler": "metro",
@@ -33,7 +34,16 @@
       "expo-router"
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "6f5357bd-8b94-42d3-9673-585e30e6e40f"
+      }
     }
   }
 }
