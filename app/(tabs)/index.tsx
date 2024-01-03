@@ -1,5 +1,4 @@
-import { Link } from "expo-router";
-import { View, Text, VStack, Box, ScrollView, HStack } from "native-base";
+import { Text, VStack, Box, ScrollView, HStack } from "native-base";
 import React from "react";
 
 const Page = () => {

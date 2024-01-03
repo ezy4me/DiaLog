@@ -1,3 +1,4 @@
+import BloodSugarList from "@/components/BloodSugarList";
 import { DiabetesChart } from "@/components/DiabetesChart";
 import { Stack, VStack, ScrollView, Box } from "native-base";
 
@@ -7,6 +8,7 @@ const Page = () => {
       <VStack space="2.5" mt="4" px="4">
         <Stack direction="column" mb="2.5" mt="1.5" space={3}>
           <DiabetesChart />
+          <BloodSugarList />
         </Stack>
       </VStack>
     </ScrollView>

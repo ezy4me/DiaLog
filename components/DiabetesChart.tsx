@@ -2,8 +2,6 @@
 import { LineChart } from "react-native-chart-kit";
 
 import { Dimensions, View } from "react-native";
-import { Button, Heading, Text } from "native-base";
-import BloodSugarList from "./BloodSugarList";
 
 export function DiabetesChart() {
   const today = new Date();
@@ -19,18 +17,11 @@ export function DiabetesChart() {
       )}.${String(currentDate.getMonth() + 1).padStart(2, "0")}`;
 
       return formattedDate;
-    }).reverse()
-  }
+    }).reverse();
+  };
 
   return (
     <View style={{ width: "100%" }}>
-      {/* <Heading
-        color={"dark.200"}
-        textAlign={"center"}
-        fontSize={20}
-        letterSpacing={1}>
-        ВАШ ГРАФИК
-      </Heading> */}
       <LineChart
         data={{
           labels: generateFormattedDate(),
@@ -67,6 +58,9 @@ export function DiabetesChart() {
             strokeWidth: "1",
             stroke: "#c7d2fe",
           },
+          propsForLabels: {
+            fontFamily: "mon",
+          },
         }}
         bezier
         style={{
@@ -74,8 +68,6 @@ export function DiabetesChart() {
           borderRadius: 4,
         }}
       />
-
-      <BloodSugarList/>
     </View>
   );
 }

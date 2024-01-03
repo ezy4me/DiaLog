@@ -33,13 +33,18 @@ const Layout = () => {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: '#525252',
         headerTitleAlign: "center",
         headerTitleStyle: {
           textTransform: "uppercase",
-          fontFamily: "mon-sb",
+          letterSpacing: .5,
+          lineHeight: 32,
+          borderBottomColor: 'white',
+          borderBottomWidth: 4,
+          borderRadius: 100,
         },
         headerStyle: {
-          backgroundColor: Colors.secondary,
+          backgroundColor: '#a5b4fc',
         },
         tabBarLabelStyle: {
           fontFamily: "mon-sb",

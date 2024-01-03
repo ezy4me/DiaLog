@@ -126,6 +126,7 @@ const Page = () => {
             borderColor={"blue.300"}
             borderWidth={2}
             mt={2}
+            mr={2}
             p={2}
             alignItems={"center"}
             justifyContent={"center"}
@@ -145,19 +146,10 @@ const Page = () => {
   );
 
   return (
-    <VStack w="100%" maxW={96} alignItems="center" space="2.5" mt="4" px="4">
+    <VStack w="100%" alignItems="center" space="2.5" mt="4" px="4">
       <Input
-        shadow={2}
-        bg={"muted.100"}
-        _hover={{
-          bg: "amber.100",
-        }}
-        _focus={{
-          bg: "muted.100",
-          borderColor: "indigo.300",
-        }}
         InputRightElement={
-          <Pressable onPress={() => setSearchTerm('')}>
+          <Pressable onPress={() => setSearchTerm("")}>
             <Icon
               as={<MaterialCommunityIcons name="close" />}
               size={5}

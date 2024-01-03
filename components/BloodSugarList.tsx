@@ -1,9 +1,8 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import {
-  Spacer,
   VStack,
   Text,
-  Heading,
   FlatList,
   Box,
   HStack,
@@ -50,14 +49,23 @@ const BloodSugarList = () => {
   ];
 
   const colorStatusStack: any = {
-    normal: "#4ade80",
-    low: "#facc15",
-    high: "#f43f5e",
+    normal: "#4ade60",
+    low: "#facc20",
+    high: "#f43f60",
+  };
+
+  const router = useRouter();
+
+  const navigateToPage = (route: any) => {
+    router.push(route);
   };
 
   return (
     <Box>
-      <Button borderRadius={32} colorScheme={"indigo"}>
+      <Button
+        onPress={() => navigateToPage("/(modals)/addBloodSugar")}
+        borderRadius={32}
+        colorScheme={"indigo"}>
         Добавить
       </Button>
       <FlatList
@@ -90,9 +98,6 @@ const BloodSugarList = () => {
                 <Text textAlign={"center"} color="gray.600">
                   {item.text}
                 </Text>
-                <Text fontWeight={"bold"} color="gray.700">
-                  {item.date}
-                </Text>
               </Box>
               <Box alignItems={"center"} justifyContent={"center"}>
                 <Button
@@ -112,6 +117,9 @@ const BloodSugarList = () => {
                     />
                   }
                 />
+                <Text mt={2} fontWeight={"bold"} color="gray.700">
+                  {item.date}
+                </Text>
               </Box>
             </HStack>
           </Box>
