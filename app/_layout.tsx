@@ -115,8 +115,20 @@ function RootLayoutNav() {
         <Stack.Screen
           name="(modals)/addBloodSugar"
           options={{
-            headerTitle:'Добавить значение',
+            headerTitle: "Добавить значение",
             title: "Добавить значение",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="(modals)/bookInfo"
+          options={{
+            headerTitle: "Справочник",
+            title: "Справочник",
             presentation: "modal",
             headerTitleAlign: "center",
             headerTitleStyle: {
