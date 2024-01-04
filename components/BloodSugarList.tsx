@@ -1,13 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  VStack,
-  Text,
-  FlatList,
-  Box,
-  HStack,
-  Button,
-} from "native-base";
+import { VStack, Text, FlatList, Box, HStack, Button } from "native-base";
 
 const BloodSugarList = () => {
   const data = [
