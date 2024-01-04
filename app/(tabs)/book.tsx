@@ -24,7 +24,7 @@ export default function Page() {
 
   const renderDiabetesInfoCards = () => {
     return data.map((item, index) => (
-      <Pressable maxW={96} onPress={() => storeData(item)}>
+      <Pressable key={index} maxW={96} onPress={() => storeData(item)}>
         {({ isHovered, isFocused, isPressed }) => {
           return (
             <DiabetesInfoCard

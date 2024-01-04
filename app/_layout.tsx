@@ -50,7 +50,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    mon: require("../assets/fonts/Montserrat-Regular.ttf"),
+    "mon": require("../assets/fonts/Montserrat-Regular.ttf"),
     "mon-sb": require("../assets/fonts/Montserrat-SemiBold.ttf"),
     "mon-b": require("../assets/fonts/Montserrat-Bold.ttf"),
     Montserrat_100Thin,
@@ -91,11 +91,11 @@ function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
 
-  // useEffect(() => {
-  //   if (isLoaded && !isSignedIn) {
-  //     router.push("/(modals)/login");
-  //   }
-  // }, [isLoaded]);
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push("/(modals)/login");
+    }
+  }, [isLoaded]);
 
   return (
     <NativeBaseProvider theme={theme}>

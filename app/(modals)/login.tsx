@@ -22,7 +22,7 @@ const Page = () => {
           Привет
         </Heading>
         <Heading mt="1" color="coolGray.600" fontWeight="medium" size="xs">
-          Войди если хочешь
+          Войди, если хочешь
         </Heading>
 
         <VStack space={3} mt="5">
