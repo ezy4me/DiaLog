@@ -2,7 +2,7 @@
   "expo": {
     "name": "dialog",
     "slug": "dialog",
-    "version": "1.0.8beta",
+    "version": "1.0.8_stable",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
