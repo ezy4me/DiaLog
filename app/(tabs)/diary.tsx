@@ -1,15 +1,21 @@
+import BloodSugarList from "@/components/BloodSugarList";
 import { DiabetesChart } from "@/components/DiabetesChart";
 import { Stack, VStack, ScrollView, Box } from "native-base";
+import { Dimensions } from "react-native";
 
 const Page = () => {
+  const screenHeight = Dimensions.get("window").height;
   return (
-    <ScrollView bg={"white"}>
-      <VStack space="2.5" mt="4" px="4">
-        <Stack direction="column" mb="2.5" mt="1.5" space={3}>
+    <VStack bg={"white"} px="4">
+      <Stack>
+        <Box>
           <DiabetesChart />
-        </Stack>
-      </VStack>
-    </ScrollView>
+        </Box>
+        <Box h={screenHeight - 300}>
+          <BloodSugarList />
+        </Box>
+      </Stack>
+    </VStack>
   );
 };
 

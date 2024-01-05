@@ -5,8 +5,10 @@ import { useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 
-import Constants from "expo-constants";
-import { NativeBaseProvider, extendTheme } from "native-base";
+import { NativeBaseProvider } from "native-base";
+import { LinearGradient } from "expo-linear-gradient";
+
+import { theme } from "./theme";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -28,16 +30,13 @@ const tokenCache = {
 };
 
 export {
-  // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from "expo-router";
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "(tabs)",
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -47,7 +46,6 @@ export default function RootLayout() {
     "mon-b": require("../assets/fonts/Montserrat-Bold.ttf"),
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -71,6 +69,13 @@ export default function RootLayout() {
   );
 }
 
+const config = {
+  dependencies: {
+    "linear-gradient": LinearGradient,
+  },
+};
+
+
 function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
@@ -82,13 +87,37 @@ function RootLayoutNav() {
   // }, [isLoaded]);
 
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider theme={theme} config={config}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="(modals)/login"
           options={{
             title: "Войти",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
+         <Stack.Screen
+          name="(modals)/addBloodSugar"
+          options={{
+            headerTitle: "Добавить значение",
+            title: "Добавить значение",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="(modals)/bookInfo"
+          options={{
+            headerTitle: "Справочник",
+            title: "Справочник",
             presentation: "modal",
             headerTitleAlign: "center",
             headerTitleStyle: {

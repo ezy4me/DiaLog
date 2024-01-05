@@ -1,4 +1,4 @@
-import { Box, Stack, VStack, Pressable, ScrollView } from "native-base";
+import { Stack, VStack, Pressable, ScrollView } from "native-base";
 
 import { DiabetesInfoCard } from "@/components/DiabetesInfoCard";
 
@@ -9,7 +9,7 @@ export default function Page() {
   const renderDiabetesInfoCards = () => {
 
     return data.map((item, index) => (
-      <Pressable maxW={96}>
+      <Pressable key={index} maxW={96}>
         {({ isHovered, isFocused, isPressed }) => {
           return (
             <DiabetesInfoCard

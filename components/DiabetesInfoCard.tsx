@@ -25,15 +25,15 @@ export function DiabetesInfoCard({
   isFocused,
   data,
 }: any) {
-  
   const imageSources = [
     require("../assets/images/about.png"),
     require("../assets/images/glucometer.png"),
     require("../assets/images/management.png"),
     require("../assets/images/food.png"),
     require("../assets/images/fitness.png"),
-    require("../assets/images/blood-test.png")
+    require("../assets/images/blood-test.png"),
   ];
+
   return (
     <Box
       alignItems="center"
@@ -54,25 +54,14 @@ export function DiabetesInfoCard({
         rounded="lg"
         overflow="hidden"
         borderColor="coolGray.200"
-        borderWidth="1"
-        _dark={{
-          borderColor: "coolGray.600",
-          backgroundColor: "gray.700",
-        }}
-        _web={{
-          shadow: 2,
-          borderWidth: 0,
-        }}
-        _light={{
-          backgroundColor: "gray.50",
-        }}>
+        borderWidth="1">
         <Box bg={colors[data.id - 1]}>
           <AspectRatio w="100%" ratio={16 / 9}>
             <Center>
               <Image
                 w={24}
                 h={24}
-                source={imageSources[data.id-1]}
+                source={imageSources[data.id - 1]}
                 alt="image"
               />
             </Center>

@@ -1,14 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  Spacer,
-  VStack,
-  Text,
-  Heading,
-  FlatList,
-  Box,
-  HStack,
-  Button,
-} from "native-base";
+import { useRouter } from "expo-router";
+import { VStack, Text, FlatList, Box, HStack, Button } from "native-base";
 
 const BloodSugarList = () => {
   const data = [
@@ -50,25 +42,41 @@ const BloodSugarList = () => {
   ];
 
   const colorStatusStack: any = {
-    normal: "#4ade80",
-    low: "#facc15",
-    high: "#f43f5e",
+    normal: ["#4ade60", "#34d399"],
+    low: ["#facc20", "#fde047"],
+    high: ["#f43f5e", "#f87171"],
+  };
+
+  const router = useRouter();
+
+  const navigateToPage = (route: any) => {
+    router.push(route);
   };
 
   return (
     <Box>
-      <Button borderRadius={32} colorScheme={"indigo"}>
+      <Button
+        onPress={() => navigateToPage("/(modals)/addBloodSugar")}
+        borderRadius={32}
+        colorScheme={"indigo"}>
         Добавить
       </Button>
       <FlatList
         data={data}
         renderItem={({ item }) => (
           <Box
-            borderBottomWidth="1"
-            borderColor="muted.200"
-            pl={["0", "4"]}
-            pr={["0", "5"]}
-            py="2">
+            mt={2}
+            borderWidth="1"
+            borderRadius={16}
+            borderColor="muted.100"
+            bg={{
+              linearGradient: {
+                colors: ['white', 'muted.50'],
+                start: [.2, .2],
+                end: [1, .5],
+              },
+            }}
+            p={1}>
             <HStack space={[2, 3]} justifyContent="space-between">
               <VStack>
                 <Box
@@ -77,7 +85,14 @@ const BloodSugarList = () => {
                   borderRadius={100}
                   borderWidth={2}
                   p={4}
-                  borderColor={colorStatusStack[item.status]}>
+                  bg={{
+                    linearGradient: {
+                      colors: [...colorStatusStack[item.status]],
+                      start: [.2, .2],
+                      end: [1, .5],
+                    },
+                  }}
+                  borderColor={'muted.100'}>
                   <Text fontSize={18} color="dark.100" fontWeight={"semibold"}>
                     {item.value}
                   </Text>
@@ -90,15 +105,14 @@ const BloodSugarList = () => {
                 <Text textAlign={"center"} color="gray.600">
                   {item.text}
                 </Text>
-                <Text fontWeight={"bold"} color="gray.700">
-                  {item.date}
-                </Text>
               </Box>
               <Box alignItems={"center"} justifyContent={"center"}>
                 <Button
                   colorScheme={"gray"}
                   borderRadius={100}
-                  bg={"muted.100"}
+                  borderColor={'muted.100'}
+                  borderWidth={2}
+                  bg={"white"}
                   size={"md"}
                   py={1}
                   _text={{
@@ -112,6 +126,9 @@ const BloodSugarList = () => {
                     />
                   }
                 />
+                <Text mt={2} fontWeight={"bold"} color="gray.700">
+                  {item.date}
+                </Text>
               </Box>
             </HStack>
           </Box>
