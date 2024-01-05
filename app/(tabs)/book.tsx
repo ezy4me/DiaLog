@@ -3,13 +3,28 @@ import { Stack, VStack, Pressable, ScrollView } from "native-base";
 import { DiabetesInfoCard } from "@/components/DiabetesInfoCard";
 
 import infoData from "infoData.json";
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Page() {
   const data = infoData;
-  const renderDiabetesInfoCards = () => {
+  const router = useRouter();
 
+  const storeData = async (value: any) => {
+    try {
+      const stringValue = JSON.stringify(value);
+
+      await AsyncStorage.setItem("bookInfo", stringValue);
+
+      router.push("/(modals)/bookInfo");
+    } catch (e) {
+      // error
+    }
+  };
+
+  const renderDiabetesInfoCards = () => {
     return data.map((item, index) => (
-      <Pressable key={index} maxW={96}>
+      <Pressable key={index} maxW={96} onPress={() => storeData(item)}>
         {({ isHovered, isFocused, isPressed }) => {
           return (
             <DiabetesInfoCard

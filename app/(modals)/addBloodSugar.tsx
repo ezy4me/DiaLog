@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View, Text, Box, Stack, Slider, Icon, Button } from "native-base";
+import { Text, Box, Stack, Slider, Icon, Button } from "native-base";
 import React from "react";
 
 const Page = () => {

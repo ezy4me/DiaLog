@@ -1,5 +1,4 @@
-import { Link } from "expo-router";
-import { View, Text, VStack, Box, ScrollView, HStack } from "native-base";
+import { Text, VStack, Box, ScrollView, HStack } from "native-base";
 import React from "react";
 
 const Page = () => {
@@ -21,7 +20,7 @@ const Page = () => {
               <Text fontSize={"md"}>3,9-5,6 ммоль/л</Text>
             </Box>
             <Box
-              bg={"amber.100"}
+              bg={"blue.100"}
               alignItems={"center"}
               justifyContent={"space-between"}
               py={6}
@@ -33,7 +32,7 @@ const Page = () => {
               <Text fontSize={"md"}>7,8 ммоль/л</Text>
             </Box>
             <Box
-              bg={"green.100"}
+              bg={"blue.100"}
               alignItems={"center"}
               justifyContent={"space-between"}
               py={6}
@@ -52,18 +51,3 @@ const Page = () => {
 };
 
 export default Page;
-/* <Box borderRadius={8} py={4} px={16} bg="indigo.500">
-        <Link style={{ color: "white" }} href={"/(modals)/login"}>
-          Войти
-        </Link>
-      </Box>
-      <Box borderRadius={8} py={4} px={16} bg="indigo.500">
-        <Link style={{ color: "white" }} href={"/(modals)/diary"}>
-          Мой дневник
-        </Link>
-      </Box>
-      <Box borderRadius={8} py={4} px={16} bg="indigo.500">
-        <Link style={{ color: "white" }} href={"/(modals)/bookInfo"}>
-          Про диабет
-        </Link>
-      </Box> */
