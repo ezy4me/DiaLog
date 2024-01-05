@@ -1,10 +1,11 @@
-import { Box, Stack, VStack, Pressable, ScrollView } from "native-base";
+import { Stack, VStack, Pressable, ScrollView } from "native-base";
 
 import { DiabetesInfoCard } from "@/components/DiabetesInfoCard";
 
 import infoData from "infoData.json";
-import { useNavigation, useRouter } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 export default function Page() {
   const data = infoData;
@@ -14,7 +15,7 @@ export default function Page() {
     try {
       const stringValue = JSON.stringify(value);
 
-      await AsyncStorage.setItem("bookInfo", stringValue);
+      await SecureStore.setItemAsync("bookInfo", stringValue);
 
       router.push("/(modals)/bookInfo");
     } catch (e) {

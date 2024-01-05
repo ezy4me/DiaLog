@@ -1,25 +1,30 @@
-import { SplashScreen, Stack, useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
+
+import * as SplashScreen from "expo-splash-screen";
 
 import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 
-import { NativeBaseProvider, extendTheme } from "native-base";
+import { NativeBaseProvider } from "native-base";
 
-import {
-  useFonts,
-  Montserrat_100Thin,
-  Montserrat_200ExtraLight,
-  Montserrat_300Light,
-  Montserrat_400Regular,
-  Montserrat_500Medium,
-  Montserrat_600SemiBold,
-  Montserrat_700Bold,
-  Montserrat_800ExtraBold,
-  Montserrat_900Black,
-} from "@expo-google-fonts/montserrat";
+// import {
+//   useFonts,
+//   Montserrat_100Thin,
+//   Montserrat_200ExtraLight,
+//   Montserrat_300Light,
+//   Montserrat_400Regular,
+//   Montserrat_500Medium,
+//   Montserrat_600SemiBold,
+//   Montserrat_700Bold,
+//   Montserrat_800ExtraBold,
+//   Montserrat_900Black,
+// } from "@expo-google-fonts/montserrat";
 
-import { theme } from "./theme";
+// import { theme } from "./theme";
+import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+export { ErrorBoundary } from "expo-router";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -40,28 +45,28 @@ const tokenCache = {
   },
 };
 
-export { ErrorBoundary } from "expo-router";
-
 export const unstable_settings = {
   initialRouteName: "(tabs)",
 };
 
+console.log("111");
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    "mon": require("../assets/fonts/Montserrat-Regular.ttf"),
+  const [fontsLoaded, error] = useFonts({
+    mon: require("../assets/fonts/Montserrat-Regular.ttf"),
     "mon-sb": require("../assets/fonts/Montserrat-SemiBold.ttf"),
     "mon-b": require("../assets/fonts/Montserrat-Bold.ttf"),
-    Montserrat_100Thin,
-    Montserrat_200ExtraLight,
-    Montserrat_300Light,
-    Montserrat_400Regular,
-    Montserrat_500Medium,
-    Montserrat_600SemiBold,
-    Montserrat_700Bold,
-    Montserrat_800ExtraBold,
-    Montserrat_900Black,
+    // Montserrat_100Thin,
+    // Montserrat_200ExtraLight,
+    // Montserrat_300Light,
+    // Montserrat_400Regular,
+    // Montserrat_500Medium,
+    // Montserrat_600SemiBold,
+    // Montserrat_700Bold,
+    // Montserrat_800ExtraBold,
+    // Montserrat_900Black,
   });
 
   useEffect(() => {
@@ -69,12 +74,16 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
+    if (fontsLoaded) {
+      console.log(fontsLoaded);
+
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded]);
 
-  if (!loaded) {
+  if (!fontsLoaded) {
+    console.log(fontsLoaded);
+
     return null;
   }
 
@@ -87,18 +96,24 @@ export default function RootLayout() {
   );
 }
 
+const config = {
+  dependencies: {
+    "linear-gradient": LinearGradient,
+  },
+};
+
 function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
 
-  useEffect(() => {
-    if (isLoaded && !isSignedIn) {
-      router.push("/(modals)/login");
-    }
-  }, [isLoaded]);
+  // useEffect(() => {
+  //   if (isLoaded && !isSignedIn) {
+  //     router.push("/(modals)/login");
+  //   }
+  // }, [isLoaded]);
 
   return (
-    <NativeBaseProvider theme={theme}>
+    <NativeBaseProvider config={config}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen

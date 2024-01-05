@@ -52,7 +52,13 @@ const Page = () => {
         <HStack w={"100%"} justifyContent={"center"}>
           <Box
             borderRadius={100}
-            bg={"indigo.500"}
+            bg={{
+              linearGradient: {
+                colors: ["indigo.500", "indigo.800"],
+                start: [0, 0],
+                end: [1, 0.5],
+              },
+            }}
             mr={2}
             mt={3}
             alignItems={"center"}

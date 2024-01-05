@@ -20,7 +20,7 @@ const Page = () => {
               <Text fontSize={"md"}>3,9-5,6 ммоль/л</Text>
             </Box>
             <Box
-              bg={"amber.100"}
+              bg={"blue.100"}
               alignItems={"center"}
               justifyContent={"space-between"}
               py={6}
@@ -32,7 +32,7 @@ const Page = () => {
               <Text fontSize={"md"}>7,8 ммоль/л</Text>
             </Box>
             <Box
-              bg={"green.100"}
+              bg={"blue.100"}
               alignItems={"center"}
               justifyContent={"space-between"}
               py={6}

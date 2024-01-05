@@ -42,9 +42,9 @@ const BloodSugarList = () => {
   ];
 
   const colorStatusStack: any = {
-    normal: "#4ade60",
-    low: "#facc20",
-    high: "#f43f60",
+    normal: ["#4ade60", "#34d399"],
+    low: ["#facc20", "#fde047"],
+    high: ["#f43f5e", "#f87171"],
   };
 
   const router = useRouter();
@@ -65,11 +65,18 @@ const BloodSugarList = () => {
         data={data}
         renderItem={({ item }) => (
           <Box
-            borderBottomWidth="1"
-            borderColor="muted.200"
-            pl={["0", "4"]}
-            pr={["0", "5"]}
-            py="2">
+            mt={2}
+            borderWidth="1"
+            borderRadius={16}
+            borderColor="muted.100"
+            bg={{
+              linearGradient: {
+                colors: ['white', 'muted.50'],
+                start: [.2, .2],
+                end: [1, .5],
+              },
+            }}
+            p={1}>
             <HStack space={[2, 3]} justifyContent="space-between">
               <VStack>
                 <Box
@@ -78,7 +85,14 @@ const BloodSugarList = () => {
                   borderRadius={100}
                   borderWidth={2}
                   p={4}
-                  borderColor={colorStatusStack[item.status]}>
+                  bg={{
+                    linearGradient: {
+                      colors: [...colorStatusStack[item.status]],
+                      start: [.2, .2],
+                      end: [1, .5],
+                    },
+                  }}
+                  borderColor={'muted.100'}>
                   <Text fontSize={18} color="dark.100" fontWeight={"semibold"}>
                     {item.value}
                   </Text>
@@ -96,7 +110,9 @@ const BloodSugarList = () => {
                 <Button
                   colorScheme={"gray"}
                   borderRadius={100}
-                  bg={"muted.100"}
+                  borderColor={'muted.100'}
+                  borderWidth={2}
+                  bg={"white"}
                   size={"md"}
                   py={1}
                   _text={{

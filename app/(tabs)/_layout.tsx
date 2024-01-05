@@ -41,7 +41,8 @@ const Layout = () => {
           lineHeight: 32,
           borderBottomColor: 'white',
           borderBottomWidth: 4,
-          borderRadius: 100,
+          borderBottomLeftRadius: 4,
+          borderBottomRightRadius: 4
         },
         headerStyle: {
           backgroundColor: '#a5b4fc',

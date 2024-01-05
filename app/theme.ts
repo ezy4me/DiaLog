@@ -1,34 +1,34 @@
-import { Input, extendTheme } from "native-base";
+import { extendTheme } from "native-base";
 
 export const theme = extendTheme({
   fontConfig: {
     Montserrat: {
       100: {
-        normal: "Montserrat_100Thin",
+        normal: "mon",
       },
       200: {
-        normal: "Montserrat_200ExtraLight",
+        normal: "mon",
       },
       300: {
-        normal: "Montserrat_300Light",
+        normal: "mon",
       },
       400: {
-        normal: "Montserrat_400Regular",
+        normal: "mon",
       },
       500: {
-        normal: "Montserrat_500Medium",
+        normal: "mon",
       },
       600: {
-        normal: "Montserrat_600SemiBold",
+        normal: "mon-sb",
       },
       700: {
-        normal: "Montserrat_700Bold",
+        normal: "mon-sb",
       },
       800: {
-        normal: "Montserrat_800ExtraBold",
+        normal: "mon-b",
       },
       900: {
-        normal: "Montserrat_900Black",
+        normal: "mon-b",
       },
     },
   },
@@ -62,6 +62,17 @@ export const theme = extendTheme({
           },
         },
       },
+      // Button: {
+      //   defaultProps: {
+      //     bg: {
+      //       linearGradient: {
+      //         colors: ["indigo.200", "indigo.800"],
+      //         start: [0, 0],
+      //         end: [1, 0.5],
+      //       },
+      //     },
+      //   },
+      // },
     },
   },
 
