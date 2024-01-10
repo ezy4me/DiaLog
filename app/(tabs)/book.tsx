@@ -41,7 +41,7 @@ export default function Page() {
   };
 
   return (
-    <ScrollView>
+    <ScrollView bg={"white"}>
       <VStack space="2.5" mt="4" px="4">
         <Stack direction="column" mb="2.5" mt="1.5" space={3}>
           {renderDiabetesInfoCards()}

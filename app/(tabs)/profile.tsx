@@ -8,6 +8,7 @@ import {
   Input,
   HStack,
   Select,
+  Switch,
 } from "native-base";
 import React, { useState } from "react";
 import { useAuth } from "@clerk/clerk-expo";
@@ -36,7 +37,7 @@ const Page = () => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView bg={"white"}>
       <VStack alignItems="center" space="2.5" mt="4" px="4">
         <Button mt="2" shadow={1} w={"100%"} backgroundColor="light.100">
           <HStack alignItems="center">
@@ -155,6 +156,10 @@ const Page = () => {
             }
           />
         </Stack>
+        <HStack alignItems="center" space={4}>
+          <Text>Push-уведомления</Text>
+          <Switch defaultIsChecked  colorScheme={'indigo'} size="lg" />
+        </HStack>
 
         <Stack w={64} direction="column" mb="2.5" mt="1.5" space={3}>
           <Button borderRadius={100} colorScheme="success">

@@ -35,9 +35,7 @@ export function DiabetesInfoCard({
   return (
     <Box
       alignItems="center"
-      bg={
-        isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "coolGray.100"
-      }
+      bg={isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "light.50"}
       style={{
         transform: [
           {
@@ -45,11 +43,9 @@ export function DiabetesInfoCard({
           },
         ],
       }}
-      rounded="8"
-      shadow={3}
-      borderColor="coolGray.300">
+      borderColor="muted.200">
       <Box
-        rounded="lg"
+        borderRadius={16}
         overflow="hidden"
         borderColor="coolGray.200"
         borderWidth="1">

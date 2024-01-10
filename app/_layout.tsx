@@ -46,15 +46,6 @@ export default function RootLayout() {
     mon: require("../assets/fonts/Montserrat-Regular.ttf"),
     "mon-sb": require("../assets/fonts/Montserrat-SemiBold.ttf"),
     "mon-b": require("../assets/fonts/Montserrat-Bold.ttf"),
-    // Montserrat_100Thin,
-    // Montserrat_200ExtraLight,
-    // Montserrat_300Light,
-    // Montserrat_400Regular,
-    // Montserrat_500Medium,
-    // Montserrat_600SemiBold,
-    // Montserrat_700Bold,
-    // Montserrat_800ExtraBold,
-    // Montserrat_900Black,
   });
 
   useEffect(() => {
@@ -63,15 +54,11 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (fontsLoaded) {
-      console.log(fontsLoaded);
-
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    console.log(fontsLoaded);
-
     return null;
   }
 
@@ -94,11 +81,11 @@ function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
 
-  useEffect(() => {
-    if (isLoaded && !isSignedIn) {
-      router.push("/(modals)/login");
-    }
-  }, [isLoaded]);
+  // useEffect(() => {
+  //   if (isLoaded && !isSignedIn) {
+  //     router.push("/(modals)/login");
+  //   }
+  // }, [isLoaded]);
 
   return (
     <NativeBaseProvider theme={theme} config={config}>
@@ -122,6 +109,7 @@ function RootLayoutNav() {
             title: "Добавить значение",
             presentation: "modal",
             headerTitleAlign: "center",
+            
             headerTitleStyle: {
               fontFamily: "mon-sb",
             },

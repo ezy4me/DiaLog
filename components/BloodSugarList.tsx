@@ -42,9 +42,9 @@ const BloodSugarList = () => {
   ];
 
   const colorStatusStack: any = {
-    normal: ["#4ade60", "#34d399"],
-    low: ["#facc20", "#fde047"],
-    high: ["#f43f5e", "#f87171"],
+    normal: ["#4ade60", "#6ee7b7"],
+    low: ["#fbbf24", "#fde047"],
+    high: ["#ef4444", "#fb7185"],
   };
 
   const router = useRouter();
@@ -66,14 +66,14 @@ const BloodSugarList = () => {
         renderItem={({ item }) => (
           <Box
             mt={2}
-            borderWidth="1"
+            borderWidth={1}
             borderRadius={16}
             borderColor="muted.100"
             bg={{
               linearGradient: {
-                colors: ['white', 'muted.50'],
-                start: [.2, .2],
-                end: [1, .5],
+                colors: ['white', 'light.50'],
+                start: [0, 0],
+                end: [1, 1],
               },
             }}
             p={1}>
@@ -93,7 +93,7 @@ const BloodSugarList = () => {
                     },
                   }}
                   borderColor={'muted.100'}>
-                  <Text fontSize={18} color="dark.100" fontWeight={"semibold"}>
+                  <Text fontSize={18} color="light.800" fontWeight={"semibold"}>
                     {item.value}
                   </Text>
                   <Text fontSize={14} color="dark.100" fontWeight={"semibold"}>
@@ -109,10 +109,7 @@ const BloodSugarList = () => {
               <Box alignItems={"center"} justifyContent={"center"}>
                 <Button
                   colorScheme={"gray"}
-                  borderRadius={100}
-                  borderColor={'muted.100'}
-                  borderWidth={2}
-                  bg={"white"}
+                  bg={"muted.50"}
                   size={"md"}
                   py={1}
                   _text={{
