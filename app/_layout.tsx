@@ -7,24 +7,10 @@ import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 
 import { NativeBaseProvider } from "native-base";
-
-// import {
-//   useFonts,
-//   Montserrat_100Thin,
-//   Montserrat_200ExtraLight,
-//   Montserrat_300Light,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_600SemiBold,
-//   Montserrat_700Bold,
-//   Montserrat_800ExtraBold,
-//   Montserrat_900Black,
-// } from "@expo-google-fonts/montserrat";
-
-// import { theme } from "./theme";
 import { LinearGradient } from "expo-linear-gradient";
+
+import { theme } from "./theme";
 import { useFonts } from "expo-font";
-export { ErrorBoundary } from "expo-router";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -45,11 +31,13 @@ const tokenCache = {
   },
 };
 
+export {
+  ErrorBoundary,
+} from "expo-router";
+
 export const unstable_settings = {
   initialRouteName: "(tabs)",
 };
-
-console.log("111");
 
 SplashScreen.preventAutoHideAsync();
 
@@ -106,14 +94,14 @@ function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
 
-  // useEffect(() => {
-  //   if (isLoaded && !isSignedIn) {
-  //     router.push("/(modals)/login");
-  //   }
-  // }, [isLoaded]);
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push("/(modals)/login");
+    }
+  }, [isLoaded]);
 
   return (
-    <NativeBaseProvider config={config}>
+    <NativeBaseProvider theme={theme} config={config}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
@@ -127,7 +115,7 @@ function RootLayoutNav() {
             },
           }}
         />
-        <Stack.Screen
+         <Stack.Screen
           name="(modals)/addBloodSugar"
           options={{
             headerTitle: "Добавить значение",

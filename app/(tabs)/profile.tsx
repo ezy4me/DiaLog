@@ -7,15 +7,12 @@ import {
   Stack,
   Input,
   HStack,
-  InputRightAddon,
   Select,
-  CheckIcon,
 } from "native-base";
 import React, { useState } from "react";
 import { useAuth } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Colors from "@/constants/Colors";
 
 const Page = () => {
   const { signOut, isSignedIn } = useAuth();
@@ -76,7 +73,7 @@ const Page = () => {
             <Text
               fontSize={"xl"}
               color={"white"}
-              fontWeight={"semi-bold"}
+              fontWeight={"semibold"}
               textTransform={"uppercase"}>
               {calculateBMI(parseFloat(weight), parseFloat(height))}
             </Text>

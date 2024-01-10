@@ -11,9 +11,8 @@ import {
   Stack,
 } from "native-base";
 import React, { useEffect, useState } from "react";
-import * as SecureStore from "expo-secure-store";
 
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const BookInfo = () => {
   const [data, setData]: any = useState({});
 
@@ -23,7 +22,7 @@ const BookInfo = () => {
 
   const getData = async () => {
     try {
-      const value = await SecureStore.getItemAsync("bookInfo");
+      const value = await AsyncStorage.getItem("bookInfo");
       if (value !== null) {
         setData(JSON.parse(value));
       }

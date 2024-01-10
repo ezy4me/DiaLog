@@ -51,18 +51,3 @@ const Page = () => {
 };
 
 export default Page;
-/* <Box borderRadius={8} py={4} px={16} bg="indigo.500">
-        <Link style={{ color: "white" }} href={"/(modals)/login"}>
-          Войти
-        </Link>
-      </Box>
-      <Box borderRadius={8} py={4} px={16} bg="indigo.500">
-        <Link style={{ color: "white" }} href={"/(modals)/diary"}>
-          Мой дневник
-        </Link>
-      </Box>
-      <Box borderRadius={8} py={4} px={16} bg="indigo.500">
-        <Link style={{ color: "white" }} href={"/(modals)/bookInfo"}>
-          Про диабет
-        </Link>
-      </Box> */

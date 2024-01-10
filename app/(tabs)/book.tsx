@@ -4,8 +4,7 @@ import { DiabetesInfoCard } from "@/components/DiabetesInfoCard";
 
 import infoData from "infoData.json";
 import { useRouter } from "expo-router";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Page() {
   const data = infoData;
@@ -15,7 +14,7 @@ export default function Page() {
     try {
       const stringValue = JSON.stringify(value);
 
-      await SecureStore.setItemAsync("bookInfo", stringValue);
+      await AsyncStorage.setItem("bookInfo", stringValue);
 
       router.push("/(modals)/bookInfo");
     } catch (e) {

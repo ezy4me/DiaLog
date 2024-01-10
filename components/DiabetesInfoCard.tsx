@@ -4,8 +4,6 @@ import {
   Center,
   Heading,
   Stack,
-  VStack,
-  HStack,
   Image,
   Text,
 } from "native-base";

@@ -1,4 +1,3 @@
-import { View } from "react-native";
 import React from "react";
 import {
   Box,
@@ -8,7 +7,6 @@ import {
   HStack,
   Heading,
   Input,
-  Link,
   VStack,
   Text,
 } from "native-base";
@@ -34,7 +32,7 @@ const Page = () => {
             Войти
           </Button>
           <HStack mt="6" justifyContent="center" alignItems="center">
-            <Box mr={2} borderColor={'light.300'} borderTopWidth={1} w={24} />
+            <Box mr={2} borderColor={"light.300"} borderTopWidth={1} w={24} />
             <Text
               fontSize="sm"
               color="coolGray.600"
@@ -43,7 +41,7 @@ const Page = () => {
               }}>
               или
             </Text>
-            <Box ml={2} borderColor={'light.300'} borderTopWidth={1} w={24} />
+            <Box ml={2} borderColor={"light.300"} borderTopWidth={1} w={24} />
           </HStack>
           <Button
             mt="2"

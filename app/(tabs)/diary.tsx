@@ -1,6 +1,6 @@
 import BloodSugarList from "@/components/BloodSugarList";
 import { DiabetesChart } from "@/components/DiabetesChart";
-import { Stack, VStack, ScrollView, Box } from "native-base";
+import { Stack, VStack, Box } from "native-base";
 import { Dimensions } from "react-native";
 
 const Page = () => {
