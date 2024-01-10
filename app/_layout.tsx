@@ -1,6 +1,7 @@
-import { useFonts } from "expo-font";
-import { SplashScreen, Stack, useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
+
+import * as SplashScreen from "expo-splash-screen";
 
 import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
@@ -9,6 +10,7 @@ import { NativeBaseProvider } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { theme } from "./theme";
+import { useFonts } from "expo-font";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -40,10 +42,19 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
+  const [fontsLoaded, error] = useFonts({
     mon: require("../assets/fonts/Montserrat-Regular.ttf"),
     "mon-sb": require("../assets/fonts/Montserrat-SemiBold.ttf"),
     "mon-b": require("../assets/fonts/Montserrat-Bold.ttf"),
+    // Montserrat_100Thin,
+    // Montserrat_200ExtraLight,
+    // Montserrat_300Light,
+    // Montserrat_400Regular,
+    // Montserrat_500Medium,
+    // Montserrat_600SemiBold,
+    // Montserrat_700Bold,
+    // Montserrat_800ExtraBold,
+    // Montserrat_900Black,
   });
 
   useEffect(() => {
@@ -51,12 +62,16 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
+    if (fontsLoaded) {
+      console.log(fontsLoaded);
+
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded]);
 
-  if (!loaded) {
+  if (!fontsLoaded) {
+    console.log(fontsLoaded);
+
     return null;
   }
 
@@ -74,7 +89,6 @@ const config = {
     "linear-gradient": LinearGradient,
   },
 };
-
 
 function RootLayoutNav() {
   const router = useRouter();
