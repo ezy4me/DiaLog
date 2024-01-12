@@ -8,12 +8,11 @@ import {
   Image,
   Spinner,
   ScrollView,
-  Stack,
 } from "native-base";
 import React, { useEffect, useState } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const BookInfo = () => {
+const Page = () => {
   const [data, setData]: any = useState({});
 
   useEffect(() => {
@@ -91,4 +90,4 @@ const BookInfo = () => {
   );
 };
 
-export default BookInfo;
+export default Page;

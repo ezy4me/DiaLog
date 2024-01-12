@@ -1,4 +1,4 @@
-import { View, Text, ViewStyle } from "react-native";
+import { ViewStyle } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import Colors from "@/constants/Colors";

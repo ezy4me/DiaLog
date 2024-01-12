@@ -39,7 +39,6 @@ export const theme = extendTheme({
         type: "text",
       },
       defaultProps: {
-        colorScheme: "red",
         borderColor: 'muted.200',
         bg: "light.50",
         _hover: {
@@ -52,28 +51,9 @@ export const theme = extendTheme({
       },
       Select: {
         defaultProps: {
-          colorScheme: "red",
           bg: "muted.100",
-          _hover: {
-            bg: "amber.100",
-          },
-          _focus: {
-            bg: "muted.100",
-            borderColor: "indigo.300",
-          },
         },
       },
-      // Button: {
-      //   defaultProps: {
-      //     bg: {
-      //       linearGradient: {
-      //         colors: ["indigo.200", "indigo.800"],
-      //         start: [0, 0],
-      //         end: [1, 0.5],
-      //       },
-      //     },
-      //   },
-      // },
     },
   },
 

@@ -1,7 +1,6 @@
-import { Stack, useRouter } from "expo-router";
+import { useFonts } from "expo-font";
+import { SplashScreen, Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
-
-import * as SplashScreen from "expo-splash-screen";
 
 import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
@@ -10,7 +9,6 @@ import { NativeBaseProvider } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { theme } from "./theme";
-import { useFonts } from "expo-font";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -31,9 +29,7 @@ const tokenCache = {
   },
 };
 
-export {
-  ErrorBoundary,
-} from "expo-router";
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -42,7 +38,7 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [fontsLoaded, error] = useFonts({
+  const [loaded, error] = useFonts({
     mon: require("../assets/fonts/Montserrat-Regular.ttf"),
     "mon-sb": require("../assets/fonts/Montserrat-SemiBold.ttf"),
     "mon-b": require("../assets/fonts/Montserrat-Bold.ttf"),
@@ -53,12 +49,12 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
-    if (fontsLoaded) {
+    if (loaded) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [loaded]);
 
-  if (!fontsLoaded) {
+  if (!loaded) {
     return null;
   }
 
@@ -102,14 +98,13 @@ function RootLayoutNav() {
             },
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="(modals)/addBloodSugar"
           options={{
             headerTitle: "Добавить значение",
             title: "Добавить значение",
             presentation: "modal",
             headerTitleAlign: "center",
-            
             headerTitleStyle: {
               fontFamily: "mon-sb",
             },
@@ -120,6 +115,18 @@ function RootLayoutNav() {
           options={{
             headerTitle: "Справочник",
             title: "Справочник",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
+         <Stack.Screen
+          name="(modals)/aboutApp"
+          options={{
+            headerTitle: "О приложении",
+            title: "О приложении",
             presentation: "modal",
             headerTitleAlign: "center",
             headerTitleStyle: {

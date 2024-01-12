@@ -14,7 +14,6 @@ import React, { useState } from "react";
 import { useAuth } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
 const Page = () => {
   const { signOut, isSignedIn } = useAuth();
   const router = useRouter();
@@ -24,6 +23,7 @@ const Page = () => {
   const [weight, setWeight] = useState("75");
   const [height, setHeight] = useState("190");
   const [gender, setGender] = useState("");
+  const [type, setType] = useState("");
 
   const calculateBMI = (weight: number, height: number) => {
     if (!isNaN(height) && !isNaN(weight)) {
@@ -80,6 +80,9 @@ const Page = () => {
             </Text>
           </Box>
         </HStack>
+
+        <Text>Данные профиля</Text>
+
         <Input
           variant="rounded"
           placeholder="Ваша почта"
@@ -92,6 +95,33 @@ const Page = () => {
           value={name}
           onChangeText={setName}
         />
+
+        <Text>Данные пациента</Text>
+
+        <Select
+          w={"100%"}
+          variant="rounded"
+          selectedValue={type}
+          placeholder="Тип диабета"
+          dropdownIcon={
+            <Box mr={2}>
+              <MaterialCommunityIcons
+                name="chevron-down"
+                size={24}
+                color="#525252"
+              />
+            </Box>
+          }
+          _selectedItem={{
+            endIcon: (
+              <MaterialCommunityIcons name="check" size={24} color="black" />
+            ),
+          }}
+          onValueChange={(itemValue) => setType(itemValue)}>
+          <Select.Item label="I тип" value="1" />
+          <Select.Item label="II тип" value="2" />
+        </Select>
+
         <Select
           w={"100%"}
           variant="rounded"
@@ -107,7 +137,6 @@ const Page = () => {
             </Box>
           }
           _selectedItem={{
-            bg: "indigo.100",
             endIcon: (
               <MaterialCommunityIcons name="check" size={24} color="black" />
             ),
@@ -116,13 +145,8 @@ const Page = () => {
           <Select.Item label="Мужской" value="male" />
           <Select.Item label="Женский" value="female" />
         </Select>
-        <Stack
-          w={"100%"}
-          justifyContent={"flex-start"}
-          direction="row"
-          mb="2.5"
-          mt="1.5"
-          space={2}>
+
+        <Stack w={"100%"} direction="row" mb="2.5" mt="1.5" space={2}>
           <Input
             w={"50%"}
             variant="rounded"
@@ -156,9 +180,10 @@ const Page = () => {
             }
           />
         </Stack>
+
         <HStack alignItems="center" space={4}>
           <Text>Push-уведомления</Text>
-          <Switch defaultIsChecked  colorScheme={'indigo'} size="lg" />
+          <Switch defaultIsChecked colorScheme={"indigo"} size="lg" />
         </HStack>
 
         <Stack w={64} direction="column" mb="2.5" mt="1.5" space={3}>
