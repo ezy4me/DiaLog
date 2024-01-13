@@ -77,11 +77,11 @@ function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
 
-  useEffect(() => {
-    if (isLoaded && !isSignedIn) {
-      router.push("/(modals)/login");
-    }
-  }, [isLoaded]);
+  // useEffect(() => {
+  //   if (isLoaded && !isSignedIn) {
+  //     router.push("/(modals)/login");
+  //   }
+  // }, [isLoaded]);
 
   return (
     <NativeBaseProvider theme={theme} config={config}>

@@ -34,6 +34,11 @@ export const theme = extendTheme({
   },
 
   components: {
+    Box: {
+      defaultProps: {
+        borderRadius: 16,
+      },
+    },
     Input: {
       baseStyle: {
         type: "text",

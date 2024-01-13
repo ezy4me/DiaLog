@@ -38,10 +38,17 @@ const Page = () => {
 
   const renderItem = ({ item }: { item: Product }) => (
     <Box
-      borderRadius={4}
+      borderRadius={16}
       w="100%"
       borderWidth={1}
-      borderColor="muted.200"
+      borderColor="muted.100"
+      bg={{
+        linearGradient: {
+          colors: ["white", "light.50"],
+          start: [0, 0],
+          end: [1, 1],
+        },
+      }}
       px={2}
       py={2}
       mb={2}>
@@ -52,7 +59,7 @@ const Page = () => {
           alignItems={"center"}>
           <Box borderRadius={4} mt={2} p={2} alignItems={"flex-start"}>
             <Text
-              bg={"violet.200"}
+              bg={"indigo.100"}
               px={4}
               py={2}
               w={48}
@@ -65,7 +72,6 @@ const Page = () => {
               minW={12}
               borderRadius={4}
               mt={2}
-              bg="muted.100"
               justifyContent={"center"}
               alignItems="flex-start">
               <HStack space={2}>
@@ -75,11 +81,13 @@ const Page = () => {
                   </Text>
                   <Box
                     borderRadius={100}
+                    borderColor={"indigo.100"}
+                    borderWidth={2}
                     w={12}
                     h={12}
                     justifyContent={"center"}
                     alignItems={"center"}
-                    bg={"indigo.200"}>
+                    bg={"white"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
                       {item.bgu.split(",")[0]}
                     </Text>
@@ -91,11 +99,13 @@ const Page = () => {
                   </Text>
                   <Box
                     borderRadius={100}
+                    borderColor={"indigo.100"}
+                    borderWidth={2}
                     w={12}
                     h={12}
                     justifyContent={"center"}
                     alignItems={"center"}
-                    bg={"amber.200"}>
+                    bg={"white"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
                       {item.bgu.split(",")[1]}
                     </Text>
@@ -107,11 +117,13 @@ const Page = () => {
                   </Text>
                   <Box
                     borderRadius={100}
+                    borderColor={"indigo.100"}
+                    borderWidth={2}
                     w={12}
                     h={12}
                     justifyContent={"center"}
                     alignItems={"center"}
-                    bg={"green.200"}>
+                    bg={"white"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
                       {item.bgu.split(",")[2]}
                     </Text>
@@ -122,7 +134,7 @@ const Page = () => {
           </Box>
           <Box
             borderRadius={100}
-            borderColor={"blue.300"}
+            borderColor={"indigo.400"}
             borderWidth={2}
             mt={2}
             mr={2}
@@ -145,7 +157,14 @@ const Page = () => {
   );
 
   return (
-    <VStack w="100%" alignItems="center" space="2.5" mt="4" px="4">
+    <VStack
+      bg={"white"}
+      w="100%"
+      minH={"100%"}
+      alignItems="center"
+      space="2.5"
+      pt="4"
+      px="4">
       <Input
         InputRightElement={
           <Pressable onPress={() => setSearchTerm("")}>
@@ -163,7 +182,7 @@ const Page = () => {
         onChangeText={(text) => setSearchTerm(text)}
       />
       {loading ? (
-        <Spinner mt={4} size="lg" />
+        <Spinner mt={4} size="lg" color={"indigo.500"} />
       ) : (
         <FlatList
           mb={16}

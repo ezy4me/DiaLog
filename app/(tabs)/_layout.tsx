@@ -43,15 +43,15 @@ const Layout = () => {
           borderBottomWidth: 2,
           borderBottomLeftRadius: 4,
           borderBottomRightRadius: 4,
-          color: 'white',
+          color: "white",
           fontFamily: "mon-sb",
-
         },
         headerStyle: {
           backgroundColor: "#4338ca",
         },
         tabBarLabelStyle: {
           fontFamily: "mon-sb",
+          padding: 2,
         },
       }}>
       <Tabs.Screen

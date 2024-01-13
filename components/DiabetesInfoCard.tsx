@@ -45,15 +45,14 @@ export function DiabetesInfoCard({
           },
         ],
       }}
-      rounded="8"
+      borderRadius={16}
       shadow={3}
       borderColor="coolGray.300">
       <Box
-        rounded="lg"
         overflow="hidden"
         borderColor="coolGray.200"
         borderWidth="1">
-        <Box bg={colors[data.id - 1]}>
+        <Box bg={colors[data.id - 1]} borderRadius={0}>
           <AspectRatio w="100%" ratio={16 / 9}>
             <Center>
               <Image
