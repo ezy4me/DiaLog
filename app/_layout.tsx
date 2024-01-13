@@ -122,6 +122,18 @@ function RootLayoutNav() {
             },
           }}
         />
+        <Stack.Screen
+          name="(modals)/aboutApp"
+          options={{
+            headerTitle: "О приложении",
+            title: "О приложении",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
       </Stack>
     </NativeBaseProvider>
   );

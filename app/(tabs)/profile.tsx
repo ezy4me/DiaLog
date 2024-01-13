@@ -37,8 +37,8 @@ const Page = () => {
 
   return (
     <ScrollView>
-      <VStack alignItems="center" space="2.5" mt="4" px="4">
-        <Button mt="2" shadow={1} w={"100%"} backgroundColor="light.100">
+      <VStack py={2} alignItems="center" space="2.5" px="4">
+        <Button shadow={1} w={"100%"} backgroundColor="light.100">
           <HStack alignItems="center">
             <MaterialCommunityIcons name="google" size={28} color={"#EA4335"} />
             <Text ml={4} color="coolGray.600">
@@ -51,7 +51,7 @@ const Page = () => {
             borderRadius={100}
             bg={{
               linearGradient: {
-                colors: ["indigo.500", "indigo.800"],
+                colors: ["indigo.500", "indigo.600"],
                 start: [0, 0],
                 end: [1, 0.5],
               },
@@ -179,6 +179,14 @@ const Page = () => {
               Войти
             </Button>
           )}
+        </Stack>
+        <Stack alignItems={'center'}>
+          <Text>
+            Copyright with <MaterialCommunityIcons color={'red'} size={18} name="heart" />
+          </Text>
+          <Text fontWeight={'semibold'}>
+            by miliash, 2024
+          </Text>
         </Stack>
       </VStack>
     </ScrollView>

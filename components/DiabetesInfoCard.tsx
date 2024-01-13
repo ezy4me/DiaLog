@@ -12,7 +12,7 @@ const colors = [
   "amber.200",
   "pink.200",
   "blue.200",
-  "violet.200",
+  "indigo.200",
   "green.200",
   "yellow.200",
 ];
@@ -46,7 +46,6 @@ export function DiabetesInfoCard({
         ],
       }}
       borderRadius={16}
-      shadow={3}
       borderColor="coolGray.300">
       <Box
         overflow="hidden"
@@ -64,7 +63,7 @@ export function DiabetesInfoCard({
             </Center>
           </AspectRatio>
           <Center
-            bg="violet.400"
+            bg="indigo.400"
             _text={{
               color: "warmGray.50",
               fontWeight: "700",
@@ -87,10 +86,10 @@ export function DiabetesInfoCard({
             <Text
               fontSize="xs"
               _light={{
-                color: "violet.500",
+                color: "indigo.500",
               }}
               _dark={{
-                color: "violet.400",
+                color: "indigo.400",
               }}
               fontWeight="500"
               ml="-0.5"

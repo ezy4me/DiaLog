@@ -59,7 +59,7 @@ const BookInfo = () => {
 
   return (
     <ScrollView>
-      <VStack mx={4} alignItems={"center"}>
+      <VStack px={4} alignItems={"center"}>
         <Heading my={4}>{data.title}</Heading>
         <Box bg={colors[data.id - 1]} borderRadius={16}>
           <AspectRatio w="100%" ratio={16 / 9}>

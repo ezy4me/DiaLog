@@ -39,13 +39,18 @@ export const theme = extendTheme({
         borderRadius: 16,
       },
     },
+    VStack: {
+      defaultProps: {
+        bg: 'white',
+      },
+    },
     Input: {
       baseStyle: {
         type: "text",
       },
       defaultProps: {
         colorScheme: "red",
-        bg: "muted.100",
+        bg: "muted.50",
         _hover: {
           bg: "amber.100",
         },

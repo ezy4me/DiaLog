@@ -12,7 +12,7 @@ const Page = () => {
   return (
     <ScrollView>
       <VStack space={3} p={4}>
-        <Box bg={"blue.400"} borderRadius={16}>
+        <Box bg={"indigo.400"} borderRadius={16}>
           <AspectRatio w="100%" ratio={16 / 9}>
             <Center>
               <Image

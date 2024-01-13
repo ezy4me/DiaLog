@@ -1,4 +1,13 @@
-import { Stack, VStack, Pressable, ScrollView } from "native-base";
+import {
+  Stack,
+  VStack,
+  HStack,
+  Pressable,
+  ScrollView,
+  Box,
+  Text,
+  Heading,
+} from "native-base";
 
 import { DiabetesInfoCard } from "@/components/DiabetesInfoCard";
 
@@ -42,7 +51,56 @@ export default function Page() {
 
   return (
     <ScrollView>
-      <VStack space="2.5" mt="4" px="4">
+      <VStack space="2.5" pt="4" px="4">
+        <Heading size={"sm"} p={4} bg={"indigo.100"} borderRadius={16}>
+          Норма сахара в крови
+        </Heading>
+        <ScrollView horizontal>
+          <HStack space={3}>
+            <Box
+              borderWidth={1}
+              borderColor="muted.100"
+              borderRadius={16}
+              bg={"indigo.50"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              py={2}
+              px={2}>
+              <Text w={72} textAlign={"center"} fontSize={"lg"}>
+                Перед приемом пищи:
+              </Text>
+              <Text fontSize={18}>3,9-5,6 ммоль/л</Text>
+            </Box>
+            <Box
+              borderWidth={1}
+              borderColor="muted.100"
+              borderRadius={16}
+              bg={"indigo.100"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              py={2}
+              px={2}>
+              <Text w={72} textAlign={"center"} fontSize={"lg"}>
+                После приема пищи (через 2 часа):
+              </Text>
+              <Text fontSize={18}>7,8 ммоль/л</Text>
+            </Box>
+            <Box
+              borderWidth={1}
+              borderColor="muted.100"
+              borderRadius={16}
+              bg={"indigo.50"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              py={2}
+              px={2}>
+              <Text w={72} textAlign={"center"} fontSize={"lg"}>
+                Случайный показатель (в любое время дня):
+              </Text>
+              <Text fontSize={18}>7,0 ммоль/л</Text>
+            </Box>
+          </HStack>
+        </ScrollView>
         <Stack direction="column" mb="2.5" mt="1.5" space={3}>
           {renderDiabetesInfoCards()}
         </Stack>
