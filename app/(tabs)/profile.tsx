@@ -23,6 +23,7 @@ const Page = () => {
   const [weight, setWeight] = useState("75");
   const [height, setHeight] = useState("190");
   const [gender, setGender] = useState("");
+  const [type, setType] = useState("");
 
   const calculateBMI = (weight: number, height: number) => {
     if (!isNaN(height) && !isNaN(weight)) {
@@ -79,6 +80,8 @@ const Page = () => {
             </Text>
           </Box>
         </HStack>
+        
+        <Text>Данные профиля</Text>
         <Input
           variant="rounded"
           placeholder="Ваша почта"
@@ -91,6 +94,31 @@ const Page = () => {
           value={name}
           onChangeText={setName}
         />
+        <Text>Данные пациента</Text>
+
+        <Select
+          w={"100%"}
+          variant="rounded"
+          selectedValue={type}
+          placeholder="Тип диабета"
+          dropdownIcon={
+            <Box mr={2}>
+              <MaterialCommunityIcons
+                name="chevron-down"
+                size={24}
+                color="#525252"
+              />
+            </Box>
+          }
+          _selectedItem={{
+            endIcon: (
+              <MaterialCommunityIcons name="check" size={24} color="black" />
+            ),
+          }}
+          onValueChange={(itemValue) => setType(itemValue)}>
+          <Select.Item label="I тип" value="1" />
+          <Select.Item label="II тип" value="2" />
+        </Select>
         <Select
           w={"100%"}
           variant="rounded"
@@ -180,13 +208,12 @@ const Page = () => {
             </Button>
           )}
         </Stack>
-        <Stack alignItems={'center'}>
+        <Stack alignItems={"center"}>
           <Text>
-            Copyright with <MaterialCommunityIcons color={'red'} size={18} name="heart" />
+            Copyright with{" "}
+            <MaterialCommunityIcons color={"red"} size={18} name="heart" />
           </Text>
-          <Text fontWeight={'semibold'}>
-            by miliash, 2024
-          </Text>
+          <Text fontWeight={"semibold"}>by miliash, 2024</Text>
         </Stack>
       </VStack>
     </ScrollView>

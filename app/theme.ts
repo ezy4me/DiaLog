@@ -51,6 +51,7 @@ export const theme = extendTheme({
       defaultProps: {
         colorScheme: "red",
         bg: "muted.50",
+        borderColor: 'muted.200',
         _hover: {
           bg: "amber.100",
         },
