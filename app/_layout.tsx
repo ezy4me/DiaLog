@@ -29,9 +29,7 @@ const tokenCache = {
   },
 };
 
-export {
-  ErrorBoundary,
-} from "expo-router";
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -75,7 +73,6 @@ const config = {
   },
 };
 
-
 function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
@@ -101,7 +98,7 @@ function RootLayoutNav() {
             },
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="(modals)/addBloodSugar"
           options={{
             headerTitle: "Добавить значение",
