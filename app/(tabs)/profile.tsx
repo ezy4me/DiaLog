@@ -33,13 +33,13 @@ const Page = () => {
 
       return bmi.toFixed(2);
     }
-    return "____";
+    return "----";
   };
 
   return (
     <ScrollView>
       <VStack py={2} alignItems="center" space="2.5" px="4">
-        <Button shadow={1} w={"100%"} backgroundColor="light.100">
+        <Button shadow={1} w={"100%"} bg={'light.100'}>
           <HStack alignItems="center">
             <MaterialCommunityIcons name="google" size={28} color={"#EA4335"} />
             <Text ml={4} color="coolGray.600">
@@ -47,7 +47,12 @@ const Page = () => {
             </Text>
           </HStack>
         </Button>
-        <HStack w={"100%"} justifyContent={"center"}>
+        <HStack
+          p={2}
+          w={"100%"}
+          bg={"indigo.400"}
+          justifyContent={"center"}
+          borderRadius={16}>
           <Box
             borderRadius={100}
             bg={{
@@ -58,7 +63,6 @@ const Page = () => {
               },
             }}
             mr={2}
-            mt={3}
             alignItems={"center"}
             justifyContent={"center"}
             w={32}
@@ -80,8 +84,11 @@ const Page = () => {
             </Text>
           </Box>
         </HStack>
-        
-        <Text>Данные профиля</Text>
+
+        <Text w={"100%"} borderRadius={16} py={2} px={4} bg={"indigo.50"}>
+          Данные профиля
+        </Text>
+
         <Input
           variant="rounded"
           placeholder="Ваша почта"
@@ -94,7 +101,10 @@ const Page = () => {
           value={name}
           onChangeText={setName}
         />
-        <Text>Данные пациента</Text>
+
+        <Text w={"100%"} borderRadius={16} py={2} px={4} bg={"indigo.50"}>
+          Данные пациента
+        </Text>
 
         <Select
           w={"100%"}

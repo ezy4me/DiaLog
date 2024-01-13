@@ -14,7 +14,7 @@ const colors = [
   "blue.200",
   "indigo.200",
   "green.200",
-  "yellow.200",
+  "violet.200",
 ];
 
 export function DiabetesInfoCard({
@@ -47,10 +47,7 @@ export function DiabetesInfoCard({
       }}
       borderRadius={16}
       borderColor="coolGray.300">
-      <Box
-        overflow="hidden"
-        borderColor="coolGray.200"
-        borderWidth="1">
+      <Box overflow="hidden" borderColor="coolGray.200" borderWidth="1">
         <Box bg={colors[data.id - 1]} borderRadius={0}>
           <AspectRatio w="100%" ratio={16 / 9}>
             <Center>
@@ -72,9 +69,9 @@ export function DiabetesInfoCard({
             position="absolute"
             bottom="2"
             left="2"
-            px="3"
-            borderRadius={100}
-            py="1.5">
+            py={2}
+            px={4}
+            borderRadius={100}>
             {data.id}
           </Center>
         </Box>

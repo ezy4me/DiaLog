@@ -1,6 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { VStack, Text, FlatList, Box, HStack, Button } from "native-base";
+import { useState } from "react";
 
 const BloodSugarList = () => {
   const data = [
@@ -53,6 +54,8 @@ const BloodSugarList = () => {
     router.push(route);
   };
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <Box>
       <Button
@@ -71,14 +74,14 @@ const BloodSugarList = () => {
             borderColor="muted.100"
             bg={{
               linearGradient: {
-                colors: ["white", "light.50"],
+                colors: ["white", "indigo.100"],
                 start: [0, 0],
                 end: [1, 1],
               },
             }}
             p={1}>
             <HStack space={[2, 3]} justifyContent="space-between">
-              <VStack>
+              <VStack borderRadius={100}>
                 <Box
                   alignItems={"center"}
                   justifyContent={"center"}
@@ -109,7 +112,7 @@ const BloodSugarList = () => {
               <Box alignItems={"center"} justifyContent={"center"}>
                 <Button
                   colorScheme={"gray"}
-                  bg={"muted.50"}
+                  bg={"transparent"}
                   size={"md"}
                   py={1}
                   _text={{

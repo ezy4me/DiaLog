@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   AspectRatio,
   Image,
@@ -6,6 +7,7 @@ import {
   ScrollView,
   Text,
   VStack,
+  Stack,
 } from "native-base";
 
 const Page = () => {
@@ -47,6 +49,13 @@ const Page = () => {
           Заботьтесь о своем здоровье с нашим приложением – вашим верным
           спутником в борьбе с диабетом!
         </Text>
+        <Stack alignItems={"center"}>
+          <Text>
+            Copyright with{" "}
+            <MaterialCommunityIcons color={"red"} size={18} name="heart" />
+          </Text>
+          <Text fontWeight={"semibold"}>by miliash, 2024</Text>
+        </Stack>
       </VStack>
     </ScrollView>
   );
