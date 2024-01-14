@@ -14,8 +14,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Page = () => {
   return (
-    <Center w="100%">
-      <Box safeArea p="2" py="8" w="90%" maxW="290">
+    <Center bg={"white"} w="100%" h={"100%"}>
+      <Box safeArea p="2" w="90%" maxW="290">
         <Heading size="lg" fontWeight="600" color="coolGray.800">
           Привет
         </Heading>
@@ -43,11 +43,7 @@ const Page = () => {
             </Text>
             <Box ml={2} borderColor={"light.300"} borderTopWidth={1} w={24} />
           </HStack>
-          <Button
-            mt="2"
-            borderWidth={1}
-            borderColor="red.100"
-            backgroundColor="light.100">
+          <Button shadow={1} w={"100%"} bg={"light.100"} borderRadius={100}>
             <HStack alignItems="center">
               <MaterialCommunityIcons
                 name="google"

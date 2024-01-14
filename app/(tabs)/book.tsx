@@ -52,7 +52,7 @@ export default function Page() {
   return (
     <ScrollView>
       <VStack space="2.5" pt="4" px="4">
-        <Heading size={"sm"} p={4} bg={"indigo.100"} borderRadius={16}>
+        <Heading size={"sm"} p={4} bg={"blueGray.100"} borderRadius={16}>
           Норма сахара в крови
         </Heading>
         <ScrollView horizontal>
@@ -61,7 +61,7 @@ export default function Page() {
               borderWidth={1}
               borderColor="muted.100"
               borderRadius={16}
-              bg={"indigo.50"}
+              bg={"blueGray.50"}
               alignItems={"center"}
               justifyContent={"center"}
               py={2}
@@ -75,7 +75,7 @@ export default function Page() {
               borderWidth={1}
               borderColor="muted.100"
               borderRadius={16}
-              bg={"indigo.100"}
+              bg={"blueGray.100"}
               alignItems={"center"}
               justifyContent={"center"}
               py={2}
@@ -89,7 +89,7 @@ export default function Page() {
               borderWidth={1}
               borderColor="muted.100"
               borderRadius={16}
-              bg={"indigo.50"}
+              bg={"blueGray.50"}
               alignItems={"center"}
               justifyContent={"center"}
               py={2}

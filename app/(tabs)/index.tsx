@@ -26,12 +26,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 
 const Page = () => {
-  const router = useRouter();
   const [modalVisible, setModalVisible] = React.useState(false);
-
-  const navigateToPage = (route: any) => {
-    router.push(route);
-  };
 
   return (
     <ScrollView bg={"white"} maxH={"100%"}>
@@ -136,10 +131,6 @@ const Page = () => {
 
         <GlucoseModalForm />
         <InsulinModalForm />
-
-        <TouchableOpacity onPress={() => navigateToPage("/(modals)/aboutApp")}>
-          <Text color={"indigo.400"}>О приложении</Text>
-        </TouchableOpacity>
       </VStack>
     </ScrollView>
   );

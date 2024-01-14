@@ -1,7 +1,13 @@
 import CustomSwitch from "@/app/UI/CustomSwitch";
 import { View, Text, ScrollView, Box, VStack, HStack } from "native-base";
 import React from "react";
-
+import Colors from "@/constants/Colors";
+import {
+  FontAwesome,
+  Fontisto,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 const Page = () => {
   const onSelectSwitch = (index: any) => {
     alert("Selected index: " + index);
@@ -19,14 +25,21 @@ const Page = () => {
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
-          <Text>Тема</Text>
+          <Box flexDirection={"row"} alignItems={"center"}>
+            <MaterialCommunityIcons
+              name="theme-light-dark"
+              size={18}
+              color="black"
+            />
+            <Text ml={2}>Тема</Text>
+          </Box>
           <CustomSwitch
             selectionMode={2}
             roundCorner={true}
             option1={"Темная"}
             option2={"Светлая"}
             onSelectSwitch={onSelectSwitch}
-            selectionColor={"indigo"}
+            selectionColor={Colors.primary}
           />
         </HStack>
 
@@ -39,14 +52,17 @@ const Page = () => {
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
-          <Text>Вес</Text>
+          <Box flexDirection={"row"} alignItems={"center"}>
+            <MaterialCommunityIcons name="weight" size={18} color="black" />
+            <Text ml={2}>Вес</Text>
+          </Box>
           <CustomSwitch
             selectionMode={1}
             roundCorner={true}
             option1={"kg"}
             option2={"ibs"}
             onSelectSwitch={onSelectSwitch}
-            selectionColor={"indigo"}
+            selectionColor={Colors.primary}
           />
         </HStack>
         <HStack
@@ -55,14 +71,17 @@ const Page = () => {
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
-          <Text>Рост</Text>
+          <Box flexDirection={"row"} alignItems={"center"}>
+            <MaterialIcons name="height" size={18} color="black" />
+            <Text ml={2}>Рост</Text>
+          </Box>
           <CustomSwitch
             selectionMode={1}
             roundCorner={true}
             option1={"cm"}
             option2={"inch"}
             onSelectSwitch={onSelectSwitch}
-            selectionColor={"indigo"}
+            selectionColor={Colors.primary}
           />
         </HStack>
         <HStack
@@ -71,14 +90,17 @@ const Page = () => {
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
-          <Text>Глюкоза</Text>
+          <Box flexDirection={"row"} alignItems={"center"}>
+            <Fontisto name="blood-drop" size={18} color="black" />
+            <Text ml={2}>Глюкоза</Text>
+          </Box>
           <CustomSwitch
             selectionMode={1}
             roundCorner={true}
             option1={"mmol/l"}
             option2={"mg/dl"}
             onSelectSwitch={onSelectSwitch}
-            selectionColor={"indigo"}
+            selectionColor={Colors.primary}
           />
         </HStack>
 
@@ -91,17 +113,19 @@ const Page = () => {
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
-          <Text>Выбор языка</Text>
+          <Box flexDirection={"row"} alignItems={"center"}>
+            <FontAwesome name="language" size={18} color="black" />
+            <Text ml={2}>Выбор языка</Text>
+          </Box>
           <CustomSwitch
             selectionMode={1}
             roundCorner={true}
             option1={"ru"}
             option2={"en"}
             onSelectSwitch={onSelectSwitch}
-            selectionColor={"indigo"}
+            selectionColor={Colors.primary}
           />
         </HStack>
-        
       </VStack>
     </ScrollView>
   );

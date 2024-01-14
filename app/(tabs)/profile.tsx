@@ -16,10 +16,15 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import calculateBMI from "@/utils/bmiCalculator";
 import ProfileNavigationCard from "@/components/Profile/ProfileNavigationCard";
+import { TouchableOpacity } from "react-native";
 
 const Page = () => {
   const { signOut, isSignedIn } = useAuth();
   const router = useRouter();
+
+  const navigateToPage = (route: any) => {
+    router.push(route);
+  };
 
   const navigationData = [
     {
@@ -40,30 +45,21 @@ const Page = () => {
       id: 3,
       icon: "notifications",
       title: "Уведомления",
-      badges: ["Измерение глюкозы", "Инъекции инсулина"],
+      badges: ["Уровень глюкозы", "Инъекции инсулина"],
       route: "/(modals)/profile/notificationDataSettings",
     },
     {
       id: 4,
       icon: "archive",
       title: "Дополнительно",
-      badges: ["Экспорт данных"],
+      badges: ["Экспорт данных", "Удаление", "Выход"],
       route: "/(modals)/profile/archiveDataSettings",
     },
   ];
 
   return (
-    <ScrollView>
+    <ScrollView bg={"white"}>
       <VStack py={2} alignItems="center" space="2.5" px="4">
-        <Button shadow={1} w={"100%"} bg={"light.100"} borderRadius={100}>
-          <HStack alignItems="center">
-            <MaterialCommunityIcons name="google" size={28} color={"#EA4335"} />
-            <Text ml={4} color="coolGray.600">
-              продолжить с Google
-            </Text>
-          </HStack>
-        </Button>
-
         {navigationData.map(({ id, icon, title, badges, route }) => (
           <ProfileNavigationCard
             key={id}
@@ -75,17 +71,20 @@ const Page = () => {
           />
         ))}
 
-        <Stack w={64} direction="column" mb="2.5" mt="1.5" space={3}>
-          {!isSignedIn && (
-            <Button
-              borderRadius={100}
-              shadow={1}
-              colorScheme="danger"
-              onPress={() => signOut()}>
-              Выйти
-            </Button>
-          )}
+        <TouchableOpacity onPress={() => navigateToPage("/(modals)/aboutApp")}>
+          <Text color={"indigo.400"}>О приложении</Text>
+        </TouchableOpacity>
 
+        <Button shadow={1} w={"100%"} bg={"light.100"} borderRadius={100}>
+          <HStack alignItems="center">
+            <MaterialCommunityIcons name="google" size={20} color={"#EA4335"} />
+            <Text ml={4} color="coolGray.600">
+              продолжить с Google
+            </Text>
+          </HStack>
+        </Button>
+
+        <Stack w={'100%'} direction="column" mb="2.5" mt="1.5" space={3}>
           {!isSignedIn && (
             <Button
               borderRadius={100}
@@ -95,6 +94,7 @@ const Page = () => {
             </Button>
           )}
         </Stack>
+
         <Stack alignItems={"center"}>
           <Text>
             Copyright with{" "}

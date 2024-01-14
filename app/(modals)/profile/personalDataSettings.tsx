@@ -1,5 +1,9 @@
 import calculateBMI from "@/utils/bmiCalculator";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Entypo,
+  FontAwesome,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import {
   Text,
   Box,
@@ -61,7 +65,7 @@ const Page = () => {
           </Box>
         </HStack>
 
-        <Text w={"100%"} borderRadius={16} py={2} px={4} bg={"indigo.50"}>
+        <Text px={2} fontWeight={"semibold"} fontSize={"md"}>
           Данные профиля
         </Text>
 
@@ -70,15 +74,35 @@ const Page = () => {
           placeholder="Ваша почта"
           value={email}
           onChangeText={setEmail}
+          rightElement={
+            <Box
+              borderLeftWidth={1}
+              borderLeftColor={"muted.200"}
+              p={2}
+              borderRadius={16}
+              children={<Entypo name="mail" size={18} color="#525252" />}
+            />
+          }
         />
         <Input
           variant="rounded"
           placeholder="Ваше имя"
           value={name}
           onChangeText={setName}
+          rightElement={
+            <Box
+              borderLeftWidth={1}
+              borderLeftColor={"muted.200"}
+              p={2}
+              borderRadius={16}
+              children={
+                <FontAwesome name="user-circle" size={18} color="#525252" />
+              }
+            />
+          }
         />
 
-        <Text w={"100%"} borderRadius={16} py={2} px={4} bg={"indigo.50"}>
+        <Text px={2} fontWeight={"semibold"} fontSize={"md"}>
           Данные пациента
         </Text>
 
@@ -169,7 +193,7 @@ const Page = () => {
             }
           />
         </Stack>
-        <Button borderRadius={100} colorScheme="success">
+        <Button borderRadius={100} colorScheme="indigo">
           Сохранить
         </Button>
       </VStack>
