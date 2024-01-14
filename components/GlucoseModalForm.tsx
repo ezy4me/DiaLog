@@ -11,30 +11,13 @@ import {
 } from "native-base";
 import React, { useState } from "react";
 import { Platform, TouchableWithoutFeedback } from "react-native";
+
+import getCurrentDate from "@/utils/getCurrentDate";
+import getCurrentTime from "@/utils/getCurrentTime";
+
 export const GlucoseModalForm = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const getCurrentDate = () => {
-    const date = new Date();
-    const month = date
-      .toLocaleString("ru", { month: "short" })
-      .split("")
-      .map((char, index) => (index == 0 ? char.toLocaleUpperCase() : char))
-      .join('');
-    const day = date.toLocaleString("ru", { day: "numeric" });
-    const year = date.toLocaleString("ru", { year: "numeric" });
-
-    return `${month} ${day}, ${year}`;
-  };
-
-  const getCurrentTime = () => {
-    const date = new Date();
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-
-    return `${hours}:${minutes}`;
-  };
-  
   return (
     <Box>
       <Button

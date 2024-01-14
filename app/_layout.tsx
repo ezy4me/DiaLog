@@ -134,6 +134,54 @@ function RootLayoutNav() {
             },
           }}
         />
+        <Stack.Screen
+          name="(modals)/profile/appDataSettings"
+          options={{
+            headerTitle: "Настройки приложения",
+            title: "Настройки приложения",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="(modals)/profile/archiveDataSettings"
+          options={{
+            headerTitle: "Дополнительно",
+            title: "Дополнительно",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="(modals)/profile/notificationDataSettings"
+          options={{
+            headerTitle: "Настройка уведовлений",
+            title: "Настройка уведовлений",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="(modals)/profile/personalDataSettings"
+          options={{
+            headerTitle: "Личные данные",
+            title: "Личные данные",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+          }}
+        />
       </Stack>
     </NativeBaseProvider>
   );

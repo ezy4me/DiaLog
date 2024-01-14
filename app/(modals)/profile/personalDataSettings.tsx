@@ -1,0 +1,180 @@
+import calculateBMI from "@/utils/bmiCalculator";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Text,
+  Box,
+  ScrollView,
+  Stack,
+  Input,
+  HStack,
+  Select,
+  VStack,
+  Button,
+} from "native-base";
+import { useState } from "react";
+
+const Page = () => {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [weight, setWeight] = useState("75");
+  const [height, setHeight] = useState("190");
+  const [gender, setGender] = useState("");
+  const [type, setType] = useState("");
+  return (
+    <ScrollView bg={"white"} maxH={"100%"}>
+      <VStack space="2.5" mt="4" px="4">
+        <HStack
+          p={2}
+          w={"100%"}
+          bg={"indigo.400"}
+          justifyContent={"center"}
+          borderRadius={16}>
+          <Box
+            borderRadius={100}
+            bg={{
+              linearGradient: {
+                colors: ["indigo.500", "indigo.600"],
+                start: [0, 0],
+                end: [1, 0.5],
+              },
+            }}
+            mr={2}
+            alignItems={"center"}
+            justifyContent={"center"}
+            w={32}
+            h={32}>
+            <Text
+              color={"white"}
+              fontSize={"md"}
+              fontWeight={"bold"}
+              textTransform={"uppercase"}>
+              ИМТ
+            </Text>
+
+            <Text
+              fontSize={"xl"}
+              color={"white"}
+              fontWeight={"semibold"}
+              textTransform={"uppercase"}>
+              {calculateBMI(parseFloat(weight), parseFloat(height))}
+            </Text>
+          </Box>
+        </HStack>
+
+        <Text w={"100%"} borderRadius={16} py={2} px={4} bg={"indigo.50"}>
+          Данные профиля
+        </Text>
+
+        <Input
+          variant="rounded"
+          placeholder="Ваша почта"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <Input
+          variant="rounded"
+          placeholder="Ваше имя"
+          value={name}
+          onChangeText={setName}
+        />
+
+        <Text w={"100%"} borderRadius={16} py={2} px={4} bg={"indigo.50"}>
+          Данные пациента
+        </Text>
+
+        <Select
+          w={"100%"}
+          variant="rounded"
+          selectedValue={type}
+          placeholder="Тип диабета"
+          dropdownIcon={
+            <Box mr={2}>
+              <MaterialCommunityIcons
+                name="chevron-down"
+                size={24}
+                color="#525252"
+              />
+            </Box>
+          }
+          _selectedItem={{
+            endIcon: (
+              <MaterialCommunityIcons name="check" size={24} color="black" />
+            ),
+          }}
+          onValueChange={(itemValue) => setType(itemValue)}>
+          <Select.Item label="I тип" value="1" />
+          <Select.Item label="II тип" value="2" />
+        </Select>
+        <Select
+          w={"100%"}
+          variant="rounded"
+          selectedValue={gender}
+          placeholder="Пол"
+          dropdownIcon={
+            <Box mr={2}>
+              <MaterialCommunityIcons
+                name="chevron-down"
+                size={24}
+                color="#525252"
+              />
+            </Box>
+          }
+          _selectedItem={{
+            bg: "indigo.100",
+            endIcon: (
+              <MaterialCommunityIcons name="check" size={24} color="black" />
+            ),
+          }}
+          onValueChange={(itemValue) => setGender(itemValue)}>
+          <Select.Item label="Мужской" value="male" />
+          <Select.Item label="Женский" value="female" />
+        </Select>
+        <Stack
+          w={"100%"}
+          justifyContent={"flex-start"}
+          direction="row"
+          mb="2.5"
+          mt="1.5"
+          space={2}>
+          <Input
+            w={"50%"}
+            variant="rounded"
+            placeholder="Рост"
+            keyboardType="numeric"
+            value={height}
+            onChangeText={setHeight}
+            rightElement={
+              <Box
+                borderLeftWidth={1}
+                borderLeftColor={"muted.200"}
+                p={2}
+                children={"см"}
+              />
+            }
+          />
+          <Input
+            w={"47.5%"}
+            variant="rounded"
+            placeholder="Вес"
+            keyboardType="numeric"
+            value={weight}
+            onChangeText={setWeight}
+            rightElement={
+              <Box
+                borderLeftWidth={1}
+                borderLeftColor={"muted.200"}
+                p={2}
+                children={"кг"}
+              />
+            }
+          />
+        </Stack>
+        <Button borderRadius={100} colorScheme="success">
+          Сохранить
+        </Button>
+      </VStack>
+    </ScrollView>
+  );
+};
+
+export default Page;
