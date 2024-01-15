@@ -1,6 +1,15 @@
+import getCurrentDate from "@/utils/getCurrentDate";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { VStack, Text, FlatList, Box, HStack, Button } from "native-base";
+import {
+  VStack,
+  Text,
+  FlatList,
+  Box,
+  HStack,
+  Button,
+  Select,
+} from "native-base";
 import { useState } from "react";
 
 const BloodSugarList = () => {
@@ -55,26 +64,61 @@ const BloodSugarList = () => {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [type, setType] = useState("");
 
   return (
-    <Box>
-      <Button
+    <Box mb={20}>
+      {/* <Button
         onPress={() => navigateToPage("/(modals)/addBloodSugar")}
         borderRadius={32}
         colorScheme={"indigo"}>
         Добавить
-      </Button>
+      </Button> */}
+      <HStack
+        my={2}
+        w={"100%"}
+        alignItems={"center"}
+        justifyContent={"space-between"}>
+        <Select
+          w={32}
+          py={1}
+          variant="rounded"
+          selectedValue={type}
+          placeholder="Глюкоза"
+          dropdownIcon={
+            <Box mr={2}>
+              <MaterialCommunityIcons
+                name="chevron-down"
+                size={24}
+                color="#525252"
+              />
+            </Box>
+          }
+          _selectedItem={{
+            endIcon: (
+              <MaterialCommunityIcons name="check" size={24} color="black" />
+            ),
+          }}
+          onValueChange={(itemValue) => setType(itemValue)}>
+          <Select.Item borderRadius={16} label="Глюкоза" value="1" />
+          <Select.Item borderRadius={16} label="Инсулин" value="2" />
+        </Select>
+        <Box w={32} p={2} borderRadius={12} bg={"indigo.500"}>
+          <Text color={"white"} textAlign={"center"} fontWeight={"semibold"}>
+            {getCurrentDate()}
+          </Text>
+        </Box>
+      </HStack>
+
       <FlatList
         data={data}
         renderItem={({ item }) => (
           <Box
             mt={2}
-            borderWidth={1}
             borderRadius={16}
-            borderColor="muted.100"
             bg={{
               linearGradient: {
-                colors: ["white", "indigo.100"],
+                colors: ["blueGray.100", "indigo.100"],
                 start: [0, 0],
                 end: [1, 1],
               },
@@ -87,6 +131,7 @@ const BloodSugarList = () => {
                   justifyContent={"center"}
                   borderRadius={100}
                   borderWidth={2}
+                  borderColor={"transparent"}
                   p={4}
                   bg={{
                     linearGradient: {
@@ -94,8 +139,7 @@ const BloodSugarList = () => {
                       start: [0.2, 0.2],
                       end: [1, 0.5],
                     },
-                  }}
-                  borderColor={"muted.100"}>
+                  }}>
                   <Text fontSize={18} color="light.800" fontWeight={"semibold"}>
                     {item.value}
                   </Text>
@@ -111,7 +155,7 @@ const BloodSugarList = () => {
               </Box>
               <Box alignItems={"center"} justifyContent={"center"}>
                 <Button
-                  colorScheme={"gray"}
+                  colorScheme={""}
                   bg={"transparent"}
                   size={"md"}
                   py={1}

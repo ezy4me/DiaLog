@@ -44,7 +44,7 @@ const Page = () => {
       borderColor="muted.100"
       bg={{
         linearGradient: {
-          colors: ["white", "light.50"],
+          colors: ["blueGray.100", "indigo.100"],
           start: [0, 0],
           end: [1, 1],
         },
@@ -52,14 +52,14 @@ const Page = () => {
       px={2}
       py={2}
       mb={2}>
-      <VStack>
+      <VStack bg={"transparent"}>
         <HStack
           space={[2, 3]}
           justifyContent="space-between"
           alignItems={"center"}>
           <Box borderRadius={4} mt={2} p={2} alignItems={"flex-start"}>
             <Text
-              bg={"indigo.100"}
+              bg={"white"}
               px={4}
               py={2}
               w={48}
@@ -69,6 +69,7 @@ const Page = () => {
               {item.name}
             </Text>
             <VStack
+              bg={"transparent"}
               minW={12}
               borderRadius={4}
               mt={2}
@@ -133,6 +134,7 @@ const Page = () => {
             </VStack>
           </Box>
           <Box
+            bg={"white"}
             borderRadius={100}
             borderColor={"indigo.400"}
             borderWidth={2}

@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
-import { View, TouchableOpacity} from 'react-native';
+import { View, TouchableOpacity } from "react-native";
 
-import { Text } from 'native-base';
+import { Text } from "native-base";
 const CustomSwitch = ({
   navigation,
   selectionMode,
@@ -10,7 +10,7 @@ const CustomSwitch = ({
   option1,
   option2,
   onSelectSwitch,
-  selectionColor
+  selectionColor,
 }: any) => {
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
   const [getRoundCorner, setRoundCorner] = useState(roundCorner);
@@ -24,14 +24,14 @@ const CustomSwitch = ({
     <View>
       <View
         style={{
-          height: 44,
-          width: '100%',
-          backgroundColor: 'white',
+          height: 40,
+          width: "100%",
+          backgroundColor: "white",
           borderRadius: getRoundCorner ? 25 : 0,
           borderWidth: 1,
           borderColor: selectionColor,
-          flexDirection: 'row',
-          justifyContent: 'center',
+          flexDirection: "row",
+          justifyContent: "center",
           padding: 2,
         }}>
         <TouchableOpacity
@@ -40,14 +40,14 @@ const CustomSwitch = ({
           style={{
             flex: 1,
 
-            backgroundColor: getSelectionMode == 1 ? selectionColor : 'white',
+            backgroundColor: getSelectionMode == 1 ? selectionColor : "white",
             borderRadius: getRoundCorner ? 25 : 0,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
           }}>
           <Text
             style={{
-              color: getSelectionMode == 1 ? 'white' : selectionColor,
+              color: getSelectionMode == 1 ? "white" : selectionColor,
             }}>
             {option1}
           </Text>
@@ -57,15 +57,14 @@ const CustomSwitch = ({
           onPress={() => updatedSwitchData(2)}
           style={{
             flex: 1,
-
-            backgroundColor: getSelectionMode == 2 ? selectionColor : 'white',
+            backgroundColor: getSelectionMode == 2 ? selectionColor : "white",
             borderRadius: getRoundCorner ? 25 : 0,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
           }}>
           <Text
             style={{
-              color: getSelectionMode == 2 ? 'white' : selectionColor,
+              color: getSelectionMode == 2 ? "white" : selectionColor,
             }}>
             {option2}
           </Text>

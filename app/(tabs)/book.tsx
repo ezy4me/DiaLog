@@ -67,7 +67,7 @@ export default function Page() {
               py={2}
               px={2}>
               <Text w={72} textAlign={"center"} fontSize={"lg"}>
-                Перед приемом пищи:
+                Перед приемом пищи
               </Text>
               <Text fontSize={18}>3,9-5,6 ммоль/л</Text>
             </Box>
@@ -81,7 +81,7 @@ export default function Page() {
               py={2}
               px={2}>
               <Text w={72} textAlign={"center"} fontSize={"lg"}>
-                После приема пищи (через 2 часа):
+                После приема пищи
               </Text>
               <Text fontSize={18}>7,8 ммоль/л</Text>
             </Box>
@@ -95,7 +95,7 @@ export default function Page() {
               py={2}
               px={2}>
               <Text w={72} textAlign={"center"} fontSize={"lg"}>
-                Случайный показатель (в любое время дня):
+                Случайный показатель
               </Text>
               <Text fontSize={18}>7,0 ммоль/л</Text>
             </Box>

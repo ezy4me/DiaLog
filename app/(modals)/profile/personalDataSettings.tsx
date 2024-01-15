@@ -126,8 +126,8 @@ const Page = () => {
             ),
           }}
           onValueChange={(itemValue) => setType(itemValue)}>
-          <Select.Item label="I тип" value="1" />
-          <Select.Item label="II тип" value="2" />
+          <Select.Item borderRadius={16} label="I тип" value="1" />
+          <Select.Item borderRadius={16} label="II тип" value="2" />
         </Select>
         <Select
           w={"100%"}
@@ -150,8 +150,8 @@ const Page = () => {
             ),
           }}
           onValueChange={(itemValue) => setGender(itemValue)}>
-          <Select.Item label="Мужской" value="male" />
-          <Select.Item label="Женский" value="female" />
+          <Select.Item borderRadius={16} label="Мужской" value="male" />
+          <Select.Item borderRadius={16} label="Женский" value="female" />
         </Select>
         <Stack
           w={"100%"}

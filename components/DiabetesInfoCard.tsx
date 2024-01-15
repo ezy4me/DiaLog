@@ -36,7 +36,7 @@ export function DiabetesInfoCard({
     <Box
       alignItems="center"
       bg={
-        isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "coolGray.100"
+        isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "blueGray.100"
       }
       style={{
         transform: [
