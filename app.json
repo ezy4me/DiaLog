@@ -2,7 +2,7 @@
   "expo": {
     "name": "DiaLog",
     "slug": "dialog",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -16,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ezy4me.dialog"
     },
     "android": {
       "adaptiveIcon": {
@@ -42,8 +43,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "6f5357bd-8b94-42d3-9673-585e30e6e40f"
+        "projectId": "eac496cf-310b-4977-b6a1-7838c3332c29"
       }
-    }
+    },
+    "owner": "sadwoe"
   }
 }

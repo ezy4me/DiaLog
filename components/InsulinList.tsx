@@ -12,6 +12,7 @@ import {
 } from "native-base";
 import { useState } from "react";
 import { GlucoseModalForm } from "./GlucoseModalForm";
+import { InsulinModalForm } from "./InsulinModalForm";
 
 const BloodSugarList = () => {
   const data = [
@@ -28,27 +29,6 @@ const BloodSugarList = () => {
       value: "5.5",
       status: "high",
       text: "Высокий уровень сахара",
-    },
-    {
-      id: "3",
-      date: "31.12",
-      value: "3.7",
-      status: "low",
-      text: "Низкий уровень сахара",
-    },
-    {
-      id: "4",
-      date: "1.1",
-      value: "6.2",
-      status: "high",
-      text: "Высокий уровень сахара",
-    },
-    {
-      id: "5",
-      date: "2.1",
-      value: "3.2",
-      status: "low",
-      text: "Низкий уровень сахара",
     },
   ];
 
@@ -106,7 +86,7 @@ const BloodSugarList = () => {
           <Select.Item borderRadius={16} label="Глюкоза" value="1" />
           <Select.Item borderRadius={16} label="Инсулин" value="2" />
         </Select>
-        <GlucoseModalForm/>
+        <InsulinModalForm />
         <Box w={32} p={2} borderRadius={12} bg={"indigo.500"}>
           <Text color={"white"} textAlign={"center"} fontWeight={"semibold"}>
             {getCurrentDate()}

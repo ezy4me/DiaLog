@@ -1,4 +1,8 @@
-import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Fontisto,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import {
   Box,
   Button,
@@ -21,14 +25,12 @@ export const GlucoseModalForm = () => {
   return (
     <Box>
       <Button
-        bg={"indigo.500"}
-        borderRadius={32}
+        colorScheme={"indigo"}
+        borderRadius={100}
         onPress={() => setModalVisible(true)}
         leftIcon={
-          <MaterialCommunityIcons name="plus" size={32} color={"white"} />
-        }>
-        Глюкоза
-      </Button>
+          <AntDesign name="pluscircle" size={24} color="#4ade80" />
+        }></Button>
       {/* <TouchableWithoutFeedback onPress={() => setModalVisible(false)}> */}
       <Modal
         isOpen={modalVisible}

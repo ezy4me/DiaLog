@@ -34,22 +34,22 @@ const Page = () => {
         <HStack
           p={2}
           w={"100%"}
-          bg={"indigo.400"}
+          bg={"blueGray.300"}
           borderRadius={16}
           justifyContent={"space-between"}>
           <VStack
             pl={1}
             w={24}
             space={2}
-            bg={"indigo.300"}
+            bg={"blueGray.100"}
             justifyContent={"center"}>
-            <HStack space={2}>
+            <HStack space={1}>
               <MaterialCommunityIcons name="cube" size={16} color="black" />
               <Text fontSize={"sm"}>Глюкоза</Text>
             </HStack>
-            <HStack space={2}>
+            <HStack space={1}>
               <MaterialIcons name="donut-small" size={16} color="black" />
-              <Text fontSize={"sm"}>mmol/l</Text>
+              <Text fontSize={"sm"}>0 mmol/l</Text>
             </HStack>
           </VStack>
           <Box
@@ -70,10 +70,10 @@ const Page = () => {
           <VStack
             pl={1}
             w={24}
-            bg={"indigo.300"}
+            bg={"blueGray.100"}
             space={2}
             justifyContent={"center"}>
-            <HStack space={2}>
+            <HStack space={1}>
               <MaterialCommunityIcons
                 name="nutrition"
                 size={16}
@@ -81,15 +81,15 @@ const Page = () => {
               />
               <Text fontSize={"sm"}>Еда</Text>
             </HStack>
-            <HStack space={2}>
+            <HStack space={1} flexWrap={'wrap'}>
               <MaterialIcons name="donut-small" size={16} color="black" />
-              <Text fontSize={"sm"}>kcal</Text>
+              <Text fontSize={"sm"}> 0 kcal</Text>
             </HStack>
           </VStack>
         </HStack>
 
-        <Heading size={"sm"} p={4} bg={"indigo.100"} borderRadius={16}>
-          Последние действия
+        <Heading size={"sm"} p={4} bg={"blueGray.200"} borderRadius={16}>
+          Последние действия:
         </Heading>
 
         <Box
@@ -98,7 +98,7 @@ const Page = () => {
           borderColor="muted.100"
           bg={{
             linearGradient: {
-              colors: ["white", "indigo.50"],
+              colors: ["white", "blueGray.100"],
               start: [0, 0],
               end: [1, 1],
             },
@@ -116,7 +116,7 @@ const Page = () => {
           borderColor="muted.100"
           bg={{
             linearGradient: {
-              colors: ["white", "indigo.50"],
+              colors: ["white", "blueGray.100"],
               start: [0, 0],
               end: [1, 1],
             },

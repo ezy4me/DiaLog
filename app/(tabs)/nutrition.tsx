@@ -40,8 +40,6 @@ const Page = () => {
     <Box
       borderRadius={16}
       w="100%"
-      borderWidth={1}
-      borderColor="muted.100"
       bg={{
         linearGradient: {
           colors: ["blueGray.100", "indigo.100"],
@@ -136,7 +134,7 @@ const Page = () => {
           <Box
             bg={"white"}
             borderRadius={100}
-            borderColor={"indigo.400"}
+            borderColor={"indigo.300"}
             borderWidth={2}
             mt={2}
             mr={2}

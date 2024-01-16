@@ -25,10 +25,10 @@ const Page = () => {
 
         <VStack space={3} mt="5">
           <FormControl>
-            <FormControl.Label>Email</FormControl.Label>
-            <Input />
+            <FormControl.Label>Email:</FormControl.Label>
+            <Input variant="rounded"/>
           </FormControl>
-          <Button mt="2" colorScheme="indigo">
+          <Button mt="2" colorScheme="indigo" borderRadius={100}>
             Войти
           </Button>
           <HStack mt="6" justifyContent="center" alignItems="center">

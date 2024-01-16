@@ -6,12 +6,12 @@ import { Dimensions } from "react-native";
 const Page = () => {
   const screenHeight = Dimensions.get("window").height;
   return (
-    <VStack bg={"white"} >
+    <VStack bg={"white"}>
       <Stack>
         <Box px="4">
           <DiabetesChart />
         </Box>
-        <Box px="4"  bg={'indigo.300'} h={screenHeight - 340}>
+        <Box bg={"indigo.200"} h={screenHeight - 340}>
           <BloodSugarList />
         </Box>
       </Stack>

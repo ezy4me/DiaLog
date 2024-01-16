@@ -65,7 +65,7 @@ export function DiabetesChart() {
         bezier
         style={{
           marginVertical: 8,
-          borderRadius: 4,
+          borderRadius: 16,
         }}
       />
     </View>

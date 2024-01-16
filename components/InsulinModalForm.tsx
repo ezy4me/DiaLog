@@ -1,5 +1,6 @@
 import CustomSwitch from "@/app/UI/CustomSwitch";
 import {
+  AntDesign,
   FontAwesome5,
   Fontisto,
   MaterialCommunityIcons,
@@ -30,14 +31,12 @@ export const InsulinModalForm = () => {
   return (
     <Box>
       <Button
-        bg={"amber.500"}
-        borderRadius={32}
+        colorScheme={"indigo"}
+        borderRadius={100}
         onPress={() => setModalVisible(true)}
         leftIcon={
-          <MaterialCommunityIcons name="plus" size={32} color={"white"} />
-        }>
-        Инсулин
-      </Button>
+          <AntDesign name="pluscircle" size={24} color="#4ade80" />
+        }></Button>
       {/* <TouchableWithoutFeedback onPress={() => setModalVisible(false)}> */}
       <Modal
         isOpen={modalVisible}
@@ -83,7 +82,7 @@ export const InsulinModalForm = () => {
                   </Box>
                 </HStack>
 
-                <Box my={2} >
+                <Box my={2}>
                   <CustomSwitch
                     selectionMode={1}
                     roundCorner={true}
