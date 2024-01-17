@@ -12,7 +12,7 @@ const Page = () => {
           <DiabetesChart />
         </Box>
         <Box
-          _light={{ bg: "light.200" }}
+          _light={{ bg: "light.100" }}
           _dark={{ bg: "coolGray.800" }}
           h={screenHeight - 340}>
           <BloodSugarList />

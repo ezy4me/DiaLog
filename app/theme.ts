@@ -77,7 +77,7 @@ export const theme = extendTheme({
       baseStyle: (props: any) => {
         return {
           _light: { color: "dark.100", bg: "blueGray.200" },
-          _dark: { color: "light.100", bg: "blueGray.500" },
+          _dark: { color: "light.100", bg: "blueGray.600" },
         };
       },
     },
@@ -174,7 +174,7 @@ export const theme = extendTheme({
             placeholderTextColor: "dark.100",
           },
           _dark: {
-            bg: "blueGray.500",
+            bg: "blueGray.600",
             color: "light.100",
             borderColor: "muted.700",
             placeholderTextColor: "light.100",
@@ -209,9 +209,9 @@ export const theme = extendTheme({
             placeholderTextColor: "dark.100",
           },
           _dark: {
-            bg: "blueGray.500",
+            bg: "blueGray.600",
             color: "light.100",
-            borderColor: "muted.500",
+            borderColor: "muted.700",
             placeholderTextColor: "light.100",
           },
         };

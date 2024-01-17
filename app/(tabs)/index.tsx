@@ -36,14 +36,22 @@ const Page = () => {
             pl={1}
             w={24}
             space={2}
-            bg={"blueGray.500"}
+            bg={colorMode == "light" ? "blueGray.300" : "blueGray.500"}
             justifyContent={"center"}>
             <HStack space={1}>
-              <MaterialCommunityIcons name="cube" size={16} color="black" />
+              <MaterialCommunityIcons
+                name="cube"
+                size={16}
+                color={colorMode == "light" ? "black" : "white"}
+              />
               <Text fontSize={"sm"}>Глюкоза</Text>
             </HStack>
             <HStack space={1}>
-              <MaterialIcons name="donut-small" size={16} color="black" />
+              <MaterialIcons
+                name="donut-small"
+                size={16}
+                color={colorMode == "light" ? "black" : "white"}
+              />
               <Text fontSize={"sm"}>0 mmol/l</Text>
             </HStack>
           </VStack>
@@ -65,19 +73,23 @@ const Page = () => {
           <VStack
             pl={1}
             w={24}
-            bg={"blueGray.500"}
+            bg={colorMode == "light" ? "blueGray.300" : "blueGray.500"}
             space={2}
             justifyContent={"center"}>
             <HStack space={1}>
               <MaterialCommunityIcons
                 name="nutrition"
                 size={16}
-                color="black"
+                color={colorMode == "light" ? "black" : "white"}
               />
               <Text fontSize={"sm"}>Еда</Text>
             </HStack>
             <HStack space={1} flexWrap={"wrap"}>
-              <MaterialIcons name="donut-small" size={16} color="black" />
+              <MaterialIcons
+                name="donut-small"
+                size={16}
+                color={colorMode == "light" ? "black" : "white"}
+              />
               <Text fontSize={"sm"}> 0 kcal</Text>
             </HStack>
           </VStack>
@@ -93,14 +105,18 @@ const Page = () => {
               colors:
                 colorMode == "light"
                   ? ["white", "blueGray.200"]
-                  : ["blueGray.500", "blueGray.600"],
+                  : ["blueGray.600", "blueGray.700"],
               start: [0, 0],
               end: [1, 1],
             },
           }}
           p={4}>
           <HStack justifyContent={"space-between"}>
-            <Fontisto name="blood-drop" size={24} color="black" />
+            <Fontisto
+              name="blood-drop"
+              size={24}
+              color={colorMode == "light" ? "black" : "white"}
+            />
             <Text>5.6 mmol/l</Text>
             <Text fontWeight={"semibold"}>31.12</Text>
           </HStack>
@@ -111,21 +127,25 @@ const Page = () => {
               colors:
                 colorMode == "light"
                   ? ["white", "blueGray.200"]
-                  : ["blueGray.500", "blueGray.600"],
+                  : ["blueGray.600", "blueGray.700"],
               start: [0, 0],
               end: [1, 1],
             },
           }}
           p={4}>
           <HStack justifyContent={"space-between"}>
-            <FontAwesome5 name="syringe" size={24} color="black" />
+            <FontAwesome5
+              name="syringe"
+              size={24}
+              color={colorMode == "light" ? "black" : "white"}
+            />
             <Text>100 ml</Text>
             <Text fontWeight={"semibold"}>31.12</Text>
           </HStack>
         </Box>
 
-        <GlucoseModalForm />
-        <InsulinModalForm />
+        <GlucoseModalForm label={true} />
+        <InsulinModalForm label={true} />
       </VStack>
     </ScrollView>
   );

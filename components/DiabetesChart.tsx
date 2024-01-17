@@ -48,10 +48,10 @@ export function DiabetesChart() {
         yAxisInterval={1}
         chartConfig={{
           backgroundColor: "transparent",
-          backgroundGradientFrom: colorMode == "light" ? "#fff" : "#475569",
+          backgroundGradientFrom: colorMode == "light" ? "#e2e8f0" : "#475569",
           backgroundGradientTo: colorMode == "light" ? "#e2e8f0" : "#475569",
           decimalPlaces: 1,
-          color: (opacity = 1) => `rgba(67, 56, 202, ${opacity})`,
+          color: (opacity = 1) => colorMode == 'light' ? `rgba(67, 56, 202, ${opacity})` : `rgba(224, 231, 255, ${opacity})`,
           labelColor: (opacity = 1) =>
             colorMode == "light"
               ? `rgba(0, 0, 0, ${opacity})`
@@ -60,11 +60,12 @@ export function DiabetesChart() {
             borderRadius: 16,
           },
           propsForDots: {
-            r: "3",
+            r: "4",
             strokeWidth: "1",
             stroke: "#c7d2fe",
           },
           propsForLabels: {
+            fontSize: '12',
             fontFamily: "mon",
           },
         }}

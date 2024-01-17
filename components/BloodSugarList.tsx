@@ -54,9 +54,9 @@ const BloodSugarList = () => {
   ];
 
   const colorStatusStack: any = {
-    normal: ["#4ade60", "#6ee7b7"],
-    low: ["#fbbf24", "#fde047"],
-    high: ["#ef4444", "#fb7185"],
+    normal: ["#4ade80", "#4ade60"],
+    low: ["#fbbf24", "#f59e0b"],
+    high: ["#ef4444", "#dc2626"],
   };
 
   const router = useRouter();
@@ -97,7 +97,7 @@ const BloodSugarList = () => {
               <MaterialCommunityIcons
                 name="chevron-down"
                 size={24}
-                color="#525252"
+                color={colorMode == "light" ? "#525252" : "white"}
               />
             </Box>
           }
@@ -129,8 +129,8 @@ const BloodSugarList = () => {
               linearGradient: {
                 colors:
                 colorMode == "light"
-                  ? ["white", "blueGray.200"]
-                  : ["blueGray.500", "blueGray.600"],
+                  ? ["blueGray.100", "blueGray.200"]
+                  : ["blueGray.600", "blueGray.700"],
                 start: [0, 0],
                 end: [1, 1],
               },

@@ -14,15 +14,18 @@ import {
   Text,
   HStack,
   KeyboardAvoidingView,
+  useColorMode,
 } from "native-base";
 import React, { useState } from "react";
 import { Platform, TouchableWithoutFeedback } from "react-native";
 
 import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
+import Colors from "@/constants/Colors";
 
-export const InsulinModalForm = () => {
+export const InsulinModalForm = ({ label }: { label?: boolean }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const { colorMode } = useColorMode();
 
   const onSelectSwitch = (index: any) => {
     alert("Selected index: " + index);
@@ -31,12 +34,18 @@ export const InsulinModalForm = () => {
   return (
     <Box>
       <Button
-        colorScheme={"indigo"}
+        colorScheme={"violet"}
         borderRadius={100}
         onPress={() => setModalVisible(true)}
         leftIcon={
-          <AntDesign name="pluscircle" size={24} color="#4ade80" />
-        }></Button>
+          <AntDesign
+            name="pluscircle"
+            size={32}
+            color={'white'}
+          />
+        }>
+        {label ? "Инсулин" : null}
+      </Button>
       {/* <TouchableWithoutFeedback onPress={() => setModalVisible(false)}> */}
       <Modal
         isOpen={modalVisible}
@@ -57,7 +66,11 @@ export const InsulinModalForm = () => {
             />
             <Modal.Header>
               <HStack space={2} alignItems={"center"}>
-                <FontAwesome5 name="syringe" size={24} color="black" />
+                <FontAwesome5
+                  name="syringe"
+                  size={24}
+                  color={colorMode == "light" ? "black" : "white"}
+                />
                 <Text fontWeight={"semibold"}>Инсулин</Text>
               </HStack>
             </Modal.Header>
@@ -83,14 +96,16 @@ export const InsulinModalForm = () => {
                 </HStack>
 
                 <Box my={2}>
-                  {/* <CustomSwitch
-                    selectionMode={1}
+                  <CustomSwitch
+                    selectionMode={"long"}
                     roundCorner={true}
-                    option1={"Долгий"}
-                    option2={"Быстрый"}
+                    options={[
+                      { label: "Короткий", value: "short" },
+                      { label: "Долгий", value: "long" },
+                    ]}
                     onSelectSwitch={onSelectSwitch}
-                    selectionColor={"indigo"}
-                  /> */}
+                    selectionColor={Colors.primary}
+                  />
                 </Box>
 
                 <Input
@@ -99,7 +114,11 @@ export const InsulinModalForm = () => {
                   placeholder="Значение"
                   leftElement={
                     <Box ml={4}>
-                      <Fontisto name="circle-o-notch" size={16} color="black" />
+                      <Fontisto
+                        name="circle-o-notch"
+                        size={16}
+                        color={colorMode == "light" ? "black" : "white"}
+                      />
                     </Box>
                   }
                   rightElement={

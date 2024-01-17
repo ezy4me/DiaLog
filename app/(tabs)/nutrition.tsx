@@ -47,10 +47,10 @@ const Page = () => {
         linearGradient: {
           colors:
             colorMode == "light"
-              ? ["white", "blueGray.200"]
-              : ["blueGray.500", "blueGray.600"],
+              ? ["blueGray.100", "blueGray.200"]
+              : ["blueGray.600", "blueGray.700"],
           start: [0, 0],
-          end: [1, 1],
+          end: [1, 1]
         },
       }}
       px={2}
@@ -158,8 +158,8 @@ const Page = () => {
 
   return (
     <VStack
-      _light={{ bg: "light.200" }}
-      _dark={{ bg: "coolGray.700" }}
+      _light={{ bg: "light.100" }}
+      _dark={{ bg: "coolGray.800" }}
       borderRadius={0}
       w="100%"
       minH={"100%"}

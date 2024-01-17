@@ -85,7 +85,7 @@ export function DiabetesInfoCard({
                 color: "indigo.500",
               }}
               _dark={{
-                color: "indigo.400",
+                color: "indigo.200",
               }}
               fontWeight="500"
               ml="-0.5"

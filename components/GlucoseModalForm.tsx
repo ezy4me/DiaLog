@@ -12,6 +12,7 @@ import {
   Text,
   HStack,
   KeyboardAvoidingView,
+  useColorMode,
 } from "native-base";
 import React, { useState } from "react";
 import { Platform, TouchableWithoutFeedback } from "react-native";
@@ -19,8 +20,9 @@ import { Platform, TouchableWithoutFeedback } from "react-native";
 import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
 
-export const GlucoseModalForm = () => {
+export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const { colorMode } = useColorMode();
 
   return (
     <Box>
@@ -28,9 +30,9 @@ export const GlucoseModalForm = () => {
         colorScheme={"indigo"}
         borderRadius={100}
         onPress={() => setModalVisible(true)}
-        leftIcon={
-          <AntDesign name="pluscircle" size={24} color="#4ade80" />
-        }></Button>
+        leftIcon={<AntDesign name="pluscircle" size={32} color={"white"} />}>
+        {label ? "Глюкоза" : null}
+      </Button>
       {/* <TouchableWithoutFeedback onPress={() => setModalVisible(false)}> */}
       <Modal
         isOpen={modalVisible}
@@ -51,7 +53,11 @@ export const GlucoseModalForm = () => {
             />
             <Modal.Header>
               <HStack space={2} alignItems={"center"}>
-                <Fontisto name="blood-drop" size={24} color="indigo" />
+                <Fontisto
+                  name="blood-drop"
+                  size={24}
+                  color={colorMode == "light" ? "black" : "white"}
+                />
                 <Text fontWeight={"semibold"}>Глюкоза</Text>
               </HStack>
             </Modal.Header>
@@ -83,7 +89,11 @@ export const GlucoseModalForm = () => {
                   placeholder="Значение"
                   leftElement={
                     <Box ml={4}>
-                      <Fontisto name="circle-o-notch" size={16} color="black" />
+                      <Fontisto
+                        name="circle-o-notch"
+                        size={16}
+                        color={colorMode == "light" ? "black" : "white"}
+                      />
                     </Box>
                   }
                   rightElement={

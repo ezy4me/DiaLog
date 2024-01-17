@@ -99,10 +99,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
-              color: colorMode === "light" ? "white" : "black",
+              color: "white",
             },
             headerStyle: {
-              backgroundColor: colorMode === "light" ? "#475569" : "white",
+              backgroundColor: "#818cf8",
             },
           }}
         />
@@ -115,10 +115,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
-              color: colorMode === "light" ? "white" : "black",
+              color: "white",
             },
             headerStyle: {
-              backgroundColor: colorMode === "light" ? "#475569" : "white",
+              backgroundColor: "#818cf8",
             },
           }}
         />
@@ -131,10 +131,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
-              color: colorMode === "light" ? "white" : "black",
+              color: "white",
             },
             headerStyle: {
-              backgroundColor: colorMode === "light" ? "#475569" : "white",
+              backgroundColor: "#818cf8",
             },
           }}
         />
@@ -147,10 +147,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
-              color: colorMode === "light" ? "white" : "black",
+              color: "white",
             },
             headerStyle: {
-              backgroundColor: colorMode === "light" ? "#475569" : "white",
+              backgroundColor: "#818cf8",
             },
           }}
         />
@@ -163,10 +163,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
-              color: colorMode === "light" ? "white" : "black",
+              color: "white",
             },
             headerStyle: {
-              backgroundColor: colorMode === "light" ? "#475569" : "white",
+              backgroundColor: "#818cf8",
             },
           }}
         />
@@ -179,10 +179,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
-              color: colorMode === "light" ? "white" : "black",
+              color: "white",
             },
             headerStyle: {
-              backgroundColor: colorMode === "light" ? "#475569" : "white",
+              backgroundColor: "#818cf8",
             },
           }}
         />
@@ -195,10 +195,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
-              color: colorMode === "light" ? "white" : "black",
+              color: "white",
             },
             headerStyle: {
-              backgroundColor: colorMode === "light" ? "#475569" : "white",
+              backgroundColor: "#818cf8",
             },
           }}
         />
@@ -211,10 +211,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
-              color: colorMode === "light" ? "white" : "black",
+              color: "white",
             },
             headerStyle: {
-              backgroundColor: colorMode === "light" ? "#475569" : "white",
+              backgroundColor: "#818cf8",
             },
           }}
         />

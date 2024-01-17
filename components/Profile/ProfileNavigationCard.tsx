@@ -38,7 +38,13 @@ const ProfileNavigationCard = ({ id, icon, title, badges, route }: any) => {
           </Text>
           <HStack flexWrap={"wrap"}>
             {badges.map((i: string) => (
-              <Badge variant={"solid"} mb={1} mr={1} px={2} key={i}>
+              <Badge
+                bg={"indigo.500"}
+                variant={"solid"}
+                mb={1}
+                mr={1}
+                px={2}
+                key={i}>
                 {i}
               </Badge>
             ))}

@@ -21,7 +21,6 @@ import useAppSettingsStore from "@/app/store/appSettingsStore";
 import { colorModeManager } from "@/app/theme";
 
 const Page = () => {
-
   const onSelectSwitch = (index: any) => {
     alert("Selected index: " + index);
   };
@@ -66,89 +65,115 @@ const Page = () => {
           />
         </Stack>
 
-        {/* <Text fontWeight={"semibold"} fontSize={"md"}>
+        <Text fontWeight={"semibold"} fontSize={"md"}>
           Единицы измерения
         </Text>
-        <HStack
-          bg={"blueGray.100"}
+        <Stack
+          direction={"row"}
           p={2}
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
           <Box flexDirection={"row"} alignItems={"center"}>
-            <MaterialCommunityIcons name="weight" size={18} color="black" />
+            <MaterialCommunityIcons
+              name="weight"
+              size={18}
+              color={colorMode == "light" ? "black" : "white"}
+            />
             <Text ml={2}>Вес</Text>
           </Box>
           <CustomSwitch
-            selectionMode={1}
+            selectionMode={"kg"}
             roundCorner={true}
-            option1={"kg"}
-            option2={"ibs"}
+            options={[
+              { label: "kg", value: "kg" },
+              { label: "ibs", value: "ibs" },
+            ]}
             onSelectSwitch={onSelectSwitch}
             selectionColor={Colors.primary}
           />
-        </HStack>
-        <HStack
-          bg={"blueGray.100"}
+        </Stack>
+        <Stack
+          direction={"row"}
           p={2}
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
           <Box flexDirection={"row"} alignItems={"center"}>
-            <MaterialIcons name="height" size={18} color="black" />
+            <MaterialIcons
+              name="height"
+              size={18}
+              color={colorMode == "light" ? "black" : "white"}
+            />
             <Text ml={2}>Рост</Text>
           </Box>
           <CustomSwitch
-            selectionMode={1}
+            selectionMode={"cm"}
             roundCorner={true}
-            option1={"cm"}
-            option2={"inch"}
+            options={[
+              { label: "cm", value: "cm" },
+              { label: "inch", value: "inch" },
+            ]}
             onSelectSwitch={onSelectSwitch}
             selectionColor={Colors.primary}
           />
-        </HStack>
-        <HStack
-          bg={"blueGray.100"}
+        </Stack>
+        <Stack
+          direction={"row"}
           p={2}
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
           <Box flexDirection={"row"} alignItems={"center"}>
-            <Fontisto name="blood-drop" size={18} color="black" />
+            <Fontisto
+              name="blood-drop"
+              size={18}
+              color={colorMode == "light" ? "black" : "white"}
+            />
             <Text ml={2}>Глюкоза</Text>
           </Box>
           <CustomSwitch
-            selectionMode={1}
+            selectionMode={"mmol/l"}
             roundCorner={true}
-            option1={"mmol/l"}
-            option2={"mg/dl"}
+            options={[
+              { label: "mmol/l", value: "mmol/l" },
+              { label: "mg/dl", value: "mg/dl" },
+            ]}
             onSelectSwitch={onSelectSwitch}
             selectionColor={Colors.primary}
           />
-        </HStack>
+        </Stack>
 
         <Text fontWeight={"semibold"} fontSize={"md"}>
           Язык
         </Text>
-        <HStack
-          bg={"blueGray.100"}
+        <Stack
+          direction={"row"}
           p={2}
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
           <Box flexDirection={"row"} alignItems={"center"}>
-            <FontAwesome name="language" size={18} color="black" />
+            <FontAwesome
+              name="language"
+              size={18}
+              color={colorMode == "light" ? "black" : "white"}
+            />
             <Text ml={2}>Выбор языка</Text>
           </Box>
           <CustomSwitch
-            selectionMode={1}
+            selectionMode={"ru"}
             roundCorner={true}
             option1={"ru"}
             option2={"en"}
+            options={[
+              { label: "ru", value: "ru" },
+              { label: "en", value: "en" },
+            ]}
             onSelectSwitch={onSelectSwitch}
             selectionColor={Colors.primary}
           />
-        </HStack> */}
+        </Stack>
       </VStack>
     </ScrollView>
   );
