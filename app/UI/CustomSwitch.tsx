@@ -7,17 +7,18 @@ const CustomSwitch = ({
   navigation,
   selectionMode,
   roundCorner,
-  option1,
-  option2,
+  options,
   onSelectSwitch,
   selectionColor,
 }: any) => {
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
   const [getRoundCorner, setRoundCorner] = useState(roundCorner);
 
-  const updatedSwitchData = (val: any) => {
+  const updatedSwitchData = (val: any, index: number) => {
+    console.log('custom switch:', val);
+    
     setSelectionMode(val);
-    onSelectSwitch(val);
+    onSelectSwitch(val, index);
   };
 
   return (
@@ -36,37 +37,36 @@ const CustomSwitch = ({
         }}>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => updatedSwitchData(1)}
+          onPress={() => updatedSwitchData(options[0].value, 0)}
           style={{
             flex: 1,
-
-            backgroundColor: getSelectionMode == 1 ? selectionColor : "white",
+            backgroundColor: getSelectionMode == options[0].value ? selectionColor : "white",
             borderRadius: getRoundCorner ? 25 : 0,
             justifyContent: "center",
             alignItems: "center",
           }}>
           <Text
             style={{
-              color: getSelectionMode == 1 ? "white" : selectionColor,
+              color: getSelectionMode == options[0].value ? "white" : selectionColor,
             }}>
-            {option1}
+            {options[0].label}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => updatedSwitchData(2)}
+          onPress={() => updatedSwitchData(options[1].value, 1)}
           style={{
             flex: 1,
-            backgroundColor: getSelectionMode == 2 ? selectionColor : "white",
+            backgroundColor: getSelectionMode == options[1].value ? selectionColor : "white",
             borderRadius: getRoundCorner ? 25 : 0,
             justifyContent: "center",
             alignItems: "center",
           }}>
           <Text
             style={{
-              color: getSelectionMode == 2 ? "white" : selectionColor,
+              color: getSelectionMode == options[1].value ? "white" : selectionColor,
             }}>
-            {option2}
+            {options[1].label}
           </Text>
         </TouchableOpacity>
       </View>

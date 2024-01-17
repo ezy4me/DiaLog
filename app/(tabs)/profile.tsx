@@ -8,6 +8,7 @@ import {
   Input,
   HStack,
   Select,
+  Center,
 } from "native-base";
 import React, { useState } from "react";
 import { useAuth } from "@clerk/clerk-expo";
@@ -58,7 +59,7 @@ const Page = () => {
   ];
 
   return (
-    <ScrollView bg={"white"}>
+    <ScrollView>
       <VStack py={2} alignItems="center" space="2.5" px="4">
         {navigationData.map(({ id, icon, title, badges, route }) => (
           <ProfileNavigationCard
@@ -84,24 +85,23 @@ const Page = () => {
           </HStack>
         </Button>
 
-        <Stack w={'100%'} direction="column" mb="2.5" mt="1.5" space={3}>
-          {!isSignedIn && (
-            <Button
-              borderRadius={100}
-              colorScheme="indigo"
-              onPress={() => router.push("/(modals)/login")}>
-              Войти
-            </Button>
-          )}
-        </Stack>
+        {!isSignedIn && (
+          <Button
+            w={"full"}
+            borderRadius={100}
+            colorScheme="indigo"
+            onPress={() => router.push("/(modals)/login")}>
+            Войти
+          </Button>
+        )}
 
-        <Stack alignItems={"center"}>
+        <Center alignItems={"center"}>
           <Text>
             Copyright with{" "}
             <MaterialCommunityIcons color={"red"} size={18} name="heart" />
           </Text>
           <Text fontWeight={"semibold"}>by miliash, 2024</Text>
-        </Stack>
+        </Center>
       </VStack>
     </ScrollView>
   );

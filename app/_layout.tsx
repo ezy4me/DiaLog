@@ -8,7 +8,11 @@ import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { NativeBaseProvider } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
-import { theme } from "./theme";
+import { colorModeManager, theme } from "./theme";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ColorMode, useColorMode, StorageManager } from "native-base";
+import useAppSettingsStore from "./store/appSettingsStore";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -76,15 +80,15 @@ const config = {
 function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
+  const { colorMode } = useColorMode();
 
-  // useEffect(() => {
-  //   if (isLoaded && !isSignedIn) {
-  //     router.push("/(modals)/login");
-  //   }
-  // }, [isLoaded]);
+  colorModeManager.get();
 
   return (
-    <NativeBaseProvider theme={theme} config={config}>
+    <NativeBaseProvider
+      theme={theme}
+      config={config}
+      colorModeManager={colorModeManager}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
@@ -95,6 +99,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
+              color: colorMode === "light" ? "white" : "black",
+            },
+            headerStyle: {
+              backgroundColor: colorMode === "light" ? "#475569" : "white",
             },
           }}
         />
@@ -107,6 +115,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
+              color: colorMode === "light" ? "white" : "black",
+            },
+            headerStyle: {
+              backgroundColor: colorMode === "light" ? "#475569" : "white",
             },
           }}
         />
@@ -119,6 +131,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
+              color: colorMode === "light" ? "white" : "black",
+            },
+            headerStyle: {
+              backgroundColor: colorMode === "light" ? "#475569" : "white",
             },
           }}
         />
@@ -131,6 +147,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
+              color: colorMode === "light" ? "white" : "black",
+            },
+            headerStyle: {
+              backgroundColor: colorMode === "light" ? "#475569" : "white",
             },
           }}
         />
@@ -143,6 +163,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
+              color: colorMode === "light" ? "white" : "black",
+            },
+            headerStyle: {
+              backgroundColor: colorMode === "light" ? "#475569" : "white",
             },
           }}
         />
@@ -155,6 +179,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
+              color: colorMode === "light" ? "white" : "black",
+            },
+            headerStyle: {
+              backgroundColor: colorMode === "light" ? "#475569" : "white",
             },
           }}
         />
@@ -167,6 +195,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
+              color: colorMode === "light" ? "white" : "black",
+            },
+            headerStyle: {
+              backgroundColor: colorMode === "light" ? "#475569" : "white",
             },
           }}
         />
@@ -179,6 +211,10 @@ function RootLayoutNav() {
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "mon-sb",
+              color: colorMode === "light" ? "white" : "black",
+            },
+            headerStyle: {
+              backgroundColor: colorMode === "light" ? "#475569" : "white",
             },
           }}
         />

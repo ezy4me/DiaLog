@@ -36,7 +36,7 @@ export function DiabetesInfoCard({
     <Box
       alignItems="center"
       bg={
-        isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "blueGray.100"
+        isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "transparent"
       }
       style={{
         transform: [
@@ -45,10 +45,9 @@ export function DiabetesInfoCard({
           },
         ],
       }}
-      borderRadius={16}
-      borderColor="coolGray.300">
-      <Box overflow="hidden" borderColor="coolGray.200" borderWidth="1">
-        <Box bg={colors[data.id - 1]} borderRadius={0}>
+      borderRadius={16}>
+      <Box overflow="hidden">
+        <Box w='full' bg={colors[data.id - 1]} borderRadius={0}>
           <AspectRatio w="100%" ratio={16 / 9}>
             <Center>
               <Image
@@ -75,11 +74,11 @@ export function DiabetesInfoCard({
             {data.id}
           </Center>
         </Box>
-        <Stack p="4" space={3}>
+        <Stack borderTopLeftRadius={0} borderTopRightRadius={0} p="4" space={3}>
           <Stack space={2}>
-            <Heading size="md" ml="-1">
+            <Text fontSize={'lg'} fontWeight={'semibold'} ml="-1">
               {data.title}
-            </Heading>
+            </Text>
             <Text
               fontSize="xs"
               _light={{

@@ -2,8 +2,11 @@
 import { LineChart } from "react-native-chart-kit";
 
 import { Dimensions, View } from "react-native";
+import { useColorMode } from "native-base";
 
 export function DiabetesChart() {
+  const { colorMode } = useColorMode();
+
   const today = new Date();
 
   const generateFormattedDate = () => {
@@ -44,12 +47,15 @@ export function DiabetesChart() {
         yAxisSuffix="mmol"
         yAxisInterval={1}
         chartConfig={{
-          backgroundColor: "#fff",
-          backgroundGradientFrom: "#fff",
-          backgroundGradientTo: "#fff",
+          backgroundColor: "transparent",
+          backgroundGradientFrom: colorMode == "light" ? "#fff" : "#475569",
+          backgroundGradientTo: colorMode == "light" ? "#e2e8f0" : "#475569",
           decimalPlaces: 1,
           color: (opacity = 1) => `rgba(67, 56, 202, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+          labelColor: (opacity = 1) =>
+            colorMode == "light"
+              ? `rgba(0, 0, 0, ${opacity})`
+              : `rgba(255, 255, 255, ${opacity})`,
           style: {
             borderRadius: 16,
           },

@@ -83,14 +83,14 @@ export const InsulinModalForm = () => {
                 </HStack>
 
                 <Box my={2}>
-                  <CustomSwitch
+                  {/* <CustomSwitch
                     selectionMode={1}
                     roundCorner={true}
                     option1={"Долгий"}
                     option2={"Быстрый"}
                     onSelectSwitch={onSelectSwitch}
                     selectionColor={"indigo"}
-                  />
+                  /> */}
                 </Box>
 
                 <Input

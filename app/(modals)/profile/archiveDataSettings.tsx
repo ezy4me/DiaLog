@@ -7,6 +7,8 @@ import {
   HStack,
   Button,
   Box,
+  Stack,
+  useColorMode,
 } from "native-base";
 import React from "react";
 import {
@@ -16,44 +18,53 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 const Page = () => {
+  const { colorMode } = useColorMode();
+
   const { signOut, isSignedIn } = useAuth();
   return (
-    <ScrollView bg={"white"} maxH={"100%"}>
+    <ScrollView maxH={"100%"}>
       <VStack space="2.5" mt="4" px="4">
         <Text fontWeight={"semibold"} fontSize={"md"}>
           Экспорт данных
         </Text>
-        <HStack
-          bg={"blueGray.100"}
+        <Stack
+          direction={"row"}
           p={2}
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
           <Box flexDirection={"row"} alignItems={"center"}>
-            <AntDesign name="pdffile1" size={18} color="black" />
-            <Text ml={2}>В формате .pdf  </Text>
-
+            <AntDesign
+              name="pdffile1"
+              size={18}
+              color={colorMode == "light" ? "black" : "white"}
+            />
+            <Text ml={2}>В формате .pdf </Text>
           </Box>
           <Button w={24} borderRadius={100} shadow={1} colorScheme="indigo">
             <MaterialCommunityIcons
               name="file-export"
               size={24}
-              color="white"
+              color={colorMode == "light" ? "black" : "white"}
             />
           </Button>
-        </HStack>
+        </Stack>
 
         <Text fontWeight={"semibold"} fontSize={"md"}>
           Аккаунт
         </Text>
-        <HStack
-          bg={"blueGray.100"}
+        <Stack
+          direction={"row"}
           p={2}
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
           <Box flexDirection={"row"} alignItems={"center"}>
-            <MaterialIcons name="delete" size={18} color="black" />
+            <MaterialIcons
+              name="delete"
+              size={18}
+              color={colorMode == "light" ? "black" : "white"}
+            />
             <Text ml={2}>Удалить аккаунт</Text>
           </Box>
           {!isSignedIn && (
@@ -66,9 +77,9 @@ const Page = () => {
               Удалить
             </Button>
           )}
-        </HStack>
-        <HStack
-          bg={"blueGray.100"}
+        </Stack>
+        <Stack
+          direction={"row"}
           p={2}
           borderRadius={16}
           alignItems={"center"}
@@ -77,7 +88,7 @@ const Page = () => {
             <MaterialCommunityIcons
               name="exit-to-app"
               size={18}
-              color="black"
+              color={colorMode == "light" ? "black" : "white"}
             />
             <Text ml={2}>Выйти</Text>
           </Box>
@@ -91,7 +102,7 @@ const Page = () => {
               Выйти
             </Button>
           )}
-        </HStack>
+        </Stack>
       </VStack>
     </ScrollView>
   );

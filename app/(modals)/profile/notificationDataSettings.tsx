@@ -4,7 +4,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <ScrollView bg={"white"}>
+    <ScrollView>
       <VStack mt={48} alignItems={"center"} justifyContent={"center"}>
         <FontAwesome name="code" size={32} color="black" />
         <Text my={4}>В разработке...</Text>

@@ -9,6 +9,7 @@ import {
   HStack,
   Button,
   Select,
+  useColorMode,
 } from "native-base";
 import { useState } from "react";
 import { GlucoseModalForm } from "./GlucoseModalForm";
@@ -67,6 +68,9 @@ const BloodSugarList = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [type, setType] = useState("");
 
+  const { colorMode } = useColorMode();
+
+
   return (
     <Box mb={20}>
       {/* <Button
@@ -79,7 +83,7 @@ const BloodSugarList = () => {
         px={4}
         py={1}
         w={"100%"}
-        bg={"indigo.400"}
+        bg={"indigo.600"}
         alignItems={"center"}
         justifyContent={"space-between"}>
         <Select
@@ -123,7 +127,10 @@ const BloodSugarList = () => {
             borderRadius={16}
             bg={{
               linearGradient: {
-                colors: ["blueGray.100", "indigo.100"],
+                colors:
+                colorMode == "light"
+                  ? ["white", "blueGray.200"]
+                  : ["blueGray.500", "blueGray.600"],
                 start: [0, 0],
                 end: [1, 1],
               },
@@ -145,16 +152,16 @@ const BloodSugarList = () => {
                       end: [1, 0.5],
                     },
                   }}>
-                  <Text fontSize={18} color="light.800" fontWeight={"semibold"}>
+                  <Text fontSize={18} fontWeight={"semibold"}>
                     {item.value}
                   </Text>
-                  <Text fontSize={14} color="dark.100" fontWeight={"semibold"}>
+                  <Text fontSize={14} fontWeight={"semibold"}>
                     mmol/l
                   </Text>
                 </Box>
               </VStack>
               <Box w={48} alignItems={"center"} justifyContent={"center"}>
-                <Text textAlign={"center"} color="gray.600">
+                <Text textAlign={"center"}>
                   {item.text}
                 </Text>
               </Box>
@@ -164,18 +171,15 @@ const BloodSugarList = () => {
                   bg={"transparent"}
                   size={"md"}
                   py={1}
-                  _text={{
-                    color: "#404040",
-                  }}
                   leftIcon={
                     <MaterialCommunityIcons
                       name="circle-edit-outline"
                       size={24}
-                      color="#404040"
+                      color={colorMode == 'light' ? 'black' : 'white'}
                     />
                   }
                 />
-                <Text mt={2} fontWeight={"bold"} color="gray.700">
+                <Text mt={2} fontWeight={"bold"}>
                   {item.date}
                 </Text>
               </Box>

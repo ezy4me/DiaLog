@@ -1,14 +1,12 @@
 import { GlucoseModalForm } from "@/components/GlucoseModalForm";
 import { InsulinModalForm } from "@/components/InsulinModalForm";
 import {
-  AntDesign,
   FontAwesome,
   FontAwesome5,
   Fontisto,
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import {
   Text,
   VStack,
@@ -16,32 +14,29 @@ import {
   ScrollView,
   HStack,
   Heading,
-  Button,
-  Modal,
-  FormControl,
-  Input,
-  View,
+  Stack,
+  useColorMode,
 } from "native-base";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 
 const Page = () => {
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const { colorMode } = useColorMode();
 
   return (
-    <ScrollView bg={"white"} maxH={"100%"}>
-      <VStack space="2.5" mt="4" px="4">
-        <HStack
+    <ScrollView maxH={"100%"}>
+      <VStack space="2.5" p="4">
+        <Stack
           p={2}
+          flexDirection={"row"}
           w={"100%"}
-          bg={"blueGray.300"}
           borderRadius={16}
           justifyContent={"space-between"}>
           <VStack
             pl={1}
             w={24}
             space={2}
-            bg={"blueGray.100"}
+            bg={"blueGray.500"}
             justifyContent={"center"}>
             <HStack space={1}>
               <MaterialCommunityIcons name="cube" size={16} color="black" />
@@ -70,7 +65,7 @@ const Page = () => {
           <VStack
             pl={1}
             w={24}
-            bg={"blueGray.100"}
+            bg={"blueGray.500"}
             space={2}
             justifyContent={"center"}>
             <HStack space={1}>
@@ -81,24 +76,24 @@ const Page = () => {
               />
               <Text fontSize={"sm"}>Еда</Text>
             </HStack>
-            <HStack space={1} flexWrap={'wrap'}>
+            <HStack space={1} flexWrap={"wrap"}>
               <MaterialIcons name="donut-small" size={16} color="black" />
               <Text fontSize={"sm"}> 0 kcal</Text>
             </HStack>
           </VStack>
-        </HStack>
+        </Stack>
 
-        <Heading size={"sm"} p={4} bg={"blueGray.200"} borderRadius={16}>
+        <Heading size={"sm"} p={4} borderRadius={16}>
           Последние действия:
         </Heading>
 
         <Box
-          borderWidth={1}
-          borderRadius={16}
-          borderColor="muted.100"
           bg={{
             linearGradient: {
-              colors: ["white", "blueGray.100"],
+              colors:
+                colorMode == "light"
+                  ? ["white", "blueGray.200"]
+                  : ["blueGray.500", "blueGray.600"],
               start: [0, 0],
               end: [1, 1],
             },
@@ -111,12 +106,12 @@ const Page = () => {
           </HStack>
         </Box>
         <Box
-          borderWidth={1}
-          borderRadius={16}
-          borderColor="muted.100"
           bg={{
             linearGradient: {
-              colors: ["white", "blueGray.100"],
+              colors:
+                colorMode == "light"
+                  ? ["white", "blueGray.200"]
+                  : ["blueGray.500", "blueGray.600"],
               start: [0, 0],
               end: [1, 1],
             },

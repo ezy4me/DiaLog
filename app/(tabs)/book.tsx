@@ -52,16 +52,13 @@ export default function Page() {
   return (
     <ScrollView>
       <VStack space="2.5" pt="4" px="4">
-        <Heading size={"sm"} p={4} bg={"blueGray.100"} borderRadius={16}>
-          Норма сахара в крови
+        <Heading size={"sm"} p={4} borderRadius={16}>
+          Норма сахара в крови:
         </Heading>
         <ScrollView horizontal>
           <HStack space={3}>
-            <Box
-              borderWidth={1}
-              borderColor="muted.100"
+            <Stack
               borderRadius={16}
-              bg={"blueGray.50"}
               alignItems={"center"}
               justifyContent={"center"}
               py={2}
@@ -70,12 +67,9 @@ export default function Page() {
                 Перед приемом пищи
               </Text>
               <Text fontSize={18}>3,9-5,6 ммоль/л</Text>
-            </Box>
-            <Box
-              borderWidth={1}
-              borderColor="muted.100"
+            </Stack>
+            <Stack
               borderRadius={16}
-              bg={"blueGray.100"}
               alignItems={"center"}
               justifyContent={"center"}
               py={2}
@@ -84,12 +78,9 @@ export default function Page() {
                 После приема пищи
               </Text>
               <Text fontSize={18}>7,8 ммоль/л</Text>
-            </Box>
-            <Box
-              borderWidth={1}
-              borderColor="muted.100"
+            </Stack>
+            <Stack
               borderRadius={16}
-              bg={"blueGray.50"}
               alignItems={"center"}
               justifyContent={"center"}
               py={2}
@@ -98,12 +89,12 @@ export default function Page() {
                 Случайный показатель
               </Text>
               <Text fontSize={18}>7,0 ммоль/л</Text>
-            </Box>
+            </Stack>
           </HStack>
         </ScrollView>
-        <Stack direction="column" mb="2.5" mt="1.5" space={3}>
+        <VStack mb="2.5" mt="1.5" space={3}>
           {renderDiabetesInfoCards()}
-        </Stack>
+        </VStack>
       </VStack>
     </ScrollView>
   );

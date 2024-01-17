@@ -3,18 +3,21 @@ import React from "react";
 import { Tabs } from "expo-router";
 import Colors from "@/constants/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useColorMode } from "native-base";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color: string;
   focused: boolean;
 }) {
+  const { colorMode } = useColorMode();
+
   const iconStyles: ViewStyle = {
     top: 0,
     position: "relative",
     padding: 0,
     borderRadius: 0,
-    backgroundColor: "white",
+    backgroundColor: colorMode == "light" ? "white" : "#27272a",
   };
 
   if (props.focused) {
@@ -29,11 +32,18 @@ function TabBarIcon(props: {
 }
 
 const Layout = () => {
+  const { colorMode } = useColorMode();
+
   return (
     <Tabs
       screenOptions={{
+        
         tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: "#525252",
+        tabBarInactiveTintColor: colorMode == "light" ? "#525252" : "#e2e8f0",
+        tabBarStyle: {
+          backgroundColor: colorMode == "light" ? "white" : "#27272a",
+          borderColor: colorMode == "light" ? "#525252" : "#3f3f46"
+        },
         headerTitleAlign: "center",
         headerTitleStyle: {
           textTransform: "uppercase",

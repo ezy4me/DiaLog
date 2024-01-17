@@ -9,6 +9,7 @@ import {
   Input,
   Pressable,
   Icon,
+  useColorMode,
 } from "native-base";
 import data from "products.json";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -21,6 +22,8 @@ interface Product {
 }
 
 const Page = () => {
+  const { colorMode } = useColorMode();
+
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -42,7 +45,10 @@ const Page = () => {
       w="100%"
       bg={{
         linearGradient: {
-          colors: ["blueGray.100", "indigo.100"],
+          colors:
+            colorMode == "light"
+              ? ["white", "blueGray.200"]
+              : ["blueGray.500", "blueGray.600"],
           start: [0, 0],
           end: [1, 1],
         },
@@ -50,14 +56,13 @@ const Page = () => {
       px={2}
       py={2}
       mb={2}>
-      <VStack bg={"transparent"}>
+      <VStack>
         <HStack
           space={[2, 3]}
           justifyContent="space-between"
           alignItems={"center"}>
           <Box borderRadius={4} mt={2} p={2} alignItems={"flex-start"}>
             <Text
-              bg={"white"}
               px={4}
               py={2}
               w={48}
@@ -67,7 +72,6 @@ const Page = () => {
               {item.name}
             </Text>
             <VStack
-              bg={"transparent"}
               minW={12}
               borderRadius={4}
               mt={2}
@@ -85,8 +89,7 @@ const Page = () => {
                     w={12}
                     h={12}
                     justifyContent={"center"}
-                    alignItems={"center"}
-                    bg={"white"}>
+                    alignItems={"center"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
                       {item.bgu.split(",")[0]}
                     </Text>
@@ -103,8 +106,7 @@ const Page = () => {
                     w={12}
                     h={12}
                     justifyContent={"center"}
-                    alignItems={"center"}
-                    bg={"white"}>
+                    alignItems={"center"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
                       {item.bgu.split(",")[1]}
                     </Text>
@@ -121,8 +123,7 @@ const Page = () => {
                     w={12}
                     h={12}
                     justifyContent={"center"}
-                    alignItems={"center"}
-                    bg={"white"}>
+                    alignItems={"center"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
                       {item.bgu.split(",")[2]}
                     </Text>
@@ -132,7 +133,6 @@ const Page = () => {
             </VStack>
           </Box>
           <Box
-            bg={"white"}
             borderRadius={100}
             borderColor={"indigo.300"}
             borderWidth={2}
@@ -158,7 +158,9 @@ const Page = () => {
 
   return (
     <VStack
-      bg={"white"}
+      _light={{ bg: "light.200" }}
+      _dark={{ bg: "coolGray.700" }}
+      borderRadius={0}
       w="100%"
       minH={"100%"}
       alignItems="center"

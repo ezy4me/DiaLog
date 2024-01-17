@@ -1,6 +1,15 @@
 import CustomSwitch from "@/app/UI/CustomSwitch";
-import { View, Text, ScrollView, Box, VStack, HStack } from "native-base";
-import React from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  Box,
+  VStack,
+  HStack,
+  useColorMode,
+  Stack,
+} from "native-base";
+import React, { useEffect } from "react";
 import Colors from "@/constants/Colors";
 import {
   FontAwesome,
@@ -8,20 +17,32 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
+import useAppSettingsStore from "@/app/store/appSettingsStore";
+import { colorModeManager } from "@/app/theme";
+
 const Page = () => {
+
   const onSelectSwitch = (index: any) => {
     alert("Selected index: " + index);
   };
 
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  const onToggleSwitchTheme = (val?: any, index?: number) => {
+    if (colorMode != val) {
+      toggleColorMode();
+    }
+  };
+
   return (
-    <ScrollView bg={"white"} maxH={"100%"}>
+    <ScrollView maxH={"100%"}>
       <VStack space="2.5" mt="4" px="4">
         <Text fontWeight={"semibold"} fontSize={"md"}>
           Вид приложения
         </Text>
-        <HStack
-          bg={"blueGray.100"}
+        <Stack
           p={2}
+          direction={"row"}
           borderRadius={16}
           alignItems={"center"}
           justifyContent={"space-between"}>
@@ -29,21 +50,23 @@ const Page = () => {
             <MaterialCommunityIcons
               name="theme-light-dark"
               size={18}
-              color="black"
+              color={colorMode == "light" ? "black" : "white"}
             />
             <Text ml={2}>Тема</Text>
           </Box>
           <CustomSwitch
-            selectionMode={2}
+            selectionMode={colorMode}
             roundCorner={true}
-            option1={"Темная"}
-            option2={"Светлая"}
-            onSelectSwitch={onSelectSwitch}
+            options={[
+              { label: "Светлая", value: "light" },
+              { label: "Темная", value: "dark" },
+            ]}
+            onSelectSwitch={onToggleSwitchTheme}
             selectionColor={Colors.primary}
           />
-        </HStack>
+        </Stack>
 
-        <Text fontWeight={"semibold"} fontSize={"md"}>
+        {/* <Text fontWeight={"semibold"} fontSize={"md"}>
           Единицы измерения
         </Text>
         <HStack
@@ -125,7 +148,7 @@ const Page = () => {
             onSelectSwitch={onSelectSwitch}
             selectionColor={Colors.primary}
           />
-        </HStack>
+        </HStack> */}
       </VStack>
     </ScrollView>
   );

@@ -14,10 +14,13 @@ import {
   Select,
   VStack,
   Button,
+  useColorMode,
 } from "native-base";
 import { useState } from "react";
 
 const Page = () => {
+  const { colorMode } = useColorMode();
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [weight, setWeight] = useState("75");
@@ -25,7 +28,7 @@ const Page = () => {
   const [gender, setGender] = useState("");
   const [type, setType] = useState("");
   return (
-    <ScrollView bg={"white"} maxH={"100%"}>
+    <ScrollView maxH={"100%"}>
       <VStack space="2.5" mt="4" px="4">
         <HStack
           p={2}
@@ -80,7 +83,13 @@ const Page = () => {
               borderLeftColor={"muted.200"}
               p={2}
               borderRadius={16}
-              children={<Entypo name="mail" size={18} color="#525252" />}
+              children={
+                <Entypo
+                  name="mail"
+                  size={18}
+                  color={colorMode == "light" ? "#525252" : "white"}
+                />
+              }
             />
           }
         />
@@ -96,7 +105,11 @@ const Page = () => {
               p={2}
               borderRadius={16}
               children={
-                <FontAwesome name="user-circle" size={18} color="#525252" />
+                <FontAwesome
+                  name="user-circle"
+                  size={18}
+                  color={colorMode == "light" ? "#525252" : "white"}
+                />
               }
             />
           }
@@ -116,13 +129,17 @@ const Page = () => {
               <MaterialCommunityIcons
                 name="chevron-down"
                 size={24}
-                color="#525252"
+                color={colorMode == "light" ? "#525252" : "white"}
               />
             </Box>
           }
           _selectedItem={{
             endIcon: (
-              <MaterialCommunityIcons name="check" size={24} color="black" />
+              <MaterialCommunityIcons
+                name="check"
+                size={24}
+                color={colorMode == "light" ? "#525252" : "white"}
+              />
             ),
           }}
           onValueChange={(itemValue) => setType(itemValue)}>
@@ -139,24 +156,27 @@ const Page = () => {
               <MaterialCommunityIcons
                 name="chevron-down"
                 size={24}
-                color="#525252"
+                color={colorMode == "light" ? "#525252" : "white"}
               />
             </Box>
           }
           _selectedItem={{
             bg: "indigo.100",
             endIcon: (
-              <MaterialCommunityIcons name="check" size={24} color="black" />
+              <MaterialCommunityIcons
+                name="check"
+                size={24}
+                color={colorMode == "light" ? "#525252" : "white"}
+              />
             ),
           }}
           onValueChange={(itemValue) => setGender(itemValue)}>
           <Select.Item borderRadius={16} label="Мужской" value="male" />
           <Select.Item borderRadius={16} label="Женский" value="female" />
         </Select>
-        <Stack
+        <HStack
           w={"100%"}
           justifyContent={"flex-start"}
-          direction="row"
           mb="2.5"
           mt="1.5"
           space={2}>
@@ -192,7 +212,7 @@ const Page = () => {
               />
             }
           />
-        </Stack>
+        </HStack>
         <Button borderRadius={100} colorScheme="indigo">
           Сохранить
         </Button>
