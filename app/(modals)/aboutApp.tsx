@@ -8,9 +8,16 @@ import {
   Text,
   VStack,
   Stack,
+  Button,
 } from "native-base";
+import useAppSettingsStore from "../store/appSettingsStore";
 
 const Page = () => {
+  const { startUp, setStartUp } = useAppSettingsStore((state) => ({
+    startUp: state.startUp,
+    setStartUp: state.setStartUp,
+  }));
+
   return (
     <ScrollView>
       <VStack space={3} p={4}>
@@ -49,6 +56,12 @@ const Page = () => {
           Заботьтесь о своем здоровье с нашим приложением – вашим верным
           спутником в борьбе с диабетом!
         </Text>
+        <Button
+          borderRadius={100}
+          colorScheme={"indigo"}
+          onPress={() => setStartUp("true")}>
+          Сброс
+        </Button>
         <Stack alignItems={"center"}>
           <Text>
             Copyright with{" "}

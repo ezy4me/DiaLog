@@ -11,7 +11,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { colorModeManager, theme } from "./theme";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ColorMode, useColorMode, StorageManager } from "native-base";
 import useAppSettingsStore from "./store/appSettingsStore";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
@@ -36,7 +35,7 @@ const tokenCache = {
 export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
-  initialRouteName: "(tabs)",
+  initialRouteName: "(modals)/startup",
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -80,9 +79,22 @@ const config = {
 function RootLayoutNav() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
-  const { colorMode } = useColorMode();
 
-  colorModeManager.get();
+  // AsyncStorage.setItem("startUp", "true");
+
+  const startUp = useAppSettingsStore((state) => state.startUp);
+  useEffect(() => {
+    const checkStartUp = async () => {
+      const isStartUp = await startUp();
+      console.log(isStartUp);
+
+      if (isStartUp) {
+        router.push("/(modals)/startup");
+      }
+    };
+
+    checkStartUp();
+  }, [startUp]);
 
   return (
     <NativeBaseProvider
@@ -91,6 +103,22 @@ function RootLayoutNav() {
       colorModeManager={colorModeManager}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(modals)/startup"
+          options={{
+            headerShown: false,
+            title: "Войти",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#818cf8",
+            },
+          }}
+        />
         <Stack.Screen
           name="(modals)/login"
           options={{

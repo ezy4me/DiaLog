@@ -10,6 +10,7 @@ type AppSettingsState = {
   height: string;
   glucose: string;
   lang: string;
+  startUp: boolean | any;
 };
 
 type AppSettingsAction = {
@@ -18,6 +19,7 @@ type AppSettingsAction = {
   switchHeight: (height: AppSettingsState["height"]) => void;
   switchGlucose: (glucose: AppSettingsState["glucose"]) => void;
   switchLang: (lang: AppSettingsState["lang"]) => void;
+  setStartUp: (startUp: AppSettingsState["startUp"]) => void;
 };
 
 const useAppSettingsStore = create<AppSettingsState & AppSettingsAction>(
@@ -27,6 +29,12 @@ const useAppSettingsStore = create<AppSettingsState & AppSettingsAction>(
     height: "cm",
     glucose: "mmol/l",
     lang: "ru",
+    startUp: async () => {
+      const storedStartUp = await AsyncStorage.getItem("startUp");
+      console.log("fd", storedStartUp);
+
+      return storedStartUp === "true";
+    },
     switchTheme: (theme: any) =>
       set((state) => {
         console.log("state theme in:", theme);
@@ -39,6 +47,10 @@ const useAppSettingsStore = create<AppSettingsState & AppSettingsAction>(
     switchHeight: (height) => set(() => ({ height })),
     switchGlucose: (glucose) => set(() => ({ glucose })),
     switchLang: (lang) => set(() => ({ lang })),
+    setStartUp: (startUp) => {
+      AsyncStorage.setItem("startUp", startUp);
+      set(() => ({}));
+    },
   })
 );
 

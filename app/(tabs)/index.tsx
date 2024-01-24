@@ -1,5 +1,6 @@
 import { GlucoseModalForm } from "@/components/GlucoseModalForm";
 import { InsulinModalForm } from "@/components/InsulinModalForm";
+import { FoodModalForm } from "@/components/FoodModalForm";
 import {
   FontAwesome,
   FontAwesome5,
@@ -143,9 +144,10 @@ const Page = () => {
             <Text fontWeight={"semibold"}>31.12</Text>
           </HStack>
         </Box>
-
+        
         <GlucoseModalForm label={true} />
         <InsulinModalForm label={true} />
+        <FoodModalForm label={true} />
       </VStack>
     </ScrollView>
   );

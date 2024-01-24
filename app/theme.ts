@@ -137,7 +137,7 @@ export const theme = extendTheme({
       baseStyle: (props: any) => {
         return {
           _light: { bg: "light.100" },
-          _dark: { bg: "coolGray.700" },
+          _dark: { bg: "coolGray.800" },
         };
       },
     },
@@ -161,7 +161,8 @@ export const theme = extendTheme({
       defaultProps: {
         borderTopWidth: "0",
         _focus: {
-          bg: "muted.100",
+          bg: "transparent",
+          color: 'black',
           borderColor: "indigo.300",
         },
       },
