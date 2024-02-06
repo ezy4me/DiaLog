@@ -47,7 +47,7 @@ export function DiabetesInfoCard({
       }}
       borderRadius={16}>
       <Box overflow="hidden">
-        <Box w='full' bg={colors[data.id - 1]} borderRadius={0}>
+        <Box w="full" bg={colors[data.id - 1]} borderRadius={0}>
           <AspectRatio w="100%" ratio={16 / 9}>
             <Center>
               <Image
@@ -76,7 +76,7 @@ export function DiabetesInfoCard({
         </Box>
         <Stack borderTopLeftRadius={0} borderTopRightRadius={0} p="4" space={3}>
           <Stack space={2}>
-            <Text fontSize={'lg'} fontWeight={'semibold'} ml="-1">
+            <Text fontSize={"lg"} fontWeight={"semibold"} ml="-1">
               {data.title}
             </Text>
             <Text

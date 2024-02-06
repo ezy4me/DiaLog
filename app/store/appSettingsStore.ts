@@ -31,8 +31,6 @@ const useAppSettingsStore = create<AppSettingsState & AppSettingsAction>(
     lang: "ru",
     startUp: async () => {
       const storedStartUp = await AsyncStorage.getItem("startUp");
-      console.log("fd", storedStartUp);
-
       return storedStartUp === "true";
     },
     switchTheme: (theme: any) =>

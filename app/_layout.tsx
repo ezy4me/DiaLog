@@ -81,13 +81,12 @@ function RootLayoutNav() {
   const { isLoaded, isSignedIn } = useAuth();
 
   // AsyncStorage.setItem("startUp", "true");
+  AsyncStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZW1haWxAbWFpbC5ydSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzA3MjI2ODgyLCJleHAiOjE3MDczMTMyODJ9.6JhNnOshlyO3ycAkMB63x1D-bnCAQLs9Ctyq_311L5I");
 
   const startUp = useAppSettingsStore((state) => state.startUp);
   useEffect(() => {
     const checkStartUp = async () => {
       const isStartUp = await startUp();
-      console.log(isStartUp);
-
       if (isStartUp) {
         router.push("/(modals)/startup");
       }

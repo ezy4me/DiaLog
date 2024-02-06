@@ -13,33 +13,38 @@ import {
 } from "native-base";
 import data from "products.json";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import useNutritionStore from "../store/nutritionStore";
 
-interface Product {
-  id: string;
+interface Food {
+  id: number;
   name: string;
-  bgu: string;
-  kcal: string;
+  proteins: number;
+  fats: number;
+  carbohydrates: number;
+  energy: number;
 }
 
 const Page = () => {
   const { colorMode } = useColorMode();
 
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState<Product[]>([]);
+  // const [food, setFood] = useState<Food[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const { food, getFood } = useNutritionStore((state) => ({
+    food: state.food,
+    getFood: state.getFood,
+  }));
+
   useEffect(() => {
-    setTimeout(() => {
-      setProducts(data as Product[]);
-      setLoading(false);
-    }, 2000);
+    getFood().then(() => setLoading(false));
   }, []);
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredProducts = food?.filter((food) =>
+    food.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const renderItem = ({ item }: { item: Product }) => (
+  const renderItem = ({ item }: { item: Food }) => (
     <Box
       borderRadius={16}
       w="100%"
@@ -50,7 +55,7 @@ const Page = () => {
               ? ["blueGray.100", "blueGray.200"]
               : ["blueGray.600", "blueGray.700"],
           start: [0, 0],
-          end: [1, 1]
+          end: [1, 1],
         },
       }}
       px={2}
@@ -91,7 +96,7 @@ const Page = () => {
                     justifyContent={"center"}
                     alignItems={"center"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
-                      {item.bgu.split(",")[0]}
+                      {item.proteins}
                     </Text>
                   </Box>
                 </Box>
@@ -108,7 +113,7 @@ const Page = () => {
                     justifyContent={"center"}
                     alignItems={"center"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
-                      {item.bgu.split(",")[1]}
+                      {item.fats}
                     </Text>
                   </Box>
                 </Box>
@@ -125,7 +130,7 @@ const Page = () => {
                     justifyContent={"center"}
                     alignItems={"center"}>
                     <Text fontSize={"md"} textTransform={"uppercase"}>
-                      {item.bgu.split(",")[2]}
+                      {item.carbohydrates}
                     </Text>
                   </Box>
                 </Box>
@@ -147,7 +152,7 @@ const Page = () => {
               fontSize={"md"}
               fontWeight={"bold"}
               textTransform={"uppercase"}>
-              {item.kcal}
+              {item.energy}
             </Text>
             <Text textTransform={"uppercase"}>ккал</Text>
           </Box>
@@ -190,7 +195,7 @@ const Page = () => {
           mb={16}
           w="100%"
           data={filteredProducts}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={renderItem}
         />
       )}
