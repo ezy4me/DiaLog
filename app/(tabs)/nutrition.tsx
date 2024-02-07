@@ -10,9 +10,11 @@ import {
   Pressable,
   Icon,
   useColorMode,
+  Stack,
+  Button,
 } from "native-base";
 import data from "products.json";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import useNutritionStore from "../store/nutritionStore";
 
 interface Food {
@@ -28,7 +30,6 @@ const Page = () => {
   const { colorMode } = useColorMode();
 
   const [loading, setLoading] = useState(true);
-  // const [food, setFood] = useState<Food[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const { food, getFood } = useNutritionStore((state) => ({
@@ -53,7 +54,7 @@ const Page = () => {
           colors:
             colorMode == "light"
               ? ["blueGray.100", "blueGray.200"]
-              : ["blueGray.600", "blueGray.700"],
+              : ["blueGray.800", "blueGray.900"],
           start: [0, 0],
           end: [1, 1],
         },
@@ -164,7 +165,7 @@ const Page = () => {
   return (
     <VStack
       _light={{ bg: "light.100" }}
-      _dark={{ bg: "coolGray.800" }}
+      _dark={{ bg: "coolGray.900" }}
       borderRadius={0}
       w="100%"
       minH={"100%"}
@@ -172,6 +173,23 @@ const Page = () => {
       space="2.5"
       pt="4"
       px="4">
+      <HStack w={'full'} space={'2'}>
+        <Button
+          colorScheme="indigo"
+          bg={'transparent'}
+          rightIcon={<Ionicons name="nutrition" size={24} color="#ef4444" />}
+          borderRadius={100}>
+          Продукты
+        </Button>
+        <Button
+          colorScheme="indigo"
+          bg={'transparent'}
+          rightIcon={<Entypo name="bowl" size={24} color={colorMode == "light"
+          ? "black" : 'white'} />}
+          borderRadius={100}>
+          Блюда
+        </Button>
+      </HStack>
       <Input
         InputRightElement={
           <Pressable onPress={() => setSearchTerm("")}>

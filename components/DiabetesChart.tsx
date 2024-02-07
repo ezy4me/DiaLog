@@ -48,8 +48,8 @@ export function DiabetesChart() {
         yAxisInterval={1}
         chartConfig={{
           backgroundColor: "transparent",
-          backgroundGradientFrom: colorMode == "light" ? "#e2e8f0" : "#475569",
-          backgroundGradientTo: colorMode == "light" ? "#e2e8f0" : "#475569",
+          backgroundGradientFrom: colorMode == "light" ? "#e2e8f0" : "#111827",
+          backgroundGradientTo: colorMode == "light" ? "#e2e8f0" : "#111827",
           decimalPlaces: 1,
           color: (opacity = 1) => colorMode == 'light' ? `rgba(67, 56, 202, ${opacity})` : `rgba(224, 231, 255, ${opacity})`,
           labelColor: (opacity = 1) =>

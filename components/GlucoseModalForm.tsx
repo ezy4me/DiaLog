@@ -1,8 +1,5 @@
-import {
-  AntDesign,
-  Fontisto,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import { AntDesign, Fontisto } from "@expo/vector-icons";
 import {
   Box,
   Button,
@@ -13,16 +10,44 @@ import {
   HStack,
   KeyboardAvoidingView,
   useColorMode,
+  Pressable,
 } from "native-base";
-import React, { useState } from "react";
-import { Platform, TouchableWithoutFeedback } from "react-native";
-
 import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
+import { Platform } from "react-native";
+import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
+import { CustomTimePicker } from "@/app/UI/CustomTimePicker";
 
 export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [datePickerVisible, setDatePickerVisible] = useState(false);
+  const [timePickerVisible, setTimePickerVisible] = useState(false);
+
+  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedTime, setSelectedTime] = useState<string>("");
+
+  useEffect(() => {
+    setSelectedDate(getCurrentDate());
+    setSelectedTime(getCurrentTime);
+  }, [modalVisible]);
+
   const { colorMode } = useColorMode();
+
+  const toggleDatePicker = () => {
+    setDatePickerVisible(!datePickerVisible);
+  };
+
+  const handleDateChange = (date: string) => {
+    setSelectedDate(getCurrentDate(date));
+  };
+
+  const toggleTimePicker = () => {
+    setTimePickerVisible(!timePickerVisible);
+  };
+
+  const handleTimeChange = (time: string) => {
+    setSelectedTime(getCurrentTime(time));
+  };
 
   return (
     <Box>
@@ -33,7 +58,6 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
         leftIcon={<AntDesign name="pluscircle" size={32} color={"white"} />}>
         {label ? "Глюкоза" : null}
       </Button>
-      {/* <TouchableWithoutFeedback onPress={() => setModalVisible(false)}> */}
       <Modal
         isOpen={modalVisible}
         onClose={() => setModalVisible(false)}
@@ -63,24 +87,37 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
             </Modal.Header>
             <Modal.Body>
               <FormControl>
-                <HStack justifyContent={"space-between"}>
-                  <Box w={32} p={2} borderRadius={12} bg={"indigo.500"}>
-                    <Text
-                      color={"white"}
-                      textAlign={"center"}
-                      fontWeight={"semibold"}>
-                      {getCurrentDate()}
-                    </Text>
-                  </Box>
-                  <Box w={24} p={2} borderRadius={12} bg={"indigo.500"}>
-                    <Text
-                      color={"white"}
-                      textAlign={"center"}
-                      fontWeight={"semibold"}>
-                      {getCurrentTime()}
-                    </Text>
-                  </Box>
+                <HStack justifyContent={"space-between"} space={4}>
+                  <Button
+                    colorScheme={"indigo"}
+                    onPress={toggleDatePicker}
+                    flex="1"
+                    borderRadius={32}
+                    bg={"indigo.500"}>
+                    {selectedDate}
+                  </Button>
+                  <Button
+                    colorScheme={"indigo"}
+                    onPress={toggleTimePicker}
+                    flex="1"
+                    borderRadius={32}
+                    bg={"indigo.500"}>
+                    {selectedTime}
+                  </Button>
                 </HStack>
+                {datePickerVisible && (
+                  <CustomDatePicker
+                    onClose={toggleDatePicker}
+                    changeDate={handleDateChange}
+                  />
+                )}
+
+                {timePickerVisible && (
+                  <CustomTimePicker
+                    onClose={toggleTimePicker}
+                    changeTime={handleTimeChange}
+                  />
+                )}
 
                 <Input
                   mt={4}
@@ -115,7 +152,6 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
           </Modal.Content>
         </KeyboardAvoidingView>
       </Modal>
-      {/* </TouchableWithoutFeedback> */}
     </Box>
   );
 };

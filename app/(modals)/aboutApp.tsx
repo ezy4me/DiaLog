@@ -62,7 +62,7 @@ const Page = () => {
           onPress={() => setStartUp("true")}>
           Сброс
         </Button>
-        <Stack alignItems={"center"}>
+        <Stack alignItems={"center"} bg={'transparent'}>
           <Text>
             Copyright with{" "}
             <MaterialCommunityIcons color={"red"} size={18} name="heart" />

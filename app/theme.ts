@@ -28,7 +28,6 @@ const config = {
 
 export const theme = extendTheme({
   config,
-
   fontConfig: {
     Montserrat: {
       100: {
@@ -72,18 +71,18 @@ export const theme = extendTheme({
     },
     Heading: {
       defaultProps: {
-        borderRadius: 16,
+        borderRadius: 12,
       },
       baseStyle: (props: any) => {
         return {
           _light: { color: "dark.100", bg: "blueGray.200" },
-          _dark: { color: "light.100", bg: "blueGray.600" },
+          _dark: { color: "light.100", bg: "blueGray.800" },
         };
       },
     },
     Badge: {
       defaultProps: {
-        borderRadius: 16,
+        borderRadius: 12,
       },
       baseStyle: (props: any) => {
         return {
@@ -94,18 +93,12 @@ export const theme = extendTheme({
     },
     Box: {
       defaultProps: {
-        borderRadius: 16,
+        borderRadius: 12,
       },
-      // baseStyle: (props: any) => {
-      //   return {
-      //     _light: { bg: "blueGray.100" },
-      //     _dark: { bg: "blueGray.500" },
-      //   };
-      // },
     },
     Container: {
       defaultProps: {
-        borderRadius: 16,
+        borderRadius: 12,
       },
       baseStyle: (props: any) => {
         return {
@@ -116,12 +109,12 @@ export const theme = extendTheme({
     },
     Stack: {
       defaultProps: {
-        borderRadius: 16,
+        borderRadius: 12,
       },
       baseStyle: (props: any) => {
         return {
           _light: { bg: "blueGray.200" },
-          _dark: { bg: "blueGray.600" },
+          _dark: { bg: "blueGray.800" },
         };
       },
     },
@@ -137,7 +130,7 @@ export const theme = extendTheme({
       baseStyle: (props: any) => {
         return {
           _light: { bg: "light.100" },
-          _dark: { bg: "coolGray.800" },
+          _dark: { bg: "coolGray.900" },
         };
       },
     },
@@ -149,17 +142,8 @@ export const theme = extendTheme({
         };
       },
     },
-    // Center: {
-    //   baseStyle: (props: any) => {
-    //     return {
-    //       _light: { bg: "transparent" },
-    //       _dark: { bg: "transparent" },
-    //     };
-    //   },
-    // },
     Input: {
       defaultProps: {
-        borderTopWidth: "0",
         _focus: {
           bg: "transparent",
           color: 'black',

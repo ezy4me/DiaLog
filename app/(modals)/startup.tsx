@@ -52,7 +52,7 @@ const Page = () => {
   return (
     <VStack
       _light={{ bg: "light.100" }}
-      _dark={{ bg: "coolGray.800" }}
+      _dark={{ bg: "coolGray.900" }}
       flex={1}
       py={8}
       px={4}

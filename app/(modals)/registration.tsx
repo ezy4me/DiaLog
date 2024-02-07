@@ -4,25 +4,21 @@ import {
   Button,
   Center,
   FormControl,
-  HStack,
-  Heading,
   Input,
-  VStack,
   Text,
   ScrollView,
-  Stack,
   useColorMode,
   AspectRatio,
   Image,
-  Divider,
 } from "native-base";
 import {
   Entypo,
-  MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import useAppSettingsStore from "../store/appSettingsStore";
+import CustomSwitch from "../UI/CustomSwitch";
+import Colors from "@/constants/Colors";
 
 const Page = () => {
   const router = useRouter();
@@ -36,14 +32,9 @@ const Page = () => {
   const [password, setPassword] = useState("");
   const { colorMode } = useColorMode();
 
-  const onEnter = () => {
+  const onRegister = () => {
     setStartUp('false');
     router.push("/(tabs)");
-  };
-
-  const onReg = () => {
-    setStartUp('false');
-    router.push("/(modals)/registration");
   };
 
   return (
@@ -60,7 +51,7 @@ const Page = () => {
       </AspectRatio>
 
       <Text mb={4} textAlign={"center"} fontWeight={"semibold"} fontSize={"xl"}>
-        У тебя уже есть аккаунт?
+        Введите свои учетные данные
       </Text>
 
       <FormControl>
@@ -110,38 +101,26 @@ const Page = () => {
         />
       </FormControl>
 
+      <CustomSwitch
+            selectionMode={"USER"}
+            roundCorner={true}
+            options={[
+              { label: "Пациент", value: "USER" },
+              { label: "Доктор", value: "DOCTOR" },
+            ]}
+            onSelectSwitch={() => {}}
+            selectionColor={Colors.primary}
+          />
+
       <Button
-        onPress={() => onEnter()}
+        onPress={() => onRegister()}
         w={"full"}
         mt="2"
         colorScheme="indigo"
         borderRadius={100}>
-        Войти
+        Зарегистрироваться
       </Button>
 
-      <HStack my="6" justifyContent="center" alignItems="center">
-        <Box mr={2} borderColor={"light.300"} borderTopWidth={1} w={24} />
-        <Text fontSize="sm">или</Text>
-        <Box ml={2} borderColor={"light.300"} borderTopWidth={1} w={24} />
-      </HStack>
-
-      <Button
-        onPress={() => onReg()}
-        w={"full"}
-        mt="2"
-        colorScheme="indigo"
-        borderRadius={100}>
-        Регистрация
-      </Button>
-
-      {/* <Button shadow={1} w={"100%"} bg={"light.100"} borderRadius={100}>
-        <HStack alignItems="center">
-          <MaterialCommunityIcons name="google" size={20} color={"#EA4335"} />
-          <Text ml={4} color="coolGray.600">
-            продолжить с Google
-          </Text>
-        </HStack>
-      </Button> */}
     </ScrollView>
   );
 };

@@ -130,7 +130,7 @@ const BloodSugarList = () => {
                 colors:
                 colorMode == "light"
                   ? ["blueGray.100", "blueGray.200"]
-                  : ["blueGray.600", "blueGray.700"],
+                  : ["blueGray.700", "blueGray.800"],
                 start: [0, 0],
                 end: [1, 1],
               },
@@ -143,15 +143,9 @@ const BloodSugarList = () => {
                   justifyContent={"center"}
                   borderRadius={100}
                   borderWidth={2}
-                  borderColor={"transparent"}
+                  borderColor={[...colorStatusStack[item.status]]}
                   p={4}
-                  bg={{
-                    linearGradient: {
-                      colors: [...colorStatusStack[item.status]],
-                      start: [0.2, 0.2],
-                      end: [1, 0.5],
-                    },
-                  }}>
+                 >
                   <Text fontSize={18} fontWeight={"semibold"}>
                     {item.value}
                   </Text>

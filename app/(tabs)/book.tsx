@@ -52,46 +52,6 @@ export default function Page() {
   return (
     <ScrollView>
       <VStack space="2.5" pt="4" px="4">
-        <Heading size={"sm"} p={4} borderRadius={16}>
-          Норма сахара в крови:
-        </Heading>
-        <ScrollView horizontal>
-          <HStack space={3}>
-            <Stack
-              borderRadius={16}
-              alignItems={"center"}
-              justifyContent={"center"}
-              py={2}
-              px={2}>
-              <Text w={72} textAlign={"center"} fontSize={"lg"}>
-                Перед приемом пищи
-              </Text>
-              <Text fontSize={18}>3,9-5,6 ммоль/л</Text>
-            </Stack>
-            <Stack
-              borderRadius={16}
-              alignItems={"center"}
-              justifyContent={"center"}
-              py={2}
-              px={2}>
-              <Text w={72} textAlign={"center"} fontSize={"lg"}>
-                После приема пищи
-              </Text>
-              <Text fontSize={18}>7,8 ммоль/л</Text>
-            </Stack>
-            <Stack
-              borderRadius={16}
-              alignItems={"center"}
-              justifyContent={"center"}
-              py={2}
-              px={2}>
-              <Text w={72} textAlign={"center"} fontSize={"lg"}>
-                Случайный показатель
-              </Text>
-              <Text fontSize={18}>7,0 ммоль/л</Text>
-            </Stack>
-          </HStack>
-        </ScrollView>
         <VStack mb="2.5" mt="1.5" space={3}>
           {renderDiabetesInfoCards()}
         </VStack>

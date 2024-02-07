@@ -20,6 +20,9 @@ apiInstance.interceptors.request.use(async (config) => {
   if (token) {
     config.headers.authorization = token;
   }
+
+  console.log(config.baseURL);
+  
   return config;
 });
 

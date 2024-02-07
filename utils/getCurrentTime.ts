@@ -1,9 +1,17 @@
-const getCurrentTime = () => {
-  const date = new Date();
-  const hours = date.getHours().toString().padStart(2, "0");
-  const minutes = date.getMinutes().toString().padStart(2, "0");
+const getCurrentTime = (value?: string) => {
+  let date = new Date();
 
-  return `${hours}:${minutes}`;
+  if (value) {
+    const [hoursStr, minutesStr] = value.split(":");
+    const hours = parseInt(hoursStr, 10);
+    const minutes = parseInt(minutesStr, 10);
+    date.setHours(hours);
+    date.setMinutes(minutes);
+  }
+
+  const timeString = date.toLocaleTimeString('ru', { hour: '2-digit', minute: '2-digit' });
+
+  return timeString;
 };
 
 export default getCurrentTime;

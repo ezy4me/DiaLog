@@ -76,14 +76,14 @@ const Page = () => {
           <Text color={"indigo.400"}>О приложении</Text>
         </TouchableOpacity>
 
-        <Button shadow={1} w={"100%"} bg={"light.100"} borderRadius={100}>
+        {/* <Button shadow={1} w={"100%"} bg={"light.100"} borderRadius={100}>
           <HStack alignItems="center">
             <MaterialCommunityIcons name="google" size={20} color={"#EA4335"} />
             <Text ml={4} color="coolGray.600">
               продолжить с Google
             </Text>
           </HStack>
-        </Button>
+        </Button> */}
 
         {!isSignedIn && (
           <Button

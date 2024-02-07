@@ -133,6 +133,21 @@ function RootLayoutNav() {
             },
           }}
         />
+         <Stack.Screen
+          name="(modals)/registration"
+          options={{
+            title: "Регистрация",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#818cf8",
+            },
+          }}
+        />
         <Stack.Screen
           name="(modals)/addBloodSugar"
           options={{

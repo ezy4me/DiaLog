@@ -37,7 +37,7 @@ const Page = () => {
             pl={1}
             w={24}
             space={2}
-            bg={colorMode == "light" ? "blueGray.300" : "blueGray.500"}
+            bg={colorMode == "light" ? "blueGray.300" : "blueGray.700"}
             justifyContent={"center"}>
             <HStack space={1}>
               <MaterialCommunityIcons
@@ -74,7 +74,7 @@ const Page = () => {
           <VStack
             pl={1}
             w={24}
-            bg={colorMode == "light" ? "blueGray.300" : "blueGray.500"}
+            bg={colorMode == "light" ? "blueGray.300" : "blueGray.700"}
             space={2}
             justifyContent={"center"}>
             <HStack space={1}>
