@@ -17,6 +17,7 @@ import {
   Heading,
   Stack,
   useColorMode,
+  Divider,
 } from "native-base";
 import React from "react";
 import { TouchableOpacity } from "react-native";
@@ -27,17 +28,18 @@ const Page = () => {
   return (
     <ScrollView maxH={"100%"}>
       <VStack space="2.5" p="4">
-        <Stack
-          p={2}
+        <HStack
           flexDirection={"row"}
           w={"100%"}
+          space={4}
           borderRadius={16}
-          justifyContent={"space-between"}>
+          justifyContent={"space-between"}
+          alignItems={'center'}>
           <VStack
-            pl={1}
-            w={24}
+            p={4}
+            flex={1}
             space={2}
-            bg={colorMode == "light" ? "blueGray.300" : "blueGray.700"}
+            bg={colorMode == "light" ? "blueGray.100" : "blueGray.800"}
             justifyContent={"center"}>
             <HStack space={1}>
               <MaterialCommunityIcons
@@ -47,13 +49,33 @@ const Page = () => {
               />
               <Text fontSize={"sm"}>Глюкоза</Text>
             </HStack>
-            <HStack space={1}>
+            <HStack
+              pl={4}
+              space={1}
+              >
               <MaterialIcons
                 name="donut-small"
                 size={16}
                 color={colorMode == "light" ? "black" : "white"}
               />
               <Text fontSize={"sm"}>0 mmol/l</Text>
+            </HStack>
+            <Divider bg={colorMode == "light" ? "dark.100" : "light.100"}/>
+            <HStack space={1}>
+              <MaterialCommunityIcons
+                name="nutrition"
+                size={16}
+                color={colorMode == "light" ? "black" : "white"}
+              />
+              <Text fontSize={"sm"}>Еда</Text>
+            </HStack>
+            <HStack pl={4} space={1} flexWrap={"wrap"}>
+              <MaterialIcons
+                name="donut-small"
+                size={16}
+                color={colorMode == "light" ? "black" : "white"}
+              />
+              <Text fontSize={"sm"}> 0 kcal</Text>
             </HStack>
           </VStack>
           <Box
@@ -69,35 +91,12 @@ const Page = () => {
             justifyContent={"center"}
             w={32}
             h={32}>
-            <FontAwesome name="question" size={48} color="white" />
+            <FontAwesome name="user" size={48} color={"white"} />
           </Box>
-          <VStack
-            pl={1}
-            w={24}
-            bg={colorMode == "light" ? "blueGray.300" : "blueGray.700"}
-            space={2}
-            justifyContent={"center"}>
-            <HStack space={1}>
-              <MaterialCommunityIcons
-                name="nutrition"
-                size={16}
-                color={colorMode == "light" ? "black" : "white"}
-              />
-              <Text fontSize={"sm"}>Еда</Text>
-            </HStack>
-            <HStack space={1} flexWrap={"wrap"}>
-              <MaterialIcons
-                name="donut-small"
-                size={16}
-                color={colorMode == "light" ? "black" : "white"}
-              />
-              <Text fontSize={"sm"}> 0 kcal</Text>
-            </HStack>
-          </VStack>
-        </Stack>
+        </HStack>
 
         <Heading size={"sm"} p={4} borderRadius={16}>
-          Последние действия:
+          Последние действия
         </Heading>
 
         <Box
@@ -105,8 +104,8 @@ const Page = () => {
             linearGradient: {
               colors:
                 colorMode == "light"
-                  ? ["white", "blueGray.200"]
-                  : ["blueGray.600", "blueGray.700"],
+                  ? ["white", "blueGray.100"]
+                  : ["blueGray.700", "blueGray.800"],
               start: [0, 0],
               end: [1, 1],
             },
@@ -127,8 +126,8 @@ const Page = () => {
             linearGradient: {
               colors:
                 colorMode == "light"
-                  ? ["white", "blueGray.200"]
-                  : ["blueGray.600", "blueGray.700"],
+                  ? ["white", "blueGray.100"]
+                  : ["blueGray.700", "blueGray.800"],
               start: [0, 0],
               end: [1, 1],
             },
@@ -144,7 +143,7 @@ const Page = () => {
             <Text fontWeight={"semibold"}>31.12</Text>
           </HStack>
         </Box>
-        
+
         <GlucoseModalForm label={true} />
         <InsulinModalForm label={true} />
         <FoodModalForm label={true} />

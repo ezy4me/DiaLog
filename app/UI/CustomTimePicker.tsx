@@ -7,6 +7,7 @@ import getCurrentTime from "@/utils/getCurrentTime";
 
 export const CustomTimePicker = ({ onClose, changeTime }: any) => {
   const [time, setTime] = useState(getCurrentTime);
+  const { colorMode } = useColorMode();
 
   const handleChange = (newTime: string) => {
     setTime(newTime)
@@ -29,11 +30,11 @@ export const CustomTimePicker = ({ onClose, changeTime }: any) => {
               onTimeChange={handleChange}
               options={{
                 backgroundColor: "transparent",
-                textHeaderColor: "#FFA25B",
-                textDefaultColor: "#F6E7C1",
+                textHeaderColor: colorMode == 'light' ? "#27272a" : "#FFA25B",
+                textDefaultColor: colorMode == 'light' ? "#FFA25B" : "#F6E7C1",
                 selectedTextColor: "#fff",
                 mainColor: "#F4722B",
-                textSecondaryColor: "#D6C7A1",
+                textSecondaryColor: colorMode == 'light' ?  "#27272a": "#D6C7A1",
                 borderColor: "rgba(122, 146, 165, 0.1)",
               }}
             />

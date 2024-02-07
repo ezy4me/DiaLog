@@ -173,19 +173,30 @@ const Page = () => {
       space="2.5"
       pt="4"
       px="4">
-      <HStack w={'full'} space={'2'}>
+      <HStack w={"full"} space={"2"}>
         <Button
           colorScheme="indigo"
-          bg={'transparent'}
+          bg={"transparent"}
+          _text={{
+            color: colorMode == "light" ? "dark.100" : "light.100"
+          }}
           rightIcon={<Ionicons name="nutrition" size={24} color="#ef4444" />}
           borderRadius={100}>
           Продукты
         </Button>
         <Button
           colorScheme="indigo"
-          bg={'transparent'}
-          rightIcon={<Entypo name="bowl" size={24} color={colorMode == "light"
-          ? "black" : 'white'} />}
+          bg={"transparent"}
+          _text={{
+            color: colorMode == "light" ? "dark.100" : "light.100"
+          }}
+          rightIcon={
+            <Entypo
+              name="bowl"
+              size={24}
+              color={colorMode == "light" ? "black" : "white"}
+            />
+          }
           borderRadius={100}>
           Блюда
         </Button>

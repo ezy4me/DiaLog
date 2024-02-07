@@ -7,8 +7,10 @@ const Page = () => {
   const screenHeight = Dimensions.get("window").height;
   return (
     <VStack>
-      <Stack borderRadius={0}  _light={{ bg: "light.100" }}
-          _dark={{ bg: "coolGray.900" }}>
+      <Stack
+        borderRadius={0}
+        _light={{ bg: "blueGray.200" }}
+        _dark={{ bg: "coolGray.900" }}>
         <Box px="4">
           <DiabetesChart />
         </Box>

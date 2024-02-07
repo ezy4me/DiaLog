@@ -75,7 +75,7 @@ export const theme = extendTheme({
       },
       baseStyle: (props: any) => {
         return {
-          _light: { color: "dark.100", bg: "blueGray.200" },
+          _light: { color: "dark.100", bg: "blueGray.100" },
           _dark: { color: "light.100", bg: "blueGray.800" },
         };
       },

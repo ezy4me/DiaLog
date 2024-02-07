@@ -31,11 +31,11 @@ export const CustomDatePicker = ({ onClose, changeDate }: any) => {
               style={{ borderRadius: 10 }}
               options={{
                 backgroundColor: "transparent",
-                textHeaderColor: "#FFA25B",
-                textDefaultColor: "#F6E7C1",
+                textHeaderColor: colorMode == 'light' ? "#27272a" : "#FFA25B",
+                textDefaultColor: colorMode == 'light' ? "#FFA25B" : "#F6E7C1",
                 selectedTextColor: "#fff",
                 mainColor: "#F4722B",
-                textSecondaryColor: "#D6C7A1",
+                textSecondaryColor: colorMode == 'light' ?  "#27272a": "#D6C7A1",
                 borderColor: "rgba(122, 146, 165, 0.1)",
               }}
             />
