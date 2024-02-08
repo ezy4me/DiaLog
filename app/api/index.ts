@@ -1,7 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-const getToken = async () => await AsyncStorage.getItem("token");
+const getToken = async () => {
+  const value = await AsyncStorage.getItem("accessToken");
+  console.log("getToken: ", value ? JSON.parse(value) : false);
+
+  return value ? JSON.parse(value) : false;
+};
 
 const commonConfig = {
   baseURL: process.env.EXPO_PUBLIC_API_URL,
@@ -18,11 +23,11 @@ const apiInstance = axios.create({
 apiInstance.interceptors.request.use(async (config) => {
   const token = await getToken();
   if (token) {
-    config.headers.authorization = token;
+    config.headers.authorization = "Bearer " + token;
   }
 
-  console.log(config.baseURL);
-  
+  console.log(config.headers.authorization);
+
   return config;
 });
 
@@ -40,11 +45,13 @@ const formDataInstance = axios.create({
   },
 });
 
-authInstance.interceptors.request.use(async(config) => {
+authInstance.interceptors.request.use(async (config) => {
   const token = await getToken();
   if (token) {
-    config.headers.authorization = token;
+    config.headers.authorization = "Bearer " + token;
   }
+  console.log("token", config.headers.authorization);
+
   return config;
 });
 

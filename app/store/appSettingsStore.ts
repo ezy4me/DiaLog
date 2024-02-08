@@ -10,7 +10,7 @@ type AppSettingsState = {
   height: string;
   glucose: string;
   lang: string;
-  startUp: boolean | any;
+  startUp: Promise<boolean>;
 };
 
 type AppSettingsAction = {
@@ -19,7 +19,13 @@ type AppSettingsAction = {
   switchHeight: (height: AppSettingsState["height"]) => void;
   switchGlucose: (glucose: AppSettingsState["glucose"]) => void;
   switchLang: (lang: AppSettingsState["lang"]) => void;
-  setStartUp: (startUp: AppSettingsState["startUp"]) => void;
+  setStartUp: (startUp: AppSettingsState["startUp"]) => Promise<any>;
+};
+
+const getAsyncStorageValue = async (key: string) => {
+  const value = await AsyncStorage.getItem(key);
+  if (value) console.log("get async storage value app: ", value);
+  return value === "true" ? true : value === "false" ? false : true;
 };
 
 const useAppSettingsStore = create<AppSettingsState & AppSettingsAction>(
@@ -29,14 +35,9 @@ const useAppSettingsStore = create<AppSettingsState & AppSettingsAction>(
     height: "cm",
     glucose: "mmol/l",
     lang: "ru",
-    startUp: async () => {
-      const storedStartUp = await AsyncStorage.getItem("startUp");
-      return storedStartUp === "true";
-    },
+    startUp: getAsyncStorageValue("startUp") || true,
     switchTheme: (theme: any) =>
       set((state) => {
-        console.log("state theme in:", theme);
-        console.log("state theme:", state.theme);
         colorModeManager.set(theme);
         state.theme = theme;
         return { theme };
@@ -45,9 +46,12 @@ const useAppSettingsStore = create<AppSettingsState & AppSettingsAction>(
     switchHeight: (height) => set(() => ({ height })),
     switchGlucose: (glucose) => set(() => ({ glucose })),
     switchLang: (lang) => set(() => ({ lang })),
-    setStartUp: (startUp) => {
-      AsyncStorage.setItem("startUp", startUp);
-      set(() => ({}));
+    setStartUp: async (value) => {
+      const resolvedValue = await value;
+      await AsyncStorage.setItem("startUp", resolvedValue.toString());
+      set({
+        startUp: value,
+      });
     },
   })
 );

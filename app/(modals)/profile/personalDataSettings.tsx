@@ -1,3 +1,5 @@
+import useAuthStore from "@/app/store/authStore";
+import useProfileStore from "@/app/store/profileStore";
 import calculateBMI from "@/utils/bmiCalculator";
 import {
   Entypo,
@@ -16,17 +18,44 @@ import {
   Button,
   useColorMode,
 } from "native-base";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Page = () => {
   const { colorMode } = useColorMode();
+  const { user, getUser } = useAuthStore();
+  const { profile, getProfile } = useProfileStore((state) => ({
+    profile: state.profile,
+    getProfile: state.getProfile,
+  }));
 
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [weight, setWeight] = useState("75");
-  const [height, setHeight] = useState("190");
-  const [gender, setGender] = useState("");
-  const [type, setType] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [weight, setWeight] = useState<number>();
+  const [height, setHeight] = useState<number>();
+  const [gender, setGender] = useState<string>("");
+  const [type, setType] = useState<string>("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!user.id) await getUser();
+      if (!profile) {
+        await getProfile(user.id);
+      }
+    };
+    fetchData();
+  }, [profile, user]);
+
+  useEffect(() => {
+    if (profile) {
+      setEmail(user.email);
+      setName(profile.name);
+      setWeight(profile.weight);
+      setHeight(profile.height);
+      setGender(profile.gender);
+      setType(profile.diabetesTypeId.toString());
+    }
+  }, [profile]);
+
   return (
     <ScrollView maxH={"100%"}>
       <VStack space="2.5" mt="4" px="4">
@@ -63,7 +92,7 @@ const Page = () => {
               color={"white"}
               fontWeight={"semibold"}
               textTransform={"uppercase"}>
-              {calculateBMI(parseFloat(weight), parseFloat(height))}
+              {calculateBMI(weight, height)}
             </Text>
           </Box>
         </HStack>
@@ -145,6 +174,7 @@ const Page = () => {
           onValueChange={(itemValue) => setType(itemValue)}>
           <Select.Item borderRadius={16} label="I тип" value="1" />
           <Select.Item borderRadius={16} label="II тип" value="2" />
+          <Select.Item borderRadius={16} label="-" value="3" />
         </Select>
         <Select
           w={"100%"}
@@ -185,8 +215,8 @@ const Page = () => {
             variant="rounded"
             placeholder="Рост"
             keyboardType="numeric"
-            value={height}
-            onChangeText={setHeight}
+            value={height?.toString()}
+            onChangeText={(text) => setHeight(parseInt(text))}
             rightElement={
               <Box
                 borderLeftWidth={1}
@@ -201,8 +231,8 @@ const Page = () => {
             variant="rounded"
             placeholder="Вес"
             keyboardType="numeric"
-            value={weight}
-            onChangeText={setWeight}
+            value={weight?.toString()}
+            onChangeText={(text) => setWeight(parseInt(text))}
             rightElement={
               <Box
                 borderLeftWidth={1}

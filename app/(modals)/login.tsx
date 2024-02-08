@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -23,26 +23,38 @@ import {
 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import useAppSettingsStore from "../store/appSettingsStore";
+import useAuthStore from "../store/authStore";
 
 const Page = () => {
   const router = useRouter();
+  const { colorMode } = useColorMode();
+
+  const { user, onLogin } = useAuthStore((state) => ({
+    onLogin: state.onLogin,
+    user: state.user,
+  }));
 
   const { startUp, setStartUp } = useAppSettingsStore((state) => ({
     startUp: state.startUp,
     setStartUp: state.setStartUp,
   }));
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { colorMode } = useColorMode();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const onEnter = () => {
-    setStartUp('false');
-    router.push("/(tabs)");
+  useEffect(() => {
+    if (user.role === "USER") {
+      setStartUp(Promise.resolve(false));
+      console.log(user);
+      router.push("/(tabs)");
+    }
+  }, [user]);
+
+  const onHandleEnter = async () => {
+    await onLogin(email, password);
   };
 
   const onReg = () => {
-    setStartUp('false');
     router.push("/(modals)/registration");
   };
 
@@ -111,7 +123,7 @@ const Page = () => {
       </FormControl>
 
       <Button
-        onPress={() => onEnter()}
+        onPress={onHandleEnter}
         w={"full"}
         mt="2"
         colorScheme="indigo"

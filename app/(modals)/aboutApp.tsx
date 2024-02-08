@@ -56,12 +56,12 @@ const Page = () => {
           Заботьтесь о своем здоровье с нашим приложением – вашим верным
           спутником в борьбе с диабетом!
         </Text>
-        <Button
+        {/* <Button
           borderRadius={100}
           colorScheme={"indigo"}
           onPress={() => setStartUp("true")}>
           Сброс
-        </Button>
+        </Button> */}
         <Stack alignItems={"center"} bg={'transparent'}>
           <Text>
             Copyright with{" "}

@@ -12,6 +12,7 @@ import { colorModeManager, theme } from "./theme";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useAppSettingsStore from "./store/appSettingsStore";
+import useAuthStore from "./store/authStore";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -78,22 +79,26 @@ const config = {
 
 function RootLayoutNav() {
   const router = useRouter();
-  const { isLoaded, isSignedIn } = useAuth();
-
-  // AsyncStorage.setItem("startUp", "true");
-  AsyncStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiZW1haWxAbWFpbC5ydSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzA3MjI2ODgyLCJleHAiOjE3MDczMTMyODJ9.6JhNnOshlyO3ycAkMB63x1D-bnCAQLs9Ctyq_311L5I");
 
   const startUp = useAppSettingsStore((state) => state.startUp);
+
+  const { user } = useAuthStore((state) => ({
+    user: state.user,
+  }));
+
   useEffect(() => {
-    const checkStartUp = async () => {
-      const isStartUp = await startUp();
-      if (isStartUp) {
+    const handleStartUp = async () => {
+      const openStartUp = await startUp;
+      console.log(await AsyncStorage.getItem("startUp"));
+      console.log("openStartUp:", openStartUp);
+
+      if (openStartUp) {
         router.push("/(modals)/startup");
       }
     };
 
-    checkStartUp();
-  }, [startUp]);
+    handleStartUp();
+  }, [startUp, router]);
 
   return (
     <NativeBaseProvider
@@ -133,7 +138,7 @@ function RootLayoutNav() {
             },
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="(modals)/registration"
           options={{
             title: "Регистрация",

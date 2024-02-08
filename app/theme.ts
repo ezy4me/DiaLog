@@ -22,8 +22,8 @@ export const colorModeManager: StorageManager = {
 };
 
 const config = {
-  useSystemColorMode: false,
-  initialColorMode: "light",
+  useSystemColorMode: true,
+  initialColorMode: "dark",
 };
 
 export const theme = extendTheme({
@@ -146,7 +146,6 @@ export const theme = extendTheme({
       defaultProps: {
         _focus: {
           bg: "transparent",
-          color: 'black',
           borderColor: "indigo.300",
         },
       },
@@ -157,11 +156,21 @@ export const theme = extendTheme({
             color: "dark.100",
             borderColor: "muted.200",
             placeholderTextColor: "dark.100",
+            _focus: {
+              bg: "transparent",
+              color: 'dark.100',
+              borderColor: "indigo.300",
+            },
           },
           _dark: {
             bg: "blueGray.600",
             color: "light.100",
             borderColor: "muted.700",
+            _focus: {
+              bg: "transparent",
+              color: 'light.100',
+              borderColor: "indigo.300",
+            },
             placeholderTextColor: "light.100",
           },
         };

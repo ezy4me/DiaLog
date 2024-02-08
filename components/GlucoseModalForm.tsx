@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AntDesign, Fontisto } from "@expo/vector-icons";
+import { AntDesign, Entypo, Fontisto } from "@expo/vector-icons";
 import {
   Box,
   Button,
@@ -93,6 +93,13 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
                     onPress={toggleDatePicker}
                     flex="1"
                     borderRadius={32}
+                    rightIcon={
+                      <Entypo
+                        name="calendar"
+                        size={18}
+                        color={colorMode == "light" ? "black" : "white"}
+                      />
+                    }
                     bg={"indigo.500"}>
                     {selectedDate}
                   </Button>
@@ -101,6 +108,13 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
                     onPress={toggleTimePicker}
                     flex="1"
                     borderRadius={32}
+                    rightIcon={
+                      <Entypo
+                        name="clock"
+                        size={18}
+                        color={colorMode == "light" ? "black" : "white"}
+                      />
+                    }
                     bg={"indigo.500"}>
                     {selectedTime}
                   </Button>

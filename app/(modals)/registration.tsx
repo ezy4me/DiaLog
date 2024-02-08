@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -11,30 +11,43 @@ import {
   AspectRatio,
   Image,
 } from "native-base";
-import {
-  Entypo,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import useAppSettingsStore from "../store/appSettingsStore";
 import CustomSwitch from "../UI/CustomSwitch";
 import Colors from "@/constants/Colors";
+import useAuthStore from "../store/authStore";
 
 const Page = () => {
   const router = useRouter();
+  const { colorMode } = useColorMode();
 
-  const { startUp, setStartUp } = useAppSettingsStore((state) => ({
-    startUp: state.startUp,
+  const { user, onRegistration } = useAuthStore((state) => ({
+    onRegistration: state.onRegistration,
+    user: state.user,
+  }));
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [role, setRole] = useState<string>("USER");
+
+  const { setStartUp } = useAppSettingsStore((state) => ({
     setStartUp: state.setStartUp,
   }));
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { colorMode } = useColorMode();
+  useEffect(() => {
+    if (user.role === "USER") {
+      setStartUp(Promise.resolve(false));
+      router.push("/(tabs)");
+    }
+  }, [user]);
 
-  const onRegister = () => {
-    setStartUp('false');
-    router.push("/(tabs)");
+  const onHandleRegister = async () => {
+    await onRegistration(email, password, role);
+  };
+
+  const onSwitchRole = (newRole: string) => {
+    setRole(newRole);
   };
 
   return (
@@ -102,25 +115,24 @@ const Page = () => {
       </FormControl>
 
       <CustomSwitch
-            selectionMode={"USER"}
-            roundCorner={true}
-            options={[
-              { label: "Пациент", value: "USER" },
-              { label: "Доктор", value: "DOCTOR" },
-            ]}
-            onSelectSwitch={() => {}}
-            selectionColor={Colors.primary}
-          />
+        selectionMode={"USER"}
+        roundCorner={true}
+        options={[
+          { label: "Пациент", value: "USER" },
+          { label: "Доктор", value: "DOCTOR" },
+        ]}
+        onSelectSwitch={(value: string) => onSwitchRole(value)}
+        selectionColor={Colors.primary}
+      />
 
       <Button
-        onPress={() => onRegister()}
+        onPress={onHandleRegister}
         w={"full"}
-        mt="2"
+        mt="4"
         colorScheme="indigo"
         borderRadius={100}>
         Зарегистрироваться
       </Button>
-
     </ScrollView>
   );
 };
