@@ -1,5 +1,4 @@
-import { create, SetState } from "zustand";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { create } from "zustand";
 import { FoodAPI } from "../api/foodApi";
 
 interface NutritionState {

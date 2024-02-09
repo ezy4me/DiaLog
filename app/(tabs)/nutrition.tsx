@@ -53,7 +53,7 @@ const Page = () => {
         linearGradient: {
           colors:
             colorMode == "light"
-              ? ["indigo.50", "indigo.100"]
+              ? ["white", "white"]
               : ["blueGray.800", "blueGray.900"],
           start: [0, 0],
           end: [1, 1],

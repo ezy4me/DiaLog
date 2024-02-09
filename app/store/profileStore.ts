@@ -1,7 +1,5 @@
-import { create, SetState } from "zustand";
-import { FoodAPI } from "../api/foodApi";
+import { create } from "zustand";
 import { ProfileAPI } from "../api/profileApi";
-import useErrorStore from "./errorStore";
 
 interface ProfileState {
   profile: any;

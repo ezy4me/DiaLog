@@ -43,7 +43,7 @@ const Page = () => {
   const [password, setPassword] = useState<string>("");
 
   useEffect(() => {
-    if (user.role === "USER") {
+    if (user?.role === "USER") {
       setStartUp(Promise.resolve(false));
       console.log(user);
       router.push("/(tabs)");

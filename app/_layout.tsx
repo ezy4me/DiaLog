@@ -83,16 +83,28 @@ function RootLayoutNav() {
 
   const startUp = useAppSettingsStore((state) => state.startUp);
 
-  const { user } = useAuthStore((state) => ({
-    user: state.user,
-  }));
+  const { user, accessToken, getUser, getAccessToken } = useAuthStore(
+    (state) => ({
+      user: state.user,
+      accessToken: state.accessToken,
+      getUser: state.getUser,
+      getAccessToken: state.getAccessToken,
+    })
+  );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!user?.id) await getUser();
+      if (!accessToken) {
+        await getAccessToken();
+      }
+    };
+    fetchData();
+  }, [user, accessToken]);
 
   useEffect(() => {
     const handleStartUp = async () => {
       const openStartUp = await startUp;
-      console.log(await AsyncStorage.getItem("startUp"));
-      console.log("openStartUp:", openStartUp);
-
       if (openStartUp) {
         router.push("/(modals)/startup");
       }
@@ -267,7 +279,7 @@ function RootLayoutNav() {
           }}
         />
       </Stack>
-      <ErrorAllert/>
+      <ErrorAllert />
     </NativeBaseProvider>
   );
 }

@@ -21,7 +21,7 @@ import {
   useColorMode,
   Divider,
 } from "native-base";
-import React from "react";
+import React, { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import useAuthStore from "../store/authStore";
 
@@ -115,7 +115,7 @@ const Page = () => {
             linearGradient: {
               colors:
                 colorMode == "light"
-                  ? ["indigo.50", "indigo.100"]
+                  ? ["white", "white"]
                   : ["blueGray.700", "blueGray.800"],
               start: [0, 0],
               end: [1, 1],
@@ -137,7 +137,7 @@ const Page = () => {
             linearGradient: {
               colors:
                 colorMode == "light"
-                  ? ["indigo.50", "indigo.100"]
+                  ? ["white", "white"]
                   : ["blueGray.700", "blueGray.800"],
               start: [0, 0],
               end: [1, 1],

@@ -1,8 +1,6 @@
-import { ColorMode, useColorMode } from "native-base";
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { colorModeManager } from "../theme";
-import { useEffect } from "react";
 
 type AppSettingsState = {
   theme: string | any;

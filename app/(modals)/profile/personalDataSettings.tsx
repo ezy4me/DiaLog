@@ -24,7 +24,7 @@ import { useState, useEffect } from "react";
 const Page = () => {
   const { colorMode } = useColorMode();
   const [loading, setLoading] = useState<boolean>(true);
-  const { user, getUser } = useAuthStore();
+  const { user } = useAuthStore();
   const { profile, getProfile, updateProfile } = useProfileStore((state) => ({
     profile: state.profile,
     getProfile: state.getProfile,
@@ -40,13 +40,12 @@ const Page = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!user.id) await getUser();
       if (!profile) {
         await getProfile(user.id);
       }
     };
     fetchData().then(() => setLoading(false));
-  }, [profile, user]);
+  }, [profile]);
 
   useEffect(() => {
     if (profile) {
