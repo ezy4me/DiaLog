@@ -2,9 +2,11 @@ import { GlucoseModalForm } from "@/components/GlucoseModalForm";
 import { InsulinModalForm } from "@/components/InsulinModalForm";
 import { FoodModalForm } from "@/components/FoodModalForm";
 import {
+  Entypo,
   FontAwesome,
   FontAwesome5,
   Fontisto,
+  Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
@@ -21,9 +23,12 @@ import {
 } from "native-base";
 import React from "react";
 import { TouchableOpacity } from "react-native";
+import useAuthStore from "../store/authStore";
 
 const Page = () => {
   const { colorMode } = useColorMode();
+
+  const { user } = useAuthStore();
 
   return (
     <ScrollView maxH={"100%"}>
@@ -34,44 +39,50 @@ const Page = () => {
           space={4}
           borderRadius={16}
           justifyContent={"space-between"}
-          alignItems={'center'}>
+          alignItems={"center"}>
           <VStack
             p={4}
             flex={1}
             space={2}
-            bg={colorMode == "light" ? "blueGray.100" : "blueGray.800"}
+            bg={colorMode == "light" ? "indigo.50" : "blueGray.800"}
             justifyContent={"center"}>
-            <HStack space={1}>
-              <MaterialCommunityIcons
+            <HStack space={1} alignItems={"center"}>
+              <MaterialCommunityIcons name="star" size={16} color={"#fde047"} />
+              <Text fontSize={"sm"}>{user.email}</Text>
+            </HStack>
+
+            <Divider bg={colorMode == "light" ? "dark.100" : "light.100"} />
+
+            <HStack space={1} alignItems={"center"}>
+              <Ionicons
                 name="cube"
                 size={16}
                 color={colorMode == "light" ? "black" : "white"}
               />
               <Text fontSize={"sm"}>Глюкоза</Text>
             </HStack>
-            <HStack
-              pl={4}
-              space={1}
-              >
-              <MaterialIcons
-                name="donut-small"
+            <HStack pl={4} space={1} alignItems={"center"}>
+              <Entypo
+                name="dot-single"
                 size={16}
                 color={colorMode == "light" ? "black" : "white"}
               />
               <Text fontSize={"sm"}>0 mmol/l</Text>
             </HStack>
-            <Divider bg={colorMode == "light" ? "dark.100" : "light.100"}/>
-            <HStack space={1}>
-              <MaterialCommunityIcons
-                name="nutrition"
+
+            <Divider bg={colorMode == "light" ? "dark.100" : "light.100"} />
+
+            <HStack space={1} alignItems={"center"}>
+              <Entypo
+                name="bowl"
                 size={16}
                 color={colorMode == "light" ? "black" : "white"}
               />
               <Text fontSize={"sm"}>Еда</Text>
             </HStack>
-            <HStack pl={4} space={1} flexWrap={"wrap"}>
-              <MaterialIcons
-                name="donut-small"
+            <HStack pl={4} space={1} alignItems={"center"}>
+              <Entypo
+                name="dot-single"
                 size={16}
                 color={colorMode == "light" ? "black" : "white"}
               />
@@ -104,7 +115,7 @@ const Page = () => {
             linearGradient: {
               colors:
                 colorMode == "light"
-                  ? ["white", "blueGray.100"]
+                  ? ["indigo.50", "indigo.100"]
                   : ["blueGray.700", "blueGray.800"],
               start: [0, 0],
               end: [1, 1],
@@ -126,7 +137,7 @@ const Page = () => {
             linearGradient: {
               colors:
                 colorMode == "light"
-                  ? ["white", "blueGray.100"]
+                  ? ["indigo.50", "indigo.100"]
                   : ["blueGray.700", "blueGray.800"],
               start: [0, 0],
               end: [1, 1],

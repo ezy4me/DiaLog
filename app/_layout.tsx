@@ -13,6 +13,7 @@ import { colorModeManager, theme } from "./theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useAppSettingsStore from "./store/appSettingsStore";
 import useAuthStore from "./store/authStore";
+import ErrorAllert from "@/components/ErrorStack/ErrorAllert";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -266,6 +267,7 @@ function RootLayoutNav() {
           }}
         />
       </Stack>
+      <ErrorAllert/>
     </NativeBaseProvider>
   );
 }

@@ -53,7 +53,7 @@ const Page = () => {
         linearGradient: {
           colors:
             colorMode == "light"
-              ? ["blueGray.100", "blueGray.200"]
+              ? ["indigo.50", "indigo.100"]
               : ["blueGray.800", "blueGray.900"],
           start: [0, 0],
           end: [1, 1],
@@ -74,6 +74,7 @@ const Page = () => {
               w={48}
               borderRadius={16}
               fontSize={"md"}
+              fontWeight={"semibold"}
               textTransform={"uppercase"}>
               {item.name}
             </Text>
@@ -90,7 +91,7 @@ const Page = () => {
                   </Text>
                   <Box
                     borderRadius={100}
-                    borderColor={"indigo.100"}
+                    borderColor={"indigo.200"}
                     borderWidth={2}
                     w={12}
                     h={12}
@@ -107,7 +108,7 @@ const Page = () => {
                   </Text>
                   <Box
                     borderRadius={100}
-                    borderColor={"indigo.100"}
+                    borderColor={"indigo.200"}
                     borderWidth={2}
                     w={12}
                     h={12}
@@ -124,7 +125,7 @@ const Page = () => {
                   </Text>
                   <Box
                     borderRadius={100}
-                    borderColor={"indigo.100"}
+                    borderColor={"indigo.200"}
                     borderWidth={2}
                     w={12}
                     h={12}
@@ -164,7 +165,7 @@ const Page = () => {
 
   return (
     <VStack
-      _light={{ bg: "light.100" }}
+      _light={{ bg: "coolGray.50" }}
       _dark={{ bg: "coolGray.900" }}
       borderRadius={0}
       w="100%"
@@ -176,9 +177,11 @@ const Page = () => {
       <HStack w={"full"} space={"2"}>
         <Button
           colorScheme="indigo"
+          borderBottomWidth={1}
+          borderBottomColor={"indigo.500"}
           bg={"transparent"}
           _text={{
-            color: colorMode == "light" ? "dark.100" : "light.100"
+            color: colorMode == "light" ? "dark.100" : "light.100",
           }}
           rightIcon={<Ionicons name="nutrition" size={24} color="#ef4444" />}
           borderRadius={100}>
@@ -186,9 +189,11 @@ const Page = () => {
         </Button>
         <Button
           colorScheme="indigo"
+          borderBottomWidth={1}
+          borderBottomColor={"indigo.500"}
           bg={"transparent"}
           _text={{
-            color: colorMode == "light" ? "dark.100" : "light.100"
+            color: colorMode == "light" ? "dark.100" : "light.100",
           }}
           rightIcon={
             <Entypo

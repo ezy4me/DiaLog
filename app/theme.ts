@@ -75,7 +75,7 @@ export const theme = extendTheme({
       },
       baseStyle: (props: any) => {
         return {
-          _light: { color: "dark.100", bg: "blueGray.100" },
+          _light: { color: "dark.100", bg: "indigo.50" },
           _dark: { color: "light.100", bg: "blueGray.800" },
         };
       },
@@ -113,7 +113,7 @@ export const theme = extendTheme({
       },
       baseStyle: (props: any) => {
         return {
-          _light: { bg: "blueGray.200" },
+          _light: { bg: "indigo.50" },
           _dark: { bg: "blueGray.800" },
         };
       },
@@ -129,7 +129,7 @@ export const theme = extendTheme({
     ScrollView: {
       baseStyle: (props: any) => {
         return {
-          _light: { bg: "light.100" },
+          _light: { bg: "coolGray.50" },
           _dark: { bg: "coolGray.900" },
         };
       },

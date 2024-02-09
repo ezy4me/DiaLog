@@ -129,7 +129,7 @@ const BloodSugarList = () => {
               linearGradient: {
                 colors:
                 colorMode == "light"
-                  ? ["blueGray.100", "blueGray.200"]
+                  ? ["indigo.50", "indigo.100"]
                   : ["blueGray.700", "blueGray.800"],
                 start: [0, 0],
                 end: [1, 1],

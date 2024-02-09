@@ -59,14 +59,10 @@ export function DiabetesInfoCard({
             </Center>
           </AspectRatio>
           <Center
-            bg="indigo.500"
-            _text={{
-              color: "warmGray.50",
-              fontWeight: "700",
-              fontSize: "xs",
-            }}
+            bg={"indigo.500"}
+            _text={{ color: "light.100", fontWeight: "700", fontSize: "xs" }}
             position="absolute"
-            bottom="2"
+            top="2"
             left="2"
             py={2}
             px={4}
