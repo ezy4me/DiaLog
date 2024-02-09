@@ -72,25 +72,7 @@ const Page = () => {
           <Text color="indigo.400">О приложении</Text>
         </TouchableOpacity>
 
-        {!accessToken && (
-          <Button
-            w="full"
-            borderRadius={100}
-            colorScheme="indigo"
-            onPress={() => router.push("/(modals)/login")}>
-            Войти
-          </Button>
-        )}
 
-        <Button
-          w="full"
-          borderRadius={100}
-          colorScheme="indigo"
-          onPress={() => {
-            AsyncStorage.clear();
-          }}>
-          РЕСЕТ
-        </Button>
 
         <Center alignItems="center">
           <Text>

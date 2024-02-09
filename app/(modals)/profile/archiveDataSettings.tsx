@@ -17,6 +17,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Page = () => {
   const { colorMode } = useColorMode();
 
@@ -92,16 +93,14 @@ const Page = () => {
             />
             <Text ml={2}>Выйти</Text>
           </Box>
-          {!isSignedIn && (
-            <Button
-              w={24}
-              borderRadius={100}
-              shadow={1}
-              colorScheme="danger"
-              onPress={() => signOut()}>
-              Выйти
-            </Button>
-          )}
+          <Button
+            w={24}
+            borderRadius={100}
+            shadow={1}
+            colorScheme="danger"
+            onPress={() => AsyncStorage.clear()}>
+            Выйти
+          </Button>
         </Stack>
       </VStack>
     </ScrollView>

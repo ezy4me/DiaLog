@@ -25,15 +25,16 @@ const Page = () => {
   const { colorMode } = useColorMode();
   const [loading, setLoading] = useState<boolean>(true);
   const { user, getUser } = useAuthStore();
-  const { profile, getProfile } = useProfileStore((state) => ({
+  const { profile, getProfile, updateProfile } = useProfileStore((state) => ({
     profile: state.profile,
     getProfile: state.getProfile,
+    updateProfile: state.updateProfile,
   }));
 
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [weight, setWeight] = useState<number>();
-  const [height, setHeight] = useState<number>();
+  const [weight, setWeight] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
   const [gender, setGender] = useState<string>("");
   const [type, setType] = useState<string>("");
 
@@ -59,19 +60,23 @@ const Page = () => {
   }, [profile]);
 
   const handleHeightChange = (text: string) => {
-    if (text === '') {
-      setHeight(undefined);
+    if (text === "") {
+      setHeight(0);
     } else {
       setHeight(parseInt(text));
     }
   };
-  
+
   const handleWeightChange = (text: string) => {
-    if (text === '') {
-      setWeight(undefined);
+    if (text === "") {
+      setWeight(0);
     } else {
       setWeight(parseInt(text));
     }
+  };
+
+  const onUpdateProfile = async () => {
+    await updateProfile(user.id, name, gender, height, weight, parseInt(type));
   };
 
   return (
@@ -123,6 +128,7 @@ const Page = () => {
           </Text>
 
           <Input
+            isDisabled
             variant="rounded"
             placeholder="Ваша почта"
             value={email}
@@ -222,8 +228,8 @@ const Page = () => {
               ),
             }}
             onValueChange={(itemValue) => setGender(itemValue)}>
-            <Select.Item borderRadius={16} label="Мужской" value="male" />
-            <Select.Item borderRadius={16} label="Женский" value="female" />
+            <Select.Item borderRadius={16} label="Мужской" value="М" />
+            <Select.Item borderRadius={16} label="Женский" value="Ж" />
           </Select>
           <HStack
             w={"100%"}
@@ -264,7 +270,10 @@ const Page = () => {
               }
             />
           </HStack>
-          <Button borderRadius={100} colorScheme="indigo">
+          <Button
+            borderRadius={100}
+            colorScheme="indigo"
+            onPress={onUpdateProfile}>
             Сохранить
           </Button>
         </VStack>
