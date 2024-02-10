@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AntDesign, Entypo, Fontisto } from "@expo/vector-icons";
 import {
   Box,
@@ -20,23 +20,46 @@ import { CustomTimePicker } from "@/app/UI/CustomTimePicker";
 import useBloodSugarStore from "@/app/store/bloodSugarStore";
 import useAuthStore from "@/app/store/authStore";
 
-export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
-  const { addBloodSugar } = useBloodSugarStore();
+export const GlucoseModalForm = ({
+  label,
+  edit,
+  data,
+  isModalVisible,
+  onClose, // Добавляем колбэк onClose
+}: {
+  label?: boolean;
+  edit?: boolean;
+  data?: any;
+  isModalVisible?: boolean;
+  onClose?: () => void; // Типизируем колбэк onClose
+}) => {
+  const { addBloodSugar, updateBloodSugar } = useBloodSugarStore();
   const { user } = useAuthStore();
   const [modalVisible, setModalVisible] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [timePickerVisible, setTimePickerVisible] = useState(false);
-
-  const [value, setValue] = useState<number>(0);
-  const [selectedDate, setSelectedDate] = useState<string>("");
-  const [selectedTime, setSelectedTime] = useState<string>("");
-
-  useEffect(() => {
-    setSelectedDate(getCurrentDate());
-    setSelectedTime(getCurrentTime);
-  }, [modalVisible]);
+  const [value, setValue] = useState<number>(data?.value || 0);
+  const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
+  const [selectedTime, setSelectedTime] = useState<string>(getCurrentTime());
 
   const { colorMode } = useColorMode();
+
+  useEffect(() => {
+    if (isModalVisible) setModalVisible(true);
+  }, [isModalVisible]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      setSelectedDate(getCurrentDate());
+      setSelectedTime(getCurrentTime());
+    }
+  }, [modalVisible]);
+
+  useEffect(() => {
+    if (data !== undefined) {
+      setValue(data.value);
+    }
+  }, [data]);
 
   const toggleDatePicker = () => {
     setDatePickerVisible(!datePickerVisible);
@@ -54,24 +77,51 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
     setSelectedTime(getCurrentTime(time));
   };
 
-  const onAddBloodSugar = () => {
-    addBloodSugar(user.id, value, selectedDate, selectedTime).then(() => {
-      setModalVisible(false)
+  const onAddBloodSugar = async () => {
+    await addBloodSugar(user.id, value, selectedDate, selectedTime).then(() => {
+      setModalVisible(false);
+      onClose && onClose(); // Вызываем onClose при закрытии модального окна
     });
+  };
+
+  const onUpdateBloodSugar = async () => {
+    await updateBloodSugar(
+      data.id,
+      user.id,
+      value,
+      selectedDate,
+      selectedTime
+    ).then(() => {
+      setModalVisible(false);
+      onClose && onClose(); // Вызываем onClose при закрытии модального окна
+    });
+  };
+
+  const handleInputChange = (event: any) => {
+    const newValue = event.nativeEvent.text;
+    setValue(newValue === "" ? 0 : parseFloat(newValue));
   };
 
   return (
     <Box>
-      <Button
-        colorScheme={"indigo"}
-        borderRadius={100}
-        onPress={() => setModalVisible(true)}
-        leftIcon={<AntDesign name="pluscircle" size={32} color={"white"} />}>
-        {label ? "Глюкоза" : null}
-      </Button>
+      {!edit ? (
+        <Button
+          colorScheme={"indigo"}
+          borderRadius={100}
+          onPress={() => setModalVisible(true)}
+          leftIcon={<AntDesign name="pluscircle" size={32} color={"white"} />}>
+          {label ? "Глюкоза" : null}
+        </Button>
+      ) : (
+        <></>
+      )}
+
       <Modal
         isOpen={modalVisible}
-        onClose={() => setModalVisible(false)}
+        onClose={() => {
+          setModalVisible(false);
+          onClose && onClose(); // Вызываем onClose при закрытии модального окна
+        }}
         avoidKeyboard={false}
         bottom="0"
         justifyContent="flex-end"
@@ -147,9 +197,7 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
                 <Input
                   mt={4}
                   value={value.toString()}
-                  onChange={(event) =>
-                    setValue(parseFloat(event.nativeEvent.text))
-                  }
+                  onChange={handleInputChange}
                   variant="rounded"
                   keyboardType="numeric"
                   placeholder="Значение"
@@ -175,7 +223,7 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
             </Modal.Body>
             <Modal.Footer>
               <Button
-                onPress={onAddBloodSugar}
+                onPress={edit ? onUpdateBloodSugar : onAddBloodSugar}
                 flex="1"
                 borderRadius={32}
                 bg={"indigo.500"}>
@@ -188,3 +236,5 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
     </Box>
   );
 };
+
+export default GlucoseModalForm;

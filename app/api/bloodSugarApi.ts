@@ -39,16 +39,17 @@ export const BloodSugarAPI = {
   },
 
   async updateBloodSugar(
+    id: number,
     userId: number,
     value: number,
     date: string,
     time: string
   ) {
     try {
-      const response = await authInstance.patch(`blood-sugar`, {
+      const response = await authInstance.patch(`blood-sugar/${id}`, {
         value,
-        date,
-        time,
+        date: convertToISODate(date, time),
+        time: convertToISODate(date, time),
         userId,
       });
 

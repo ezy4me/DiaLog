@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { BloodSugarAPI } from "../api/bloodSugarApi";
+import convertToISODate from "@/utils/convertToISODate";
 
 interface BloodSugarState {
   bloodSugarData: any;
@@ -14,6 +15,7 @@ interface BloodSugarActions {
     time: string
   ) => Promise<any>;
   updateBloodSugar: (
+    id: number,
     userId: number,
     value: number,
     date: string,
@@ -49,18 +51,33 @@ const useBloodSugarStore = create<BloodSugarStore>((set) => ({
     }
   },
 
-  updateBloodSugar: async (userId, value, date, time) => {
+  updateBloodSugar: async (id, userId, value, date, time) => {
     try {
-      await BloodSugarAPI.updateBloodSugar(userId, value, date, time);
-      set({});
+      await BloodSugarAPI.updateBloodSugar(id, userId, value, date, time);
+
+      set((state) => ({
+        bloodSugarData: state.bloodSugarData.map((item: any) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              value: value,
+              date: convertToISODate(date, time),
+              time: time,
+            };
+          } else {
+            return item;
+          }
+        }),
+      }));
     } catch (error) {
       console.error("Error updating blood sugar data:", error);
     }
   },
+
   deleteBloodSugar: async (id) => {
     try {
       await BloodSugarAPI.deleteBloodSugar(id);
-      
+
       set((state) => ({
         bloodSugarData: state.bloodSugarData.filter(
           (item: any) => item.id !== id

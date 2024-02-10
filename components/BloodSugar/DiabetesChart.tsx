@@ -25,10 +25,12 @@ export function DiabetesChart() {
   }, [data?.length]);
 
   const chartData = {
-    labels: data?.map((item: any) => getCurrentDate(item.date).substring(0, 5)),
+    labels: data
+      ? data?.map((item: any) => getCurrentDate(item.date).substring(0, 5))
+      : [],
     datasets: [
       {
-        data: data?.map((item: any) => item.value),
+        data: data ? data?.map((item: any) => item.value) : [],
       },
     ],
   };
@@ -39,7 +41,7 @@ export function DiabetesChart() {
         <Center h={"full"}>
           <Spinner size="lg" color={"indigo.500"} />
         </Center>
-      ) : data?.length === 0 ? (
+      ) : data === undefined ? (
         <Center h={"full"}>
           <MaterialCommunityIcons
             name="database-clock"
