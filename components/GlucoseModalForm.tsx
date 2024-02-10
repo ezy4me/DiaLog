@@ -17,12 +17,17 @@ import getCurrentTime from "@/utils/getCurrentTime";
 import { Platform } from "react-native";
 import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
 import { CustomTimePicker } from "@/app/UI/CustomTimePicker";
+import useBloodSugarStore from "@/app/store/bloodSugarStore";
+import useAuthStore from "@/app/store/authStore";
 
 export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
+  const { addBloodSugar } = useBloodSugarStore();
+  const { user } = useAuthStore();
   const [modalVisible, setModalVisible] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [timePickerVisible, setTimePickerVisible] = useState(false);
 
+  const [value, setValue] = useState<number>(0);
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
 
@@ -47,6 +52,12 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
 
   const handleTimeChange = (time: string) => {
     setSelectedTime(getCurrentTime(time));
+  };
+
+  const onAddBloodSugar = () => {
+    addBloodSugar(user.id, value, selectedDate, selectedTime).then(() => {
+      setModalVisible(false)
+    });
   };
 
   return (
@@ -135,6 +146,10 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
 
                 <Input
                   mt={4}
+                  value={value.toString()}
+                  onChange={(event) =>
+                    setValue(parseFloat(event.nativeEvent.text))
+                  }
                   variant="rounded"
                   keyboardType="numeric"
                   placeholder="Значение"
@@ -159,7 +174,11 @@ export const GlucoseModalForm = ({ label }: { label?: boolean }) => {
               </FormControl>
             </Modal.Body>
             <Modal.Footer>
-              <Button flex="1" borderRadius={32} bg={"indigo.500"}>
+              <Button
+                onPress={onAddBloodSugar}
+                flex="1"
+                borderRadius={32}
+                bg={"indigo.500"}>
                 Сохранить
               </Button>
             </Modal.Footer>

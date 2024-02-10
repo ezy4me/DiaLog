@@ -31,25 +31,25 @@ const BloodSugarList = () => {
       await getBloodSugar(user.id);
     };
     fetchData().then(() => setLoading(false));
-  }, [data.length]);
+  }, [data?.length]);
 
   const getColorStatusStack = (value: number): string[] => {
     if (value >= 7.8) {
-      return ["#ef4444", "#dc2626"]; // high
+      return ["#ef4444", "#dc2626"];
     } else if (value <= 3.9) {
-      return ["#fbbf24", "#f59e0b"]; // low
+      return ["#fbbf24", "#f59e0b"];
     } else {
-      return ["#4ade80", "#4ade60"]; // normal
+      return ["#4ade80", "#4ade60"];
     }
   };
 
   const getTextStatusStack = (value: number): string => {
     if (value >= 7.8) {
-      return "Высокий уровень сахара"; // high
+      return "Высокий уровень сахара";
     } else if (value <= 3.9) {
-      return "Низкий уровень сахара"; // low
+      return "Низкий уровень сахара";
     } else {
-      return "Уровень сахара в пределах нормы"; // normal
+      return "Уровень сахара в пределах нормы";
     }
   };
 
@@ -98,7 +98,7 @@ const BloodSugarList = () => {
         </Box>
       </HStack>
 
-      {loading ? (
+      {loading && data?.length ? (
         <Spinner mt={4} size="lg" color={"indigo.500"} />
       ) : (
         <FlatList

@@ -3,8 +3,6 @@ import axios from "axios";
 
 const getToken = async () => {
   const value = await AsyncStorage.getItem("accessToken");
-  console.log("getToken: ", value ? JSON.parse(value) : false);
-
   return value ? JSON.parse(value) : false;
 };
 
@@ -25,8 +23,6 @@ apiInstance.interceptors.request.use(async (config) => {
   if (token) {
     config.headers.authorization = "Bearer " + token;
   }
-
-  console.log(config.headers.authorization);
 
   return config;
 });
@@ -50,8 +46,6 @@ authInstance.interceptors.request.use(async (config) => {
   if (token) {
     config.headers.authorization = "Bearer " + token;
   }
-  console.log("token", config.headers.authorization);
-
   return config;
 });
 

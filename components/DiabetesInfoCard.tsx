@@ -47,7 +47,11 @@ export function DiabetesInfoCard({
       }}
       borderRadius={16}>
       <Box overflow="hidden">
-        <Box w="full" bg={colors[data.id - 1]} borderRadius={0}>
+        <Box
+          w="full"
+          _light={{ bg: "indigo.100" }}
+          _dark={{ bg: "blueGray.700" }}
+          borderRadius={0}>
           <AspectRatio w="100%" ratio={16 / 9}>
             <Center>
               <Image

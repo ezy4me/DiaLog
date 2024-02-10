@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Text, Button, ScrollView, VStack, Center } from "native-base";
+import { Text, Button, ScrollView, VStack, Center, Stack } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
@@ -14,9 +14,9 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       await getAccessToken();
-      console.log('accessToken: ', accessToken);
+      console.log("accessToken: ", accessToken);
     };
-  
+
     fetchData();
   }, [accessToken]);
   const navigateToPage = (route: any) => {
@@ -35,18 +35,11 @@ const Page = () => {
       id: 2,
       icon: "apps",
       title: "Настройки приложения",
-      badges: ["Тема", "Язык", "Метрика"],
+      badges: ["Тема", "Уведомления"],
       route: "/(modals)/profile/appDataSettings",
     },
     {
       id: 3,
-      icon: "notifications",
-      title: "Уведомления",
-      badges: ["Уровень глюкозы", "Инъекции инсулина"],
-      route: "/(modals)/profile/notificationDataSettings",
-    },
-    {
-      id: 4,
       icon: "archive",
       title: "Дополнительно",
       badges: ["Экспорт данных", "Удаление", "Выход"],
@@ -55,8 +48,16 @@ const Page = () => {
   ];
 
   return (
-    <ScrollView>
-      <VStack py={2} alignItems="center" space="2.5" px="4">
+    <VStack
+      _light={{ bg: "coolGray.50" }}
+      _dark={{ bg: "coolGray.900" }}
+      h={"full"}
+      borderRadius={0}
+      py={2}
+      alignItems="center"
+      justifyContent={"space-between"}
+      space="2.5">
+      <VStack alignItems="center" space="2.5">
         {navigationData.map(({ id, icon, title, badges, route }) => (
           <ProfileNavigationCard
             key={id}
@@ -71,18 +72,16 @@ const Page = () => {
         <TouchableOpacity onPress={() => navigateToPage("/(modals)/aboutApp")}>
           <Text color="indigo.400">О приложении</Text>
         </TouchableOpacity>
-
-
-
-        <Center alignItems="center">
-          <Text>
-            Copyright with{" "}
-            <MaterialCommunityIcons color="red" size={18} name="heart" />
-          </Text>
-          <Text fontWeight="semibold">by miliash, 2024</Text>
-        </Center>
       </VStack>
-    </ScrollView>
+
+      <Center alignItems="center">
+        <Text>
+          Copyright with{" "}
+          <MaterialCommunityIcons color="red" size={18} name="heart" />
+        </Text>
+        <Text fontWeight="semibold">by miliash, 2024</Text>
+      </Center>
+    </VStack>
   );
 };
 

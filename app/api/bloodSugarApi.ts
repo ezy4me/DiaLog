@@ -1,11 +1,17 @@
+import convertToISODate from "@/utils/convertToISODate";
 import { authInstance } from ".";
 
 export const BloodSugarAPI = {
-  async getBloodSugar(userId: number) {
+  async getBloodSugar(userId: number, date?: string) {
     try {
-      console.log("userID: ", userId);
+      let url = `blood-sugar/${userId}`;
 
-      const response = await authInstance.get(`blood-sugar/${userId}`);
+      if (date) {
+        url += `?date=${date}`;
+        console.log(url);
+      }
+
+      const response = await authInstance.get(url);
 
       return response.data;
     } catch (error) {
@@ -13,14 +19,17 @@ export const BloodSugarAPI = {
     }
   },
 
-  async addBloodSugar(userId: number, value: number, date: Date, time: Date) {
+  async addBloodSugar(
+    userId: number,
+    value: number,
+    date: string,
+    time: string
+  ) {
     try {
-      console.log("userID: ", userId);
-
       const response = await authInstance.post(`blood-sugar`, {
         value,
-        date,
-        time,
+        date: convertToISODate(date, time),
+        time: convertToISODate(date, time),
         userId,
       });
 
@@ -33,12 +42,10 @@ export const BloodSugarAPI = {
   async updateBloodSugar(
     userId: number,
     value: number,
-    date: Date,
-    time: Date
+    date: string,
+    time: string
   ) {
     try {
-      console.log("userID: ", userId);
-
       const response = await authInstance.patch(`blood-sugar`, {
         value,
         date,

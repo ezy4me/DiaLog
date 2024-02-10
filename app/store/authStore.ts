@@ -89,7 +89,13 @@ const useAuthStore = create<AuthStore>((set) => ({
     });
   },
 
-  onLogout: async () => {},
+  onLogout: async () => {
+    set({
+      accessToken: "",
+      user: {},
+      role: "",
+    });
+  },
 }));
 
 export default useAuthStore;

@@ -1,10 +1,7 @@
-import { useAuth } from "@clerk/clerk-expo";
 import {
-  View,
   Text,
   ScrollView,
   VStack,
-  HStack,
   Button,
   Box,
   Stack,
@@ -13,15 +10,25 @@ import {
 import React from "react";
 import {
   AntDesign,
-  FontAwesome5,
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
+import useAuthStore from "@/app/store/authStore";
 const Page = () => {
   const { colorMode } = useColorMode();
+  const router = useRouter();
 
-  const { signOut, isSignedIn } = useAuth();
+  const { onLogout } = useAuthStore();
+
+  const onHandleLogout = async () => {
+    await AsyncStorage.clear();
+    await onLogout().then(() => {
+      router.push("/(modals)/login");
+    });
+  };
+
   return (
     <ScrollView maxH={"100%"}>
       <VStack space="2.5" mt="4" px="4">
@@ -68,16 +75,14 @@ const Page = () => {
             />
             <Text ml={2}>Удалить аккаунт</Text>
           </Box>
-          {!isSignedIn && (
-            <Button
-              w={24}
-              borderRadius={100}
-              shadow={1}
-              colorScheme="danger"
-              onPress={() => signOut()}>
-              Удалить
-            </Button>
-          )}
+          <Button
+            w={24}
+            borderRadius={100}
+            shadow={1}
+            colorScheme="danger"
+            onPress={() => {}}>
+            Удалить
+          </Button>
         </Stack>
         <Stack
           direction={"row"}
@@ -98,7 +103,7 @@ const Page = () => {
             borderRadius={100}
             shadow={1}
             colorScheme="danger"
-            onPress={() => AsyncStorage.clear()}>
+            onPress={onHandleLogout}>
             Выйти
           </Button>
         </Stack>

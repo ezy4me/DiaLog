@@ -6,18 +6,18 @@ interface BloodSugarState {
 }
 
 interface BloodSugarActions {
-  getBloodSugar: (userId: number) => Promise<any>;
+  getBloodSugar: (userId: number, date?: string) => Promise<any>;
   addBloodSugar: (
     userId: number,
     value: number,
-    date: Date,
-    time: Date
+    date: string,
+    time: string
   ) => Promise<any>;
   updateBloodSugar: (
     userId: number,
     value: number,
-    date: Date,
-    time: Date
+    date: string,
+    time: string
   ) => Promise<any>;
 }
 
@@ -25,28 +25,33 @@ type BloodSugarStore = BloodSugarState & BloodSugarActions;
 
 const useBloodSugarStore = create<BloodSugarStore>((set) => ({
   bloodSugarData: [],
-  getBloodSugar: async (userId) => {
+  getBloodSugar: async (userId, date) => {
     try {
-      const data = await BloodSugarAPI.getBloodSugar(userId);
+      const data = await BloodSugarAPI.getBloodSugar(userId, date);
       set({ bloodSugarData: data });
     } catch (error) {
-      console.error("Error fetching profile data:", error);
+      console.error("Error fetching blood sugar data:", error);
     }
   },
   addBloodSugar: async (userId, value, date, time) => {
     try {
-      await BloodSugarAPI.addBloodSugar(userId, value, date, time);
-      set({});
+      const data = await BloodSugarAPI.addBloodSugar(userId, value, date, time);
+      console.log(data);
+
+      set((state) => ({
+        bloodSugarData: state.bloodSugarData ? state.bloodSugarData.concat(data) : [data],
+      }));
     } catch (error) {
-      console.error("Error updating profile data:", error);
+      console.error("Error add blood sugar data:", error);
     }
   },
+
   updateBloodSugar: async (userId, value, date, time) => {
     try {
       await BloodSugarAPI.updateBloodSugar(userId, value, date, time);
       set({});
     } catch (error) {
-      console.error("Error updating profile data:", error);
+      console.error("Error updating blood sugar data:", error);
     }
   },
 }));

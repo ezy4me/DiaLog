@@ -167,22 +167,6 @@ function RootLayoutNav() {
           }}
         />
         <Stack.Screen
-          name="(modals)/addBloodSugar"
-          options={{
-            headerTitle: "Добавить значение",
-            title: "Добавить значение",
-            presentation: "modal",
-            headerTitleAlign: "center",
-            headerTitleStyle: {
-              fontFamily: "mon-sb",
-              color: "white",
-            },
-            headerStyle: {
-              backgroundColor: "#818cf8",
-            },
-          }}
-        />
-        <Stack.Screen
           name="(modals)/bookInfo"
           options={{
             headerTitle: "Справочник",
@@ -235,22 +219,6 @@ function RootLayoutNav() {
           options={{
             headerTitle: "Дополнительно",
             title: "Дополнительно",
-            presentation: "modal",
-            headerTitleAlign: "center",
-            headerTitleStyle: {
-              fontFamily: "mon-sb",
-              color: "white",
-            },
-            headerStyle: {
-              backgroundColor: "#818cf8",
-            },
-          }}
-        />
-        <Stack.Screen
-          name="(modals)/profile/notificationDataSettings"
-          options={{
-            headerTitle: "Настройка уведовлений",
-            title: "Настройка уведовлений",
             presentation: "modal",
             headerTitleAlign: "center",
             headerTitleStyle: {

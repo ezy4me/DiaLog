@@ -51,7 +51,7 @@ const Page = () => {
   }, [user]);
 
   const onHandleEnter = async () => {
-    await onLogin(email, password);
+    if (email && password) await onLogin(email, password);
   };
 
   const onReg = () => {
@@ -101,6 +101,7 @@ const Page = () => {
         <Input
           mb={4}
           variant="rounded"
+          type="password"
           placeholder="Пароль"
           value={password}
           onChangeText={setPassword}
