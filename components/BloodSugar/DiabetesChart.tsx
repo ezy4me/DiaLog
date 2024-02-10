@@ -35,7 +35,19 @@ export function DiabetesChart() {
 
   return (
     <View style={{ width: "100%", height: 255 }}>
-      {!loading && data?.length > 0 ? (
+      {loading ? (
+        <Center h={"full"}>
+          <Spinner size="lg" color={"indigo.500"} />
+        </Center>
+      ) : data?.length === 0 ? (
+        <Center h={"full"}>
+          <MaterialCommunityIcons
+            name="database-clock"
+            size={48}
+            color={colorMode == "light" ? "black" : "white"}
+          />
+        </Center>
+      ) : (
         <LineChart
           data={chartData}
           width={Dimensions.get("window").width - 32}
@@ -75,14 +87,6 @@ export function DiabetesChart() {
             borderRadius: 16,
           }}
         />
-      ) : (
-        <Center h={"full"}>
-          <MaterialCommunityIcons
-            name="database-clock"
-            size={48}
-            color={colorMode == "light" ? "black" : "white"}
-          />
-        </Center>
       )}
     </View>
   );

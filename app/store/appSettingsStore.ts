@@ -22,7 +22,6 @@ type AppSettingsAction = {
 
 const getAsyncStorageValue = async (key: string) => {
   const value = await AsyncStorage.getItem(key);
-  if (value) console.log("get async storage value app: ", value);
   return value === "true" ? true : value === "false" ? false : true;
 };
 

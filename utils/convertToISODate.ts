@@ -29,8 +29,6 @@ const convertToISODate = (inputDate: string, inputTime: string) => {
     parseInt(timeParts[1])
   );
 
-  console.log(isoDate.toISOString());
-  
   return isoDate.toISOString();
 }
 

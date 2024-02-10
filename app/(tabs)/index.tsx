@@ -1,4 +1,4 @@
-import { GlucoseModalForm } from "@/components/GlucoseModalForm";
+import { GlucoseModalForm } from "@/components/BloodSugar/GlucoseModalForm";
 import { InsulinModalForm } from "@/components/InsulinModalForm";
 import { FoodModalForm } from "@/components/FoodModalForm";
 import {

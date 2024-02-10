@@ -1,5 +1,5 @@
-import BloodSugarList from "@/components/BloodSugarList";
-import { DiabetesChart } from "@/components/DiabetesChart";
+import BloodSugarList from "@/components/BloodSugar/BloodSugarList";
+import { DiabetesChart } from "@/components/BloodSugar/DiabetesChart";
 import { Stack, VStack, Box } from "native-base";
 import { Dimensions } from "react-native";
 

@@ -8,7 +8,6 @@ export const BloodSugarAPI = {
 
       if (date) {
         url += `?date=${date}`;
-        console.log(url);
       }
 
       const response = await authInstance.get(url);

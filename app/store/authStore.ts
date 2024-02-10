@@ -24,8 +24,6 @@ type AuthStore = AuthState & AuthActions;
 
 const getAsyncStorageValue = async (key: string) => {
   const value = await AsyncStorage.getItem(key);
-  console.log("get async storage value: ", value ? JSON.parse(value) : false);
-
   return value ? JSON.parse(value) : null;
 };
 

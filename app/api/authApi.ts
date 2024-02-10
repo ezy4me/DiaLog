@@ -24,7 +24,6 @@ export const AuthAPI = {
       return response.data;
     } catch (error) {
       console.log(error);
-
       throw new Error("Failed to register. Please try again later.");
     }
   },
