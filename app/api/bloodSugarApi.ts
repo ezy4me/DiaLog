@@ -58,4 +58,14 @@ export const BloodSugarAPI = {
       console.log(error);
     }
   },
+
+  async deleteBloodSugar(id: number) {
+    try {
+        const response = await authInstance.delete(`blood-sugar/${id}`)
+  
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
 };

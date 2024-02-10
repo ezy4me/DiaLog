@@ -19,12 +19,17 @@ import getCurrentTime from "@/utils/getCurrentTime";
 
 const BloodSugarList = () => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [type, setType] = useState("");
 
+  const { colorMode } = useColorMode();
   const { user } = useAuthStore();
-  const { data, getBloodSugar } = useBloodSugarStore((state) => ({
-    data: state.bloodSugarData,
-    getBloodSugar: state.getBloodSugar,
-  }));
+  const { data, getBloodSugar, deleteBloodSugar } = useBloodSugarStore(
+    (state) => ({
+      data: state.bloodSugarData,
+      getBloodSugar: state.getBloodSugar,
+      deleteBloodSugar: state.deleteBloodSugar,
+    })
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,9 +58,9 @@ const BloodSugarList = () => {
     }
   };
 
-  const [type, setType] = useState("");
-
-  const { colorMode } = useColorMode();
+  const onHadleDelete = async (id: number) => {
+    await deleteBloodSugar(id);
+  };
 
   return (
     <Box mb={20}>
@@ -98,7 +103,7 @@ const BloodSugarList = () => {
         </Box>
       </HStack>
 
-      {loading && data?.length ? (
+      {loading && data?.length == 0 ? (
         <Spinner mt={4} size="lg" color={"indigo.500"} />
       ) : (
         <FlatList
@@ -144,15 +149,16 @@ const BloodSugarList = () => {
                 </Box>
                 <VStack alignItems={"center"} justifyContent={"center"}>
                   <Button
-                    colorScheme={""}
+                    onPress={() => onHadleDelete(item.id)}
+                    colorScheme={"red"}
                     bg={"transparent"}
                     size={"md"}
                     py={1}
                     leftIcon={
                       <MaterialCommunityIcons
-                        name="circle-edit-outline"
+                        name="delete"
                         size={24}
-                        color={colorMode == "light" ? "black" : "white"}
+                        color={'#ef4444'}
                       />
                     }
                   />

@@ -19,6 +19,7 @@ interface BloodSugarActions {
     date: string,
     time: string
   ) => Promise<any>;
+  deleteBloodSugar: (id: number) => Promise<any>;
 }
 
 type BloodSugarStore = BloodSugarState & BloodSugarActions;
@@ -39,7 +40,9 @@ const useBloodSugarStore = create<BloodSugarStore>((set) => ({
       console.log(data);
 
       set((state) => ({
-        bloodSugarData: state.bloodSugarData ? state.bloodSugarData.concat(data) : [data],
+        bloodSugarData: state.bloodSugarData
+          ? state.bloodSugarData.concat(data)
+          : [data],
       }));
     } catch (error) {
       console.error("Error add blood sugar data:", error);
@@ -52,6 +55,19 @@ const useBloodSugarStore = create<BloodSugarStore>((set) => ({
       set({});
     } catch (error) {
       console.error("Error updating blood sugar data:", error);
+    }
+  },
+  deleteBloodSugar: async (id) => {
+    try {
+      await BloodSugarAPI.deleteBloodSugar(id);
+      
+      set((state) => ({
+        bloodSugarData: state.bloodSugarData.filter(
+          (item: any) => item.id !== id
+        ),
+      }));
+    } catch (error) {
+      console.error("Error deleting blood sugar data:", error);
     }
   },
 }));
