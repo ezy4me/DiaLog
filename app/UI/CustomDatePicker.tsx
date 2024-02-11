@@ -7,8 +7,6 @@ export const CustomDatePicker = ({ onClose, changeDate, isOpen }: any) => {
   const [date, setDate] = useState<any>(new Date().toISOString());
   const { colorMode } = useColorMode();
 
-  
-
   const handleChange = (newDate: string) => {
     if (newDate !== date) {
       setDate(newDate);

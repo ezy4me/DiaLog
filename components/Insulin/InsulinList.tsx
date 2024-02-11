@@ -11,7 +11,6 @@ import {
   Select,
 } from "native-base";
 import { useState } from "react";
-import { GlucoseModalForm } from "./BloodSugar/GlucoseModalForm";
 import { InsulinModalForm } from "./InsulinModalForm";
 
 const BloodSugarList = () => {

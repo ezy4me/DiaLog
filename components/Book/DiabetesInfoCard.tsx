@@ -24,12 +24,12 @@ export function DiabetesInfoCard({
   data,
 }: any) {
   const imageSources = [
-    require("../assets/images/about.png"),
-    require("../assets/images/glucometer.png"),
-    require("../assets/images/management.png"),
-    require("../assets/images/food.png"),
-    require("../assets/images/fitness.png"),
-    require("../assets/images/blood-test.png"),
+    require("../../assets/images/about.png"),
+    require("../../assets/images/glucometer.png"),
+    require("../../assets/images/management.png"),
+    require("../../assets/images/food.png"),
+    require("../../assets/images/fitness.png"),
+    require("../../assets/images/blood-test.png"),
   ];
 
   return (

@@ -41,7 +41,7 @@ const Layout = () => {
         tabBarInactiveTintColor: colorMode == "light" ? "#525252" : "#e2e8f0",
         tabBarStyle: {
           backgroundColor: colorMode == "light" ? "white" : "#27272a",
-          borderColor: colorMode == "light" ? "#e2e8f0" : "#3f3f46"
+          borderColor: colorMode == "light" ? "#e2e8f0" : "#3f3f46",
         },
         headerTitleAlign: "center",
         headerTitleStyle: {
@@ -60,7 +60,6 @@ const Layout = () => {
         },
         tabBarLabelStyle: {
           fontFamily: "mon-sb",
-          padding: 2,
         },
       }}>
       <Tabs.Screen

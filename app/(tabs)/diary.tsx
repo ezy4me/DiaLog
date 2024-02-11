@@ -1,5 +1,6 @@
 import BloodSugarList from "@/components/BloodSugar/BloodSugarList";
 import { DiabetesChart } from "@/components/BloodSugar/DiabetesChart";
+import DiaryControls from "@/components/Diary/DiaryControls";
 import { Stack, VStack, Box } from "native-base";
 import { Dimensions } from "react-native";
 
@@ -14,6 +15,7 @@ const Page = () => {
         <Box px="4">
           <DiabetesChart />
         </Box>
+        <DiaryControls />
         <Box
           _light={{ bg: "light.100" }}
           _dark={{ bg: "coolGray.900" }}

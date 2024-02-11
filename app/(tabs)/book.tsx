@@ -9,7 +9,7 @@ import {
   Heading,
 } from "native-base";
 
-import { DiabetesInfoCard } from "@/components/DiabetesInfoCard";
+import { DiabetesInfoCard } from "@/components/Book/DiabetesInfoCard";
 
 import infoData from "infoData.json";
 import { useRouter } from "expo-router";

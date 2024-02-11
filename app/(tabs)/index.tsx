@@ -1,6 +1,6 @@
 import { GlucoseModalForm } from "@/components/BloodSugar/GlucoseModalForm";
-import { InsulinModalForm } from "@/components/InsulinModalForm";
-import { FoodModalForm } from "@/components/FoodModalForm";
+import { InsulinModalForm } from "@/components/Insulin/InsulinModalForm";
+import { FoodModalForm } from "@/components/Food/FoodModalForm";
 import {
   Entypo,
   FontAwesome,
@@ -48,7 +48,7 @@ const Page = () => {
             justifyContent={"center"}>
             <HStack space={1} alignItems={"center"}>
               <MaterialCommunityIcons name="star" size={16} color={"#fde047"} />
-              <Text fontSize={"sm"}>{user.email}</Text>
+              <Text fontSize={"sm"}>{user?.email}</Text>
             </HStack>
 
             <Divider bg={colorMode == "light" ? "dark.100" : "light.100"} />

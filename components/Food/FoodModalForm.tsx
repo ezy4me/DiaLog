@@ -21,19 +21,36 @@ import { Platform, TouchableWithoutFeedback } from "react-native";
 import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
 
-export const FoodModalForm = ({ label }: { label?: boolean }) => {
+export const FoodModalForm = ({
+  label,
+  edit,
+  data,
+  isModalVisible,
+  onClose,
+}: {
+  label?: boolean;
+  edit?: boolean;
+  data?: any;
+  isModalVisible?: boolean;
+  onClose?: () => void;
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { colorMode } = useColorMode();
 
   return (
     <Box>
-      <Button
-        colorScheme={"green"}
-        borderRadius={100}
-        onPress={() => setModalVisible(true)}
-        leftIcon={<AntDesign name="pluscircle" size={32} color={"white"} />}>
-        {label ? "Питание" : null}
-      </Button>
+     {!edit ? (
+        <Button
+          p={label ? "2.5" : 0}
+          colorScheme={"emerald"}
+          borderRadius={100}
+          onPress={() => setModalVisible(true)}
+          leftIcon={<AntDesign name="pluscircle" size={32} color={"white"} />}>
+          {label ? "Питание" : null}
+        </Button>
+      ) : (
+        <></>
+      )}
       {/* <TouchableWithoutFeedback onPress={() => setModalVisible(false)}> */}
       <Modal
         isOpen={modalVisible}

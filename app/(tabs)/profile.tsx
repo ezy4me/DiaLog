@@ -4,21 +4,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import ProfileNavigationCard from "@/components/Profile/ProfileNavigationCard";
-import useAuthStore from "../store/authStore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Page = () => {
   const router = useRouter();
-  const { accessToken, getAccessToken } = useAuthStore();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await getAccessToken();
-      console.log("accessToken: ", accessToken);
-    };
-
-    fetchData();
-  }, [accessToken]);
   const navigateToPage = (route: any) => {
     router.push(route);
   };

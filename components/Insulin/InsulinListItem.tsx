@@ -13,7 +13,7 @@ import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
 import useBloodSugarStore from "@/app/store/bloodSugarStore";
 import ConfirmAllert from "../Allerts/ConfirmAllert";
-import { GlucoseModalForm } from "./GlucoseModalForm";
+import { InsulinModalForm } from "./InsulinModalForm";
 
 const getColorStatusStack = (value: number): string[] => {
   if (value >= 7.8) {
@@ -35,7 +35,7 @@ const getTextStatusStack = (value: number): string => {
   }
 };
 
-const BloodSugarItem = ({ item }: { item: any }) => {
+const InsulinListItem = ({ item }: { item: any }) => {
   const { colorMode } = useColorMode();
   const { deleteBloodSugar } = useBloodSugarStore((state) => ({
     deleteBloodSugar: state.deleteBloodSugar,
@@ -133,7 +133,7 @@ const BloodSugarItem = ({ item }: { item: any }) => {
         onConfirm={onDeleteConfirmed}
       />
       {isEditOpen && (
-        <GlucoseModalForm
+        <InsulinModalForm
           edit={true}
           data={item}
           isModalVisible={isEditOpen}
@@ -144,4 +144,4 @@ const BloodSugarItem = ({ item }: { item: any }) => {
   );
 };
 
-export default BloodSugarItem;
+export default InsulinListItem;

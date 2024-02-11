@@ -60,18 +60,15 @@ const Page = () => {
         },
       }}
       px={2}
-      py={2}
       mb={2}>
       <VStack>
         <HStack
-          space={[2, 3]}
           justifyContent="space-between"
           alignItems={"center"}>
           <Box borderRadius={4} mt={2} p={2} alignItems={"flex-start"}>
             <Text
               px={4}
-              py={2}
-              w={48}
+              w={64}
               borderRadius={16}
               fontSize={"md"}
               fontWeight={"semibold"}
@@ -81,7 +78,7 @@ const Page = () => {
             <VStack
               minW={12}
               borderRadius={4}
-              mt={2}
+              my={2}
               justifyContent={"center"}
               alignItems="flex-start">
               <HStack space={2}>
@@ -171,8 +168,7 @@ const Page = () => {
       w="100%"
       minH={"100%"}
       alignItems="center"
-      space="2.5"
-      pt="4"
+      space="3.5"
       px="4">
       <HStack w={"full"} space={"2"}>
         <Button
@@ -226,7 +222,7 @@ const Page = () => {
         <Spinner mt={4} size="lg" color={"indigo.500"} />
       ) : (
         <FlatList
-          mb={16}
+          mb={32}
           w="100%"
           data={filteredProducts}
           keyExtractor={(item) => item.id.toString()}

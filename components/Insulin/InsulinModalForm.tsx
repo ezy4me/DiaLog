@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { AntDesign, Entypo, Fontisto } from "@expo/vector-icons";
+import CustomSwitch from "@/app/UI/CustomSwitch";
+import {
+  AntDesign,
+  Entypo,
+  FontAwesome5,
+  Fontisto,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import {
   Box,
   Button,
@@ -10,17 +16,19 @@ import {
   HStack,
   KeyboardAvoidingView,
   useColorMode,
-  Pressable,
 } from "native-base";
+import React, { useEffect, useState } from "react";
+import { Platform, TouchableWithoutFeedback } from "react-native";
+
 import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
-import { Platform } from "react-native";
+import Colors from "@/constants/Colors";
+import useAuthStore from "@/app/store/authStore";
+import useBloodSugarStore from "@/app/store/bloodSugarStore";
 import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
 import { CustomTimePicker } from "@/app/UI/CustomTimePicker";
-import useBloodSugarStore from "@/app/store/bloodSugarStore";
-import useAuthStore from "@/app/store/authStore";
 
-export const GlucoseModalForm = ({
+export const InsulinModalForm = ({
   label,
   edit,
   data,
@@ -33,6 +41,7 @@ export const GlucoseModalForm = ({
   isModalVisible?: boolean;
   onClose?: () => void;
 }) => {
+  const { colorMode } = useColorMode();
   const { addBloodSugar, updateBloodSugar } = useBloodSugarStore();
   const { user } = useAuthStore();
   const [modalVisible, setModalVisible] = useState(false);
@@ -42,7 +51,9 @@ export const GlucoseModalForm = ({
   const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
   const [selectedTime, setSelectedTime] = useState<string>(getCurrentTime());
 
-  const { colorMode } = useColorMode();
+  const onSelectSwitch = (index: any) => {
+    alert("Selected index: " + index);
+  };
 
   const toggleDatePicker = () => {
     setDatePickerVisible(!datePickerVisible);
@@ -58,6 +69,11 @@ export const GlucoseModalForm = ({
 
   const handleTimeChange = (time: string) => {
     setSelectedTime(getCurrentTime(time));
+  };
+
+  const handleInputChange = (event: any) => {
+    const newValue = event.nativeEvent.text;
+    setValue(newValue === "" ? 0 : parseFloat(newValue));
   };
 
   const onAddBloodSugar = async () => {
@@ -97,26 +113,21 @@ export const GlucoseModalForm = ({
     }
   }, [data]);
 
-  const handleInputChange = (event: any) => {
-    const newValue = event.nativeEvent.text;
-    setValue(newValue === "" ? 0 : parseFloat(newValue));
-  };
-
   return (
     <Box>
       {!edit ? (
         <Button
           p={label ? "2.5" : 0}
-          colorScheme={"indigo"}
+          colorScheme={"amber"}
           borderRadius={100}
           onPress={() => setModalVisible(true)}
           leftIcon={<AntDesign name="pluscircle" size={32} color={"white"} />}>
-          {label ? "Глюкоза" : null}
+          {label ? "Инсулин" : null}
         </Button>
       ) : (
         <></>
       )}
-
+      {/* <TouchableWithoutFeedback onPress={() => setModalVisible(false)}> */}
       <Modal
         isOpen={modalVisible}
         onClose={() => {
@@ -135,23 +146,23 @@ export const GlucoseModalForm = ({
             <Modal.CloseButton
               _icon={{ color: "light.100" }}
               borderRadius={100}
-              bg={"indigo.500"}
+              bg={"amber.500"}
             />
             <Modal.Header>
               <HStack space={2} alignItems={"center"}>
-                <Fontisto
-                  name="blood-drop"
+                <FontAwesome5
+                  name="syringe"
                   size={24}
                   color={colorMode == "light" ? "black" : "white"}
                 />
-                <Text fontWeight={"semibold"}>Глюкоза</Text>
+                <Text fontWeight={"semibold"}>Инсулин</Text>
               </HStack>
             </Modal.Header>
             <Modal.Body>
               <FormControl>
                 <HStack justifyContent={"space-between"} space={4}>
                   <Button
-                    colorScheme={"indigo"}
+                    colorScheme={"amber"}
                     onPress={toggleDatePicker}
                     flex="1"
                     borderRadius={32}
@@ -162,11 +173,11 @@ export const GlucoseModalForm = ({
                         color={colorMode == "light" ? "black" : "white"}
                       />
                     }
-                    bg={"indigo.500"}>
+                    bg={"amber.500"}>
                     {selectedDate}
                   </Button>
                   <Button
-                    colorScheme={"indigo"}
+                    colorScheme={"amber"}
                     onPress={toggleTimePicker}
                     flex="1"
                     borderRadius={32}
@@ -177,7 +188,7 @@ export const GlucoseModalForm = ({
                         color={colorMode == "light" ? "black" : "white"}
                       />
                     }
-                    bg={"indigo.500"}>
+                    bg={"amber.500"}>
                     {selectedTime}
                   </Button>
                 </HStack>
@@ -197,8 +208,20 @@ export const GlucoseModalForm = ({
                   />
                 )}
 
+                <Box my={4}>
+                  <CustomSwitch
+                    selectionMode={"long"}
+                    roundCorner={true}
+                    options={[
+                      { label: "Короткий", value: "short" },
+                      { label: "Долгий", value: "long" },
+                    ]}
+                    onSelectSwitch={onSelectSwitch}
+                    selectionColor={Colors.primary}
+                  />
+                </Box>
+
                 <Input
-                  mt={4}
                   value={value.toString()}
                   onChange={handleInputChange}
                   variant="rounded"
@@ -218,7 +241,7 @@ export const GlucoseModalForm = ({
                       borderLeftWidth={1}
                       borderLeftColor={"muted.200"}
                       p={2}
-                      children={"mmol/l"}
+                      children={"ml"}
                     />
                   }
                 />
@@ -229,15 +252,14 @@ export const GlucoseModalForm = ({
                 onPress={edit ? onUpdateBloodSugar : onAddBloodSugar}
                 flex="1"
                 borderRadius={32}
-                bg={"indigo.500"}>
+                bg={"amber.500"}>
                 Сохранить
               </Button>
             </Modal.Footer>
           </Modal.Content>
         </KeyboardAvoidingView>
       </Modal>
+      {/* </TouchableWithoutFeedback> */}
     </Box>
   );
 };
-
-export default GlucoseModalForm;
