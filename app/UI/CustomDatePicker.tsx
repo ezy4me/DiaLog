@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, Pressable } from "react-native";
 import DatePicker from "react-native-modern-datepicker";
 import { Box, Text, useColorMode, Modal } from "native-base";
-import getCurrentDate from "@/utils/getCurrentDate";
 
-export const CustomDatePicker = ({ onClose, changeDate }: any) => {
+export const CustomDatePicker = ({ onClose, changeDate, isOpen }: any) => {
   const [date, setDate] = useState<any>(new Date().toISOString());
   const { colorMode } = useColorMode();
 
+  
+
   const handleChange = (newDate: string) => {
-    setDate(newDate);
-    changeDate(newDate);
+    if (newDate !== date) {
+      setDate(newDate);
+      changeDate(newDate);
+    }
   };
 
   const handleConfirm = () => {
     onClose();
   };
+
   return (
-    <Modal size="full" animationPreset="slide" isOpen={true}>
+    <Modal size="full" animationPreset="slide" isOpen={isOpen}>
       <KeyboardAvoidingView
         style={{ flex: 1, justifyContent: "center", width: "100%" }}
         behavior={Platform.OS === "android" ? "padding" : "position"}>
@@ -31,11 +35,12 @@ export const CustomDatePicker = ({ onClose, changeDate }: any) => {
               style={{ borderRadius: 10 }}
               options={{
                 backgroundColor: "transparent",
-                textHeaderColor: colorMode == 'light' ? "#27272a" : "#FFA25B",
-                textDefaultColor: colorMode == 'light' ? "#FFA25B" : "#F6E7C1",
+                textHeaderColor: colorMode == "light" ? "#27272a" : "#FFA25B",
+                textDefaultColor: colorMode == "light" ? "#FFA25B" : "#F6E7C1",
                 selectedTextColor: "#fff",
                 mainColor: "#F4722B",
-                textSecondaryColor: colorMode == 'light' ?  "#27272a": "#D6C7A1",
+                textSecondaryColor:
+                  colorMode == "light" ? "#27272a" : "#D6C7A1",
                 borderColor: "rgba(122, 146, 165, 0.1)",
               }}
             />

@@ -25,13 +25,13 @@ export const GlucoseModalForm = ({
   edit,
   data,
   isModalVisible,
-  onClose, // Добавляем колбэк onClose
+  onClose,
 }: {
   label?: boolean;
   edit?: boolean;
   data?: any;
   isModalVisible?: boolean;
-  onClose?: () => void; // Типизируем колбэк onClose
+  onClose?: () => void;
 }) => {
   const { addBloodSugar, updateBloodSugar } = useBloodSugarStore();
   const { user } = useAuthStore();
@@ -80,7 +80,7 @@ export const GlucoseModalForm = ({
   const onAddBloodSugar = async () => {
     await addBloodSugar(user.id, value, selectedDate, selectedTime).then(() => {
       setModalVisible(false);
-      onClose && onClose(); // Вызываем onClose при закрытии модального окна
+      onClose && onClose();
     });
   };
 
@@ -93,7 +93,7 @@ export const GlucoseModalForm = ({
       selectedTime
     ).then(() => {
       setModalVisible(false);
-      onClose && onClose(); // Вызываем onClose при закрытии модального окна
+      onClose && onClose();
     });
   };
 
@@ -106,6 +106,7 @@ export const GlucoseModalForm = ({
     <Box>
       {!edit ? (
         <Button
+          p={label ? "2.5" : 0}
           colorScheme={"indigo"}
           borderRadius={100}
           onPress={() => setModalVisible(true)}
@@ -120,7 +121,7 @@ export const GlucoseModalForm = ({
         isOpen={modalVisible}
         onClose={() => {
           setModalVisible(false);
-          onClose && onClose(); // Вызываем onClose при закрытии модального окна
+          onClose && onClose();
         }}
         avoidKeyboard={false}
         bottom="0"
@@ -180,8 +181,10 @@ export const GlucoseModalForm = ({
                     {selectedTime}
                   </Button>
                 </HStack>
+
                 {datePickerVisible && (
                   <CustomDatePicker
+                    isOpen={datePickerVisible}
                     onClose={toggleDatePicker}
                     changeDate={handleDateChange}
                   />

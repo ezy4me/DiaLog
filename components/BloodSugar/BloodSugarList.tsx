@@ -1,31 +1,41 @@
-import getCurrentDate from "@/utils/getCurrentDate";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
-  Text,
   FlatList,
   Box,
   HStack,
   Select,
   useColorMode,
   Spinner,
+  Button,
 } from "native-base";
 import { useEffect, useState } from "react";
 import { GlucoseModalForm } from "./GlucoseModalForm";
 import useBloodSugarStore from "@/app/store/bloodSugarStore";
 import useAuthStore from "@/app/store/authStore";
 import BloodSugarItem from "./BloodSugarItem";
-import { ItemClick } from "native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types";
+import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
+import getCurrentDate from "@/utils/getCurrentDate";
 
 const BloodSugarList = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [type, setType] = useState("");
-
   const { colorMode } = useColorMode();
   const { user } = useAuthStore();
   const { data, getBloodSugar } = useBloodSugarStore((state) => ({
     data: state.bloodSugarData,
     getBloodSugar: state.getBloodSugar,
   }));
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const [type, setType] = useState<string>("");
+  const [datePickerVisible, setDatePickerVisible] = useState<boolean>(false);
+  const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
+
+  const toggleDatePicker = () => {
+    setDatePickerVisible(!datePickerVisible);
+  };
+
+  const handleDateChange = (date: string) => {
+    if (date) setSelectedDate(getCurrentDate(date));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,13 +48,14 @@ const BloodSugarList = () => {
     <Box mb={20}>
       <HStack
         px={4}
-        py={1}
+        py={2}
         w={"100%"}
         bg={"indigo.600"}
+        space={2}
         alignItems={"center"}
         justifyContent={"space-between"}>
         <Select
-          w={32}
+          w={40}
           py={1}
           variant="rounded"
           selectedValue={type}
@@ -67,12 +78,19 @@ const BloodSugarList = () => {
           <Select.Item borderRadius={16} label="Глюкоза" value="1" />
           <Select.Item borderRadius={16} label="Инсулин" value="2" />
         </Select>
+
         <GlucoseModalForm />
-        <Box w={32} p={2} borderRadius={12} bg={"indigo.500"}>
-          <Text color={"white"} textAlign={"center"} fontWeight={"semibold"}>
-            {getCurrentDate()}
-          </Text>
-        </Box>
+
+        <Button
+          w={40}
+          p={2}
+          colorScheme={"indigo"}
+          onPress={toggleDatePicker}
+          borderRadius={100}
+          rightIcon={<Entypo name="calendar" size={18} color={"white"} />}
+          bg={"indigo.500"}>
+          {selectedDate}
+        </Button>
       </HStack>
 
       {loading && data?.length == 0 ? (
@@ -80,12 +98,19 @@ const BloodSugarList = () => {
       ) : (
         <FlatList
           px={4}
-          mb={2}
           data={data}
           renderItem={({ item }: any) => (
             <BloodSugarItem key={item.id} item={item} />
           )}
           keyExtractor={(item: any) => item?.id}
+        />
+      )}
+
+      {datePickerVisible && (
+        <CustomDatePicker
+          isOpen={datePickerVisible}
+          onClose={toggleDatePicker}
+          changeDate={handleDateChange}
         />
       )}
     </Box>
