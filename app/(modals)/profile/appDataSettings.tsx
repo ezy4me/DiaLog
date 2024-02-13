@@ -1,26 +1,19 @@
 import CustomSwitch from "@/app/UI/CustomSwitch";
 import {
-  View,
   Text,
   ScrollView,
   Box,
   VStack,
-  HStack,
   useColorMode,
   Stack,
 } from "native-base";
 import React, { useEffect } from "react";
 import Colors from "@/constants/Colors";
 import {
-  FontAwesome,
   FontAwesome5,
-  Fontisto,
   Ionicons,
   MaterialCommunityIcons,
-  MaterialIcons,
 } from "@expo/vector-icons";
-import useAppSettingsStore from "@/app/store/appSettingsStore";
-import { colorModeManager } from "@/app/theme";
 
 const Page = () => {
   const onSelectSwitch = (index: any) => {
@@ -87,11 +80,9 @@ const Page = () => {
           <CustomSwitch
             selectionMode={"off"}
             roundCorner={true}
-            option1={"ru"}
-            option2={"en"}
             options={[
-              { label: "вкл", value: "on" },
-              { label: "выкл", value: "off" },
+              { label: "Выкл", value: "off" },
+              { label: "Вкл", value: "on" },
             ]}
             onSelectSwitch={onSelectSwitch}
             selectionColor={Colors.primary}
@@ -114,11 +105,9 @@ const Page = () => {
           <CustomSwitch
             selectionMode={"off"}
             roundCorner={true}
-            option1={"ru"}
-            option2={"en"}
             options={[
-              { label: "вкл", value: "on" },
-              { label: "выкл", value: "off" },
+              { label: "Выкл", value: "off" },
+              { label: "Вкл", value: "on" },
             ]}
             onSelectSwitch={onSelectSwitch}
             selectionColor={Colors.primary}

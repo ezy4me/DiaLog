@@ -16,14 +16,17 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import useAuthStore from "@/app/store/authStore";
+import useProfileStore from "@/app/store/profileStore";
 const Page = () => {
   const { colorMode } = useColorMode();
   const router = useRouter();
 
   const { onLogout } = useAuthStore();
+  const {clearProfileData} = useProfileStore()
 
   const onHandleLogout = async () => {
     await AsyncStorage.clear();
+    await clearProfileData()
     await onLogout().then(() => {
       router.push("/(modals)/login");
     });

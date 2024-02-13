@@ -15,6 +15,7 @@ interface ProfileActions {
     weight: number,
     diabetesTypeId: number
   ) => Promise<any>;
+  clearProfileData: () => void;
 }
 
 type ProfileStore = ProfileState & ProfileActions;
@@ -50,6 +51,11 @@ const useProfileStore = create<ProfileStore>((set) => ({
     } catch (error) {
       console.error("Error updating profile data:", error);
     }
+  },
+  clearProfileData: async () => {
+    set({
+      profile: null,
+    });
   },
 }));
 

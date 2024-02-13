@@ -36,7 +36,7 @@ const Page = () => {
   }));
 
   useEffect(() => {
-    if (user.role === "USER") {
+    if (user?.role === "USER") {
       setStartUp(Promise.resolve(false));
       router.push("/(tabs)");
     }
@@ -94,6 +94,7 @@ const Page = () => {
           mb={4}
           variant="rounded"
           placeholder="Пароль"
+          type="password"
           value={password}
           onChangeText={setPassword}
           rightElement={

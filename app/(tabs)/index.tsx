@@ -157,7 +157,7 @@ const Page = () => {
 
         <GlucoseModalForm label={true} />
         <InsulinModalForm label={true} />
-        <FoodModalForm label={true} />
+        {/* <FoodModalForm label={true} /> */}
       </VStack>
     </ScrollView>
   );

@@ -23,9 +23,9 @@ const Page = () => {
       dataListComponent = <InsulinDosageList />;
       chartComponent = <InsulinDosageChart/>
       break;
-    case "food":
-      // dataListComponent = <FoodList />;
-      break;
+    // case "food":
+    //   dataListComponent = <FoodList />;
+    //   break;
     default:
       dataListComponent = null;
   }

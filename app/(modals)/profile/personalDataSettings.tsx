@@ -54,7 +54,7 @@ const Page = () => {
       setWeight(profile.weight);
       setHeight(profile.height);
       setGender(profile.gender);
-      setType(profile.diabetesTypeId.toString());
+      setType(profile.diabetesTypeId?.toString());
     }
   }, [profile]);
 
@@ -200,7 +200,7 @@ const Page = () => {
             onValueChange={(itemValue) => setType(itemValue)}>
             <Select.Item borderRadius={16} label="I тип" value="1" />
             <Select.Item borderRadius={16} label="II тип" value="2" />
-            <Select.Item borderRadius={16} label="-" value="3" />
+            <Select.Item borderRadius={16} label="Не указан" value="3" />
           </Select>
           <Select
             w={"100%"}
