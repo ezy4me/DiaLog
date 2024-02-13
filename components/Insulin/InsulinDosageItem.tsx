@@ -84,7 +84,7 @@ const InsulinListItem = ({ item }: { item: any }) => {
                   justifyContent={"center"}
                   borderRadius={100}
                   borderWidth={2}
-                  borderColor={getColorStatusStack(item.insulinTypeId)}
+                  borderColor={getColorStatusStack(item.value)}
                   p={4}>
                   <Text fontSize={18} fontWeight={"semibold"}>
                     {item.value}
@@ -96,7 +96,7 @@ const InsulinListItem = ({ item }: { item: any }) => {
               </VStack>
               <Box w={32} alignItems={"center"} justifyContent={"center"}>
                 <Text textAlign={"center"}>
-                  {getTextStatusStack(item.value)}
+                  {getTextStatusStack(item.insulinTypeId)}
                 </Text>
               </Box>
               <VStack alignItems={"center"} justifyContent={"center"}>

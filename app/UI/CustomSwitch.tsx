@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-
 import { View, TouchableOpacity } from "react-native";
+import { Text } from "native-base";
 
-import { Text, useColorMode } from "native-base";
 const CustomSwitch = ({
   navigation,
   selectionMode,
@@ -14,11 +13,7 @@ const CustomSwitch = ({
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
   const [getRoundCorner, setRoundCorner] = useState(roundCorner);
 
-  const { colorMode } = useColorMode();
-
   const updatedSwitchData = (val: any, index: number) => {
-    console.log("custom switch:", val);
-
     setSelectionMode(val);
     onSelectSwitch(val, index);
   };
@@ -79,4 +74,5 @@ const CustomSwitch = ({
     </View>
   );
 };
+
 export default CustomSwitch;

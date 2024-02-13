@@ -226,6 +226,7 @@ export const GlucoseModalForm = ({
             </Modal.Body>
             <Modal.Footer>
               <Button
+                colorScheme={"indigo"}
                 onPress={edit ? onUpdateBloodSugar : onAddBloodSugar}
                 flex="1"
                 borderRadius={32}

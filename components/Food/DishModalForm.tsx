@@ -105,7 +105,11 @@ export const DishModalForm = ({
               </FormControl>
             </Modal.Body>
             <Modal.Footer>
-              <Button flex="1" borderRadius={32} bg={"green.500"}>
+              <Button
+                colorScheme={"emerald"}
+                flex="1"
+                borderRadius={32}
+                bg={"green.500"}>
                 Сохранить
               </Button>
             </Modal.Footer>

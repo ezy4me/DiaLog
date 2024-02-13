@@ -53,7 +53,7 @@ export const InsulinModalForm = ({
   const [type, setType] = useState<number>(1);
 
   const onSelectSwitch = (index: any) => {
-    setType(index);
+    setType(parseInt(index));
   };
 
   const toggleDatePicker = () => {
@@ -78,12 +78,16 @@ export const InsulinModalForm = ({
   };
 
   const onAddInsulinDosage = async () => {
-    await addInsulinDosage(user.id, value, selectedDate, selectedTime, type).then(
-      () => {
-        setModalVisible(false);
-        onClose && onClose();
-      }
-    );
+    await addInsulinDosage(
+      user.id,
+      value,
+      selectedDate,
+      selectedTime,
+      type
+    ).then(() => {
+      setModalVisible(false);
+      onClose && onClose();
+    });
   };
 
   const onUpdateInsulinDosage = async () => {
@@ -113,7 +117,7 @@ export const InsulinModalForm = ({
 
   useEffect(() => {
     if (data !== undefined) {
-      setValue(data.value);
+      setValue(data?.value);
     }
   }, [data]);
 
@@ -253,6 +257,7 @@ export const InsulinModalForm = ({
             </Modal.Body>
             <Modal.Footer>
               <Button
+                colorScheme={"amber"}
                 onPress={edit ? onUpdateInsulinDosage : onAddInsulinDosage}
                 flex="1"
                 borderRadius={32}

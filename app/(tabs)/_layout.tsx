@@ -60,6 +60,7 @@ const Layout = () => {
         },
         tabBarLabelStyle: {
           fontFamily: "mon-sb",
+          padding: 2,
         },
       }}>
       <Tabs.Screen

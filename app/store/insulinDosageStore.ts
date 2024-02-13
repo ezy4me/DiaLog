@@ -47,7 +47,6 @@ const useInsulinDosageStore = create<InsulinDosageStore>((set) => ({
         time,
         insulinTypeId
       );
-      console.log(data);
 
       set((state) => ({
         insulinDosageData: state.insulinDosageData
@@ -78,6 +77,7 @@ const useInsulinDosageStore = create<InsulinDosageStore>((set) => ({
               value: value,
               date: convertToISODate(date, time),
               time: time,
+              insulinTypeId: insulinTypeId,
             };
           } else {
             return item;

@@ -39,7 +39,6 @@ const useBloodSugarStore = create<BloodSugarStore>((set) => ({
   addBloodSugar: async (userId, value, date, time) => {
     try {
       const data = await BloodSugarAPI.addBloodSugar(userId, value, date, time);
-      console.log(data);
 
       set((state) => ({
         bloodSugarData: state.bloodSugarData
