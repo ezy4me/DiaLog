@@ -7,7 +7,11 @@ import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
 import { InsulinModalForm } from "../Insulin/InsulinModalForm";
 import { FoodModalForm } from "../Food/FoodModalForm";
 
-const DiaryControls = () => {
+const DiaryControls = ({
+  onDataTypeChange,
+}: {
+  onDataTypeChange: (dataType: string) => void;
+}) => {
   const { colorMode } = useColorMode();
 
   const [type, setType] = useState<string>("glucose");
@@ -20,6 +24,11 @@ const DiaryControls = () => {
 
   const handleDateChange = (date: string) => {
     if (date) setSelectedDate(getCurrentDate(date));
+  };
+
+  const handleTypeChange = (type: string) => {
+    setType(type);
+    onDataTypeChange(type);
   };
 
   return (
@@ -58,7 +67,7 @@ const DiaryControls = () => {
               <MaterialCommunityIcons name="check" size={24} color="black" />
             ),
           }}
-          onValueChange={(itemValue) => setType(itemValue)}>
+          onValueChange={(itemValue) => handleTypeChange(itemValue)}>
           <Select.Item borderRadius={16} label="Глюкоза" value="glucose" />
           <Select.Item borderRadius={16} label="Инсулин" value="insulin" />
           <Select.Item borderRadius={16} label="Питание" value="food" />

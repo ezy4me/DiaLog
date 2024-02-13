@@ -24,7 +24,7 @@ import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
 import Colors from "@/constants/Colors";
 import useAuthStore from "@/app/store/authStore";
-import useBloodSugarStore from "@/app/store/bloodSugarStore";
+import useInsulinDosageStore from "@/app/store/insulinDosageStore";
 import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
 import { CustomTimePicker } from "@/app/UI/CustomTimePicker";
 
@@ -42,7 +42,7 @@ export const InsulinModalForm = ({
   onClose?: () => void;
 }) => {
   const { colorMode } = useColorMode();
-  const { addBloodSugar, updateBloodSugar } = useBloodSugarStore();
+  const { addInsulinDosage, updateInsulinDosage } = useInsulinDosageStore();
   const { user } = useAuthStore();
   const [modalVisible, setModalVisible] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
@@ -50,9 +50,10 @@ export const InsulinModalForm = ({
   const [value, setValue] = useState<number>(data?.value || 0);
   const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
   const [selectedTime, setSelectedTime] = useState<string>(getCurrentTime());
+  const [type, setType] = useState<number>(1);
 
   const onSelectSwitch = (index: any) => {
-    alert("Selected index: " + index);
+    setType(index);
   };
 
   const toggleDatePicker = () => {
@@ -76,20 +77,23 @@ export const InsulinModalForm = ({
     setValue(newValue === "" ? 0 : parseFloat(newValue));
   };
 
-  const onAddBloodSugar = async () => {
-    await addBloodSugar(user.id, value, selectedDate, selectedTime).then(() => {
-      setModalVisible(false);
-      onClose && onClose();
-    });
+  const onAddInsulinDosage = async () => {
+    await addInsulinDosage(user.id, value, selectedDate, selectedTime, type).then(
+      () => {
+        setModalVisible(false);
+        onClose && onClose();
+      }
+    );
   };
 
-  const onUpdateBloodSugar = async () => {
-    await updateBloodSugar(
+  const onUpdateInsulinDosage = async () => {
+    await updateInsulinDosage(
       data.id,
       user.id,
       value,
       selectedDate,
-      selectedTime
+      selectedTime,
+      type
     ).then(() => {
       setModalVisible(false);
       onClose && onClose();
@@ -210,11 +214,11 @@ export const InsulinModalForm = ({
 
                 <Box my={4}>
                   <CustomSwitch
-                    selectionMode={"long"}
+                    selectionMode={"1"}
                     roundCorner={true}
                     options={[
-                      { label: "Короткий", value: "short" },
-                      { label: "Долгий", value: "long" },
+                      { label: "Короткий", value: "1" },
+                      { label: "Долгий", value: "2" },
                     ]}
                     onSelectSwitch={onSelectSwitch}
                     selectionColor={Colors.primary}
@@ -241,7 +245,7 @@ export const InsulinModalForm = ({
                       borderLeftWidth={1}
                       borderLeftColor={"muted.200"}
                       p={2}
-                      children={"ml"}
+                      children={"ME"}
                     />
                   }
                 />
@@ -249,7 +253,7 @@ export const InsulinModalForm = ({
             </Modal.Body>
             <Modal.Footer>
               <Button
-                onPress={edit ? onUpdateBloodSugar : onAddBloodSugar}
+                onPress={edit ? onUpdateInsulinDosage : onAddInsulinDosage}
                 flex="1"
                 borderRadius={32}
                 bg={"amber.500"}>

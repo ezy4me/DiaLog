@@ -11,7 +11,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
-import useBloodSugarStore from "@/app/store/bloodSugarStore";
+import useInsulinDosageStore from "@/app/store/insulinDosageStore";
 import ConfirmAllert from "../Allerts/ConfirmAllert";
 import { InsulinModalForm } from "./InsulinModalForm";
 
@@ -25,20 +25,14 @@ const getColorStatusStack = (value: number): string[] => {
   }
 };
 
-const getTextStatusStack = (value: number): string => {
-  if (value >= 7.8) {
-    return "Высокий уровень сахара";
-  } else if (value <= 3.9) {
-    return "Низкий уровень сахара";
-  } else {
-    return "Уровень сахара в пределах нормы";
-  }
+const getTextStatusStack = (type: number): string => {
+ return type == 1 ? "Короткий" : "Долгий"
 };
 
 const InsulinListItem = ({ item }: { item: any }) => {
   const { colorMode } = useColorMode();
-  const { deleteBloodSugar } = useBloodSugarStore((state) => ({
-    deleteBloodSugar: state.deleteBloodSugar,
+  const { deleteInsulinDosage } = useInsulinDosageStore((state) => ({
+    deleteInsulinDosage: state.deleteInsulinDosage,
   }));
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -48,7 +42,7 @@ const InsulinListItem = ({ item }: { item: any }) => {
   };
 
   const onDeleteConfirmed = async () => {
-    await deleteBloodSugar(item.id);
+    await deleteInsulinDosage(item.id);
     setIsAlertOpen(false);
   };
 
@@ -90,13 +84,13 @@ const InsulinListItem = ({ item }: { item: any }) => {
                   justifyContent={"center"}
                   borderRadius={100}
                   borderWidth={2}
-                  borderColor={getColorStatusStack(item.value)}
+                  borderColor={getColorStatusStack(item.insulinTypeId)}
                   p={4}>
                   <Text fontSize={18} fontWeight={"semibold"}>
                     {item.value}
                   </Text>
                   <Text fontSize={14} fontWeight={"semibold"}>
-                    mmol/l
+                    ME
                   </Text>
                 </Box>
               </VStack>

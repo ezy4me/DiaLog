@@ -170,11 +170,9 @@ const Page = () => {
       alignItems="center"
       space="3.5"
       px="4">
-      <HStack w={"full"} space={"2"}>
+      <HStack w={"full"} space={"2"} mt={2}>
         <Button
           colorScheme="indigo"
-          borderBottomWidth={1}
-          borderBottomColor={"indigo.500"}
           bg={"transparent"}
           _text={{
             color: colorMode == "light" ? "dark.100" : "light.100",
@@ -185,8 +183,6 @@ const Page = () => {
         </Button>
         <Button
           colorScheme="indigo"
-          borderBottomWidth={1}
-          borderBottomColor={"indigo.500"}
           bg={"transparent"}
           _text={{
             color: colorMode == "light" ? "dark.100" : "light.100",

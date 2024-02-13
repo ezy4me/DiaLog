@@ -7,7 +7,7 @@ import getCurrentDate from "@/utils/getCurrentDate";
 import useAuthStore from "@/app/store/authStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export function DiabetesChart() {
+export function BloodSugarChart() {
   const { colorMode } = useColorMode();
   const { data, getBloodSugar } = useBloodSugarStore((state) => ({
     data: state.bloodSugarData,
