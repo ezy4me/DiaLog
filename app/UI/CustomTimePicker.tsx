@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, Pressable } from "react-native";
 import DatePicker from "react-native-modern-datepicker";
 import { Box, Text, useColorMode, Modal } from "native-base";
-import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
 
 export const CustomTimePicker = ({ onClose, changeTime }: any) => {

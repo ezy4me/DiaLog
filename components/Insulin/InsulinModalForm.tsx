@@ -4,7 +4,6 @@ import {
   Entypo,
   FontAwesome5,
   Fontisto,
-  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import {
   Box,

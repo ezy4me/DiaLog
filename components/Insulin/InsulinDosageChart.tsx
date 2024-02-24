@@ -39,7 +39,7 @@ export function InsulinDosageChart() {
     <View style={{ width: "100%", height: 255 }}>
       {loading ? (
         <Center h={"full"}>
-          <Spinner size="lg" color={"indigo.500"} />
+          <Spinner size="lg" color={"amber.500"} />
         </Center>
       ) : data === undefined ? (
         <Center h={"full"}>

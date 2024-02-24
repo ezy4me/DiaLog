@@ -1,6 +1,6 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Box, Button, HStack, Text, VStack, useColorMode } from "native-base";
+import { Box, Button, HStack, VStack, useColorMode } from "native-base";
 import React, { useState } from "react";
 
 const CustomStepper = ({ steps, currentIndex, onNext, onPrev }: any) => {
