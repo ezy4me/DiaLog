@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Box,
   Spinner,
@@ -7,57 +7,74 @@ import {
   Pressable,
   Icon,
   useColorMode,
+  HStack,
 } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import useNutritionStore from "@/app/store/nutritionStore";
 import FoodItem from "./FoodItem";
 
-interface Food {
-  id: number;
-  name: string;
-  proteins: number;
-  fats: number;
-  carbohydrates: number;
-  energy: number;
-}
 const FoodList = () => {
-  const { colorMode } = useColorMode();
-
-  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const { food, getFood } = useNutritionStore((state) => ({
     food: state.food,
     getFood: state.getFood,
   }));
 
+  const filteredProducts = useMemo(() => {
+    if (!Array.isArray(food)) return [];
+    return food.filter((food) =>
+      food.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [food, searchTerm]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      await getFood();
+    } catch (error) {
+      console.error("Error fetching food:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    getFood().then(() => setLoading(false));
+    fetchData();
   }, []);
 
-  const filteredProducts = food?.filter((food) =>
-    food.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleClearSearchTerm = () => {
+    setSearchTerm("");
+  };
 
   return (
-    <Box mb={20} w={"full"}>
-      <Input
+    <Box mb={20} w="full">
+      <HStack
         mb={2}
-        InputRightElement={
-          <Pressable onPress={() => setSearchTerm("")}>
-            <Icon
-              as={<MaterialCommunityIcons name="close" />}
-              size={5}
-              mr="2"
-              color="muted.400"
-            />
-          </Pressable>
-        }
-        variant="rounded"
-        placeholder="Поиск"
-        value={searchTerm}
-        onChangeText={(text) => setSearchTerm(text)}
-      />
+        w="full"
+        space={2}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Input
+          w={72}
+          InputRightElement={
+            <Pressable onPress={handleClearSearchTerm}>
+              <Icon
+                as={<MaterialCommunityIcons name="close" />}
+                size={5}
+                mr="2"
+                color="muted.400"
+              />
+            </Pressable>
+          }
+          variant="rounded"
+          placeholder="Поиск"
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+        />
+      </HStack>
       {loading ? (
         <Spinner mt={4} size="lg" color={"indigo.500"} />
       ) : (
@@ -66,7 +83,7 @@ const FoodList = () => {
           w="100%"
           data={filteredProducts}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }: any) => <FoodItem key={item.id} item={item} />}
+          renderItem={({ item }) => <FoodItem key={item.id} item={item} />}
         />
       )}
     </Box>

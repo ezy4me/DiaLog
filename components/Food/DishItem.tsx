@@ -10,7 +10,7 @@ import {
 } from "native-base";
 import { DishModalForm } from "./DishModalForm";
 
-const DishItem = ({ item }: { item: any }) => {
+const DishItem = ({ item, callBack }: { item: any; callBack: () => void }) => {
   const { colorMode } = useColorMode();
   const [isEditOpen, setIsEditOpen] = useState(false);
 
@@ -29,6 +29,10 @@ const DishItem = ({ item }: { item: any }) => {
     );
   };
 
+  const handleCallback = () => {
+    callBack();
+  };
+
   const closeModal = () => {
     setIsEditOpen(false);
   };
@@ -36,7 +40,7 @@ const DishItem = ({ item }: { item: any }) => {
   return (
     <>
       <Pressable borderRadius={16} onPress={() => setIsEditOpen(true)}>
-        {({ isHovered, isFocused, isPressed }) => {
+        {({ isPressed }) => {
           return (
             <Box
               borderRadius={16}
@@ -115,6 +119,9 @@ const DishItem = ({ item }: { item: any }) => {
       </Pressable>
       {isEditOpen && (
         <DishModalForm
+          key={item.id}
+          callBack={handleCallback}
+          edit={true}
           data={item}
           isModalVisible={isEditOpen}
           onClose={closeModal}

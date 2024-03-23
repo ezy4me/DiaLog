@@ -5,7 +5,7 @@ import { useState } from "react";
 import getCurrentDate from "@/utils/getCurrentDate";
 import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
 import { InsulinModalForm } from "../Insulin/InsulinModalForm";
-import { FoodModalForm } from "../Food/FoodModalForm";
+import { NutritionModalForm } from "../Nutrition/NutritionModalForm";
 
 const DiaryControls = ({
   onDataTypeChange,
@@ -75,7 +75,7 @@ const DiaryControls = ({
 
         {type === "glucose" && <GlucoseModalForm />}
         {type === "insulin" && <InsulinModalForm />}
-        {type === "food" && <FoodModalForm />}
+        {type === "food" && <NutritionModalForm />}
 
         <Button
           w={40}

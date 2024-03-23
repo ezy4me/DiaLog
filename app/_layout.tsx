@@ -144,6 +144,7 @@ function RootLayoutNav() {
               fontFamily: "mon-sb",
               color: "white",
             },
+            headerBackVisible: false,
             headerStyle: {
               backgroundColor: "#818cf8",
             },

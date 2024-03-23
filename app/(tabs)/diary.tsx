@@ -6,6 +6,8 @@ import { Stack, VStack, Box } from "native-base";
 import { Dimensions } from "react-native";
 import { useState } from "react";
 import { InsulinDosageChart } from "@/components/Insulin/InsulinDosageChart";
+import NutritionList from "@/components/Nutrition/NutritionList";
+import { NutritionChart } from "@/components/Nutrition/NutritionChart";
 
 const Page = () => {
   const screenHeight = Dimensions.get("window").height;
@@ -23,9 +25,10 @@ const Page = () => {
       dataListComponent = <InsulinDosageList />;
       chartComponent = <InsulinDosageChart/>
       break;
-    // case "food":
-    //   dataListComponent = <FoodList />;
-    //   break;
+    case "food":
+      dataListComponent = <NutritionList />;
+      chartComponent = <NutritionChart />
+      break;
     default:
       dataListComponent = null;
   }
