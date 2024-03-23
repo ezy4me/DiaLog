@@ -10,7 +10,7 @@ interface NutritionState {
 
 interface NutritionActions {
   getFood: () => Promise<any>;
-  getNutrition: (id: number) => Promise<any>;
+  getNutrition: (id: number, date: string) => Promise<any>;
   addNutrition: (userId: number, dto: any) => Promise<any>;
   deleteNutrition: (userId: number, id: number) => Promise<any>;
 }
@@ -29,9 +29,9 @@ const useNutritionStore = create<NutritionStore>((set) => ({
     }
   },
 
-  getNutrition: async (id) => {
+  getNutrition: async (id, date) => {
     try {
-      const res = await NutritionAPI.getNutrition(id);
+      const res = await NutritionAPI.getNutrition(id, date);
       set({ nutrition: res?.data });
     } catch (error) {
       console.error("Error fetching food data:", error);
@@ -40,8 +40,9 @@ const useNutritionStore = create<NutritionStore>((set) => ({
 
   addNutrition: async (userId, dto) => {
     try {
+      let date = new Date();
       await NutritionAPI.addNutrition(dto);
-      const res = await NutritionAPI.getNutrition(userId);
+      const res = await NutritionAPI.getNutrition(userId, date.toISOString());
       set({ nutrition: res?.data });
     } catch (error) {
       console.error("Error fetching food data:", error);
@@ -50,8 +51,10 @@ const useNutritionStore = create<NutritionStore>((set) => ({
 
   deleteNutrition: async (userId, id) => {
     try {
+      let date = new Date();
+
       await NutritionAPI.deleteNutrition(id);
-      const res = await NutritionAPI.getNutrition(userId);
+      const res = await NutritionAPI.getNutrition(userId, date.toISOString());
       set({ nutrition: res?.data });
     } catch (error) {
       console.error("Error fetching food data:", error);

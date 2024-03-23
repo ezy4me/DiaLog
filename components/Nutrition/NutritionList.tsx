@@ -1,29 +1,20 @@
-import { FlatList, Box, Spinner } from "native-base";
-import { useEffect, useState } from "react";
-import useAuthStore from "@/app/store/authStore";
+import { FlatList, Box, Spinner, Center, useColorMode } from "native-base";
 import NutritionItem from "./NutritionItem";
-import useNutritionStore from "@/app/store/nutritionStore";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const NutritionList = () => {
-  const { user } = useAuthStore();
-  const { data, getNutrition } = useNutritionStore((state) => ({
-    data: state.nutrition,
-    getNutrition: state.getNutrition,
-  }));
-
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await getNutrition(user.id);
-    };
-    fetchData().then(() => setLoading(false));
-  }, [data?.length]);
+const NutritionList = ({ data }: any) => {
+  const { colorMode } = useColorMode();
 
   return (
     <Box mb={20}>
-      {loading && data?.length == 0 ? (
-        <Spinner mt={4} size="lg" color={"indigo.500"} />
+      {data?.length == 0 ? (
+        <Center h={"full"}>
+          <MaterialCommunityIcons
+            name="database-clock"
+            size={48}
+            color={colorMode == "light" ? "black" : "white"}
+          />
+        </Center>
       ) : (
         <FlatList
           px={4}

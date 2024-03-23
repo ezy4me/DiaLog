@@ -1,7 +1,7 @@
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Box, Button, HStack, Select, useColorMode } from "native-base";
 import GlucoseModalForm from "../BloodSugar/GlucoseModalForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import getCurrentDate from "@/utils/getCurrentDate";
 import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
 import { InsulinModalForm } from "../Insulin/InsulinModalForm";
@@ -9,25 +9,38 @@ import { NutritionModalForm } from "../Nutrition/NutritionModalForm";
 
 const DiaryControls = ({
   onDataTypeChange,
+  onSelectedDateChange,
 }: {
   onDataTypeChange: (dataType: string) => void;
+  onSelectedDateChange: (date: any) => void;
 }) => {
   const { colorMode } = useColorMode();
 
   const [type, setType] = useState<string>("glucose");
-  const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
+  const [selectedDate, setSelectedDate] = useState<string>("");
   const [datePickerVisible, setDatePickerVisible] = useState<boolean>(false);
 
   const toggleDatePicker = () => {
     setDatePickerVisible(!datePickerVisible);
   };
 
+  useEffect(() => {
+    if (!selectedDate) {
+      setSelectedDate(getCurrentDate());
+    }
+  }, [selectedDate]);
+
   const handleDateChange = (date: string) => {
-    if (date) setSelectedDate(getCurrentDate(date));
+    if (date) {
+      setSelectedDate(getCurrentDate(date));
+      onSelectedDateChange(date);
+    }
   };
 
   const handleTypeChange = (type: string) => {
     setType(type);
+    setSelectedDate(getCurrentDate());
+    onSelectedDateChange(getCurrentDate());
     onDataTypeChange(type);
   };
 

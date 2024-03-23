@@ -1,9 +1,10 @@
 import { authInstance } from ".";
 
 export const NutritionAPI = {
-  async getNutrition(id: number) {
+  async getNutrition(id: number, date: string) {
     try {
-      return authInstance.get(`nutrition/user/${id}`);
+      let url = `nutrition/user/${id}` + `?date=${date}`;
+      return authInstance.get(url);
     } catch (error) {
       console.log(error);
     }

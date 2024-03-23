@@ -2,16 +2,10 @@ import convertToISODate from "@/utils/convertToISODate";
 import { authInstance } from ".";
 
 export const InsulinDosageAPI = {
-  async getInsulinDosage(userId: number, date?: string) {
+  async getInsulinDosage(userId: number, date: string) {
     try {
-      let url = `insulin-dosage/${userId}`;
-
-      if (date) {
-        url += `?date=${date}`;
-      }
-
+      let url = `insulin-dosage/${userId}` + `?date=${date}`;
       const response = await authInstance.get(url);
-
       return response.data;
     } catch (error) {
       console.log(error);

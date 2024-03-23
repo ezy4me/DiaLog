@@ -1,28 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions, View } from "react-native";
 import { Center, Spinner, useColorMode } from "native-base";
-import useInsulinDosageStore from "@/app/store/insulinDosageStore";
 import getCurrentDate from "@/utils/getCurrentDate";
-import useAuthStore from "@/app/store/authStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export function InsulinDosageChart() {
+export function InsulinDosageChart({ data }: any) {
   const { colorMode } = useColorMode();
-  const { data, getInsulinDosage } = useInsulinDosageStore((state) => ({
-    data: state.insulinDosageData,
-    getInsulinDosage: state.getInsulinDosage,
-  }));
-  const { user } = useAuthStore();
-
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await getInsulinDosage(user.id);
-    };
-    fetchData().then(() => setLoading(false));
-  }, [data?.length]);
 
   const chartData = {
     labels: data
@@ -37,11 +20,7 @@ export function InsulinDosageChart() {
 
   return (
     <View style={{ width: "100%", height: 255 }}>
-      {loading ? (
-        <Center h={"full"}>
-          <Spinner size="lg" color={"amber.500"} />
-        </Center>
-      ) : data === undefined ? (
+      {data?.length === 0 ? (
         <Center h={"full"}>
           <MaterialCommunityIcons
             name="database-clock"

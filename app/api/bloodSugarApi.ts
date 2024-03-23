@@ -2,16 +2,10 @@ import convertToISODate from "@/utils/convertToISODate";
 import { authInstance } from ".";
 
 export const BloodSugarAPI = {
-  async getBloodSugar(userId: number, date?: string) {
+  async getBloodSugar(userId: number, date: string) {
     try {
-      let url = `blood-sugar/${userId}`;
-
-      if (date) {
-        url += `?date=${date}`;
-      }
-
+      let url = `blood-sugar/${userId}` + `?date=${date}`;
       const response = await authInstance.get(url);
-
       return response.data;
     } catch (error) {
       console.log(error);
@@ -61,11 +55,11 @@ export const BloodSugarAPI = {
 
   async deleteBloodSugar(id: number) {
     try {
-        const response = await authInstance.delete(`blood-sugar/${id}`)
-  
-        return response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
+      const response = await authInstance.delete(`blood-sugar/${id}`);
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

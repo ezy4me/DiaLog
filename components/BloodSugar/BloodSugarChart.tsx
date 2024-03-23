@@ -1,47 +1,29 @@
-import React, { useEffect, useState } from "react";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions, View } from "react-native";
 import { Center, Spinner, useColorMode } from "native-base";
-import useBloodSugarStore from "@/app/store/bloodSugarStore";
 import getCurrentDate from "@/utils/getCurrentDate";
-import useAuthStore from "@/app/store/authStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export function BloodSugarChart() {
+export function BloodSugarChart({ data }: any) {
   const { colorMode } = useColorMode();
-  const { data, getBloodSugar } = useBloodSugarStore((state) => ({
-    data: state.bloodSugarData,
-    getBloodSugar: state.getBloodSugar,
-  }));
-  const { user } = useAuthStore();
-
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await getBloodSugar(user.id);
-    };
-    fetchData().then(() => setLoading(false));
-  }, [data?.length]);
 
   const chartData = {
-    labels: data
-      ? data?.map((item: any) => getCurrentDate(item.date).substring(0, 5))
-      : [],
+    labels:
+      data.length > 0
+        ? data?.map((item: any) => getCurrentDate(item.date).substring(0, 5))
+        : [],
     datasets: [
       {
-        data: data ? data?.map((item: any) => item.value) : [],
+        data: data.length > 0 ? data?.map((item: any) => item.value) : [],
       },
     ],
   };
 
+  console.log(chartData);
+
   return (
     <View style={{ width: "100%", height: 255 }}>
-      {loading ? (
-        <Center h={"full"}>
-          <Spinner size="lg" color={"indigo.500"} />
-        </Center>
-      ) : data === undefined ? (
+      {data?.length === 0 ? (
         <Center h={"full"}>
           <MaterialCommunityIcons
             name="database-clock"

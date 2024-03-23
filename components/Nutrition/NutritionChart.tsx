@@ -7,15 +7,8 @@ import useAuthStore from "@/app/store/authStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import useNutritionStore from "@/app/store/nutritionStore";
 
-export function NutritionChart() {
+export function NutritionChart({ data }: any) {
   const { colorMode } = useColorMode();
-  const { data, getNutrition } = useNutritionStore((state) => ({
-    data: state.nutrition,
-    getNutrition: state.getNutrition,
-  }));
-  const { user } = useAuthStore();
-
-  const [loading, setLoading] = useState<boolean>(true);
 
   const totalCalories = (item: any) => {
     const total = item.dish.foodDishes.reduce(
@@ -24,13 +17,6 @@ export function NutritionChart() {
     );
     return total.toFixed(0);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await getNutrition(user.id);
-    };
-    fetchData().then(() => setLoading(false));
-  }, [data?.length]);
 
   const chartData = {
     labels: data
@@ -45,11 +31,7 @@ export function NutritionChart() {
 
   return (
     <View style={{ width: "100%", height: 255 }}>
-      {loading ? (
-        <Center h={"full"}>
-          <Spinner size="lg" color={"indigo.500"} />
-        </Center>
-      ) : data === undefined ? (
+      {data?.length === 0 ? (
         <Center h={"full"}>
           <MaterialCommunityIcons
             name="database-clock"

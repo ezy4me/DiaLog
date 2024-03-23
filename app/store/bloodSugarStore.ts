@@ -7,7 +7,7 @@ interface BloodSugarState {
 }
 
 interface BloodSugarActions {
-  getBloodSugar: (userId: number, date?: string) => Promise<any>;
+  getBloodSugar: (userId: number, date: string) => Promise<any>;
   addBloodSugar: (
     userId: number,
     value: number,

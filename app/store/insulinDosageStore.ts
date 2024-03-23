@@ -7,7 +7,7 @@ interface InsulinDosageState {
 }
 
 interface InsulinDosageActions {
-  getInsulinDosage: (userId: number, date?: string) => Promise<any>;
+  getInsulinDosage: (userId: number, date: string) => Promise<any>;
   addInsulinDosage: (
     userId: number,
     value: number,

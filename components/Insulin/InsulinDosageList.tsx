@@ -1,29 +1,20 @@
-import { FlatList, Box, Spinner } from "native-base";
-import { useEffect, useState } from "react";
-import useInsulinDosageStore from "@/app/store/insulinDosageStore";
-import useAuthStore from "@/app/store/authStore";
+import { FlatList, Box, Spinner, Center, useColorMode } from "native-base";
 import InsulinDosageItem from "./InsulinDosageItem";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const InsulinDosageList = () => {
-  const { user } = useAuthStore();
-  const { data, getInsulinDosage } = useInsulinDosageStore((state) => ({
-    data: state.insulinDosageData,
-    getInsulinDosage: state.getInsulinDosage,
-  }));
-
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await getInsulinDosage(user.id);
-    };
-    fetchData().then(() => setLoading(false));
-  }, [data?.length]);
+const InsulinDosageList = ({ data }: any) => {
+  const { colorMode } = useColorMode();
 
   return (
     <Box mb={20}>
-      {loading && data?.length == 0 ? (
-        <Spinner mt={4} size="lg" color={"amber.500"} />
+      {data?.length == 0 ? (
+          <Center h={"full"}>
+          <MaterialCommunityIcons
+            name="database-clock"
+            size={48}
+            color={colorMode == "light" ? "black" : "white"}
+          />
+        </Center>
       ) : (
         <FlatList
           px={4}
