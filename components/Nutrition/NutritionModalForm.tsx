@@ -1,29 +1,25 @@
-import {
-  AntDesign,
-  Fontisto,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import useAuthStore from "@/app/store/authStore";
+import useDishStore from "@/app/store/dishStore";
+import useNutritionStore from "@/app/store/nutritionStore";
+import getCurrentDate from "@/utils/getCurrentDate";
+import getCurrentTime from "@/utils/getCurrentTime";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Box,
   Button,
   Modal,
-  FormControl,
-  Input,
   Text,
   HStack,
   KeyboardAvoidingView,
   useColorMode,
+  Select,
 } from "native-base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Platform } from "react-native";
-
-import getCurrentDate from "@/utils/getCurrentDate";
-import getCurrentTime from "@/utils/getCurrentTime";
 
 export const NutritionModalForm = ({
   label,
   edit,
-  data,
   isModalVisible,
   onClose,
 }: {
@@ -35,10 +31,49 @@ export const NutritionModalForm = ({
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { colorMode } = useColorMode();
+  const [selectedDish, setSelectedDish] = useState<string>("");
+  const [selectedType, setSelectedType] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
+  const [selectedTime, setSelectedTime] = useState<string>(getCurrentTime());
+  const { dishes } = useDishStore((state) => ({
+    dishes: state.dishesData,
+  }));
+
+  const user  = useAuthStore((state) => state.user);
+
+  const { getDishes } = useDishStore((state) => ({
+    getDishes: state.getDishes,
+  }));
+
+  const fetchData = async () => {
+    await getDishes();
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const addNutrition = useNutritionStore((state) => state.addNutrition);
+
+  const onAddNutrition = async () => {
+    if (!selectedType || !selectedDish) {
+      return;
+    }
+
+    await addNutrition(user.id,{
+      dishId: dishes.find((d: any) => d.name === selectedDish).id,
+      nutritionTypeId: parseInt(selectedType),
+      date: new Date(),
+      time: new Date(),
+    }).then(() => {
+      setModalVisible(false);
+      onClose && onClose();
+    });
+  };
 
   return (
     <Box>
-     {!edit ? (
+      {!edit ? (
         <Button
           p={label ? "2.5" : 0}
           colorScheme={"emerald"}
@@ -78,101 +113,76 @@ export const NutritionModalForm = ({
               </HStack>
             </Modal.Header>
             <Modal.Body>
-              <FormControl>
-                <HStack justifyContent={"space-between"}>
-                  <Box w={32} p={2} borderRadius={12} bg={"green.500"}>
-                    <Text
-                      color={"white"}
-                      textAlign={"center"}
-                      fontWeight={"semibold"}>
-                      {getCurrentDate()}
-                    </Text>
+              <Select
+                my={2}
+                w={"100%"}
+                variant="rounded"
+                selectedValue={selectedType}
+                placeholder="Завтра | Обед | Ужин"
+                dropdownIcon={
+                  <Box mr={2}>
+                    <MaterialCommunityIcons
+                      name="chevron-down"
+                      size={24}
+                      color={colorMode == "light" ? "#525252" : "white"}
+                    />
                   </Box>
-                  <Box w={24} p={2} borderRadius={12} bg={"green.500"}>
-                    <Text
-                      color={"white"}
-                      textAlign={"center"}
-                      fontWeight={"semibold"}>
-                      {getCurrentTime()}
-                    </Text>
+                }
+                _selectedItem={{
+                  endIcon: (
+                    <MaterialCommunityIcons
+                      name="check"
+                      size={24}
+                      color={colorMode == "light" ? "#525252" : "white"}
+                    />
+                  ),
+                }}
+                onValueChange={(itemValue) => setSelectedType(itemValue)}>
+                <Select.Item borderRadius={16} label="Завтрак" value="1" />
+                <Select.Item borderRadius={16} label="Обед" value="2" />
+                <Select.Item borderRadius={16} label="Ужин" value="3" />
+              </Select>
+              <Select
+                my={2}
+                w={"100%"}
+                variant="rounded"
+                selectedValue={selectedDish}
+                placeholder="..."
+                dropdownIcon={
+                  <Box mr={2}>
+                    <MaterialCommunityIcons
+                      name="chevron-down"
+                      size={24}
+                      color={colorMode == "light" ? "#525252" : "white"}
+                    />
                   </Box>
-                </HStack>
-
-                <Input
-                  mt={4}
-                  variant="rounded"
-                  keyboardType="numeric"
-                  placeholder="Белки"
-                  leftElement={
-                    <Box ml={4}>
-                      <Fontisto
-                        name="circle-o-notch"
-                        size={16}
-                        color={colorMode == "light" ? "black" : "white"}
-                      />
-                    </Box>
-                  }
-                  rightElement={
-                    <Box
-                      borderLeftWidth={1}
-                      borderLeftColor={"muted.200"}
-                      p={2}
-                      children={"g"}
+                }
+                _selectedItem={{
+                  endIcon: (
+                    <MaterialCommunityIcons
+                      name="check"
+                      size={24}
+                      color={colorMode == "light" ? "#525252" : "white"}
                     />
-                  }
-                />
-
-                <Input
-                  mt={4}
-                  variant="rounded"
-                  keyboardType="numeric"
-                  placeholder="Жиры"
-                  leftElement={
-                    <Box ml={4}>
-                      <Fontisto
-                        name="circle-o-notch"
-                        size={16}
-                        color={colorMode == "light" ? "black" : "white"}
-                      />
-                    </Box>
-                  }
-                  rightElement={
-                    <Box
-                      borderLeftWidth={1}
-                      borderLeftColor={"muted.200"}
-                      p={2}
-                      children={"g"}
-                    />
-                  }
-                />
-
-                <Input
-                  mt={4}
-                  variant="rounded"
-                  keyboardType="numeric"
-                  placeholder="Углеводы"
-                  leftElement={
-                    <Box ml={4}>
-                      <Fontisto
-                        name="circle-o-notch"
-                        size={16}
-                        color={colorMode == "light" ? "black" : "white"}
-                      />
-                    </Box>
-                  }
-                  rightElement={
-                    <Box
-                      borderLeftWidth={1}
-                      borderLeftColor={"muted.200"}
-                      p={2}
-                      children={"g"}
-                    />
-                  }
-                />
-              </FormControl>
+                  ),
+                }}
+                onValueChange={(itemValue) => setSelectedDish(itemValue)}>
+                {dishes.map((d: any) => (
+                  <Select.Item
+                    borderRadius={16}
+                    key={d.id}
+                    label={d.name}
+                    value={d.name}
+                  />
+                ))}
+              </Select>
             </Modal.Body>
             <Modal.Footer>
-              <Button flex="1" borderRadius={32} bg={"green.500"}>
+              <Button
+                onPress={onAddNutrition}
+                flex="1"
+                borderRadius={32}
+                bg={"green.500"}>
                 Сохранить
               </Button>
             </Modal.Footer>

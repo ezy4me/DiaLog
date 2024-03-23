@@ -1,21 +1,21 @@
 import { FlatList, Box, Spinner } from "native-base";
 import { useEffect, useState } from "react";
-import useBloodSugarStore from "@/app/store/bloodSugarStore";
 import useAuthStore from "@/app/store/authStore";
-import BloodSugarItem from "./NutritionItem";
+import NutritionItem from "./NutritionItem";
+import useNutritionStore from "@/app/store/nutritionStore";
 
 const NutritionList = () => {
   const { user } = useAuthStore();
-  const { data, getBloodSugar } = useBloodSugarStore((state) => ({
-    data: state.bloodSugarData,
-    getBloodSugar: state.getBloodSugar,
+  const { data, getNutrition } = useNutritionStore((state) => ({
+    data: state.nutrition,
+    getNutrition: state.getNutrition,
   }));
 
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      await getBloodSugar(user.id);
+      await getNutrition(user.id);
     };
     fetchData().then(() => setLoading(false));
   }, [data?.length]);
@@ -29,7 +29,7 @@ const NutritionList = () => {
           px={4}
           data={data}
           renderItem={({ item }: any) => (
-            <BloodSugarItem key={item.id} item={item} />
+            <NutritionItem key={item.id} item={item} />
           )}
           keyExtractor={(item: any) => item?.id}
         />

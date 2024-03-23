@@ -24,6 +24,7 @@ import {
 import React, { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import useAuthStore from "../store/authStore";
+import { NutritionModalForm } from "@/components/Nutrition/NutritionModalForm";
 
 const Page = () => {
   const { colorMode } = useColorMode();
@@ -107,57 +108,12 @@ const Page = () => {
         </HStack>
 
         <Heading size={"sm"} p={4} borderRadius={16}>
-          Последние действия
+          Действия
         </Heading>
-
-        <Box
-          bg={{
-            linearGradient: {
-              colors:
-                colorMode == "light"
-                  ? ["white", "white"]
-                  : ["blueGray.700", "blueGray.800"],
-              start: [0, 0],
-              end: [1, 1],
-            },
-          }}
-          p={4}>
-          <HStack justifyContent={"space-between"}>
-            <Fontisto
-              name="blood-drop"
-              size={24}
-              color={colorMode == "light" ? "black" : "white"}
-            />
-            <Text>5.6 mmol/l</Text>
-            <Text fontWeight={"semibold"}>31.12</Text>
-          </HStack>
-        </Box>
-        <Box
-          bg={{
-            linearGradient: {
-              colors:
-                colorMode == "light"
-                  ? ["white", "white"]
-                  : ["blueGray.700", "blueGray.800"],
-              start: [0, 0],
-              end: [1, 1],
-            },
-          }}
-          p={4}>
-          <HStack justifyContent={"space-between"}>
-            <FontAwesome5
-              name="syringe"
-              size={24}
-              color={colorMode == "light" ? "black" : "white"}
-            />
-            <Text>100 ml</Text>
-            <Text fontWeight={"semibold"}>31.12</Text>
-          </HStack>
-        </Box>
 
         <GlucoseModalForm label={true} />
         <InsulinModalForm label={true} />
-        {/* <FoodModalForm label={true} /> */}
+        <NutritionModalForm label={true} />
       </VStack>
     </ScrollView>
   );

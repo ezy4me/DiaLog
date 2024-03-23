@@ -2,24 +2,32 @@ import React, { useEffect, useState } from "react";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions, View } from "react-native";
 import { Center, Spinner, useColorMode } from "native-base";
-import useBloodSugarStore from "@/app/store/bloodSugarStore";
 import getCurrentDate from "@/utils/getCurrentDate";
 import useAuthStore from "@/app/store/authStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import useNutritionStore from "@/app/store/nutritionStore";
 
 export function NutritionChart() {
   const { colorMode } = useColorMode();
-  const { data, getBloodSugar } = useBloodSugarStore((state) => ({
-    data: state.bloodSugarData,
-    getBloodSugar: state.getBloodSugar,
+  const { data, getNutrition } = useNutritionStore((state) => ({
+    data: state.nutrition,
+    getNutrition: state.getNutrition,
   }));
   const { user } = useAuthStore();
 
   const [loading, setLoading] = useState<boolean>(true);
 
+  const totalCalories = (item: any) => {
+    const total = item.dish.foodDishes.reduce(
+      (total: any, dish: any) => total + (dish.food.energy * dish.weight) / 100,
+      0
+    );
+    return total.toFixed(0);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      await getBloodSugar(user.id);
+      await getNutrition(user.id);
     };
     fetchData().then(() => setLoading(false));
   }, [data?.length]);
@@ -30,7 +38,7 @@ export function NutritionChart() {
       : [],
     datasets: [
       {
-        data: data ? data?.map((item: any) => item.value) : [],
+        data: data ? data?.map((item: any) => totalCalories(item)) : [],
       },
     ],
   };
@@ -54,7 +62,7 @@ export function NutritionChart() {
           data={chartData}
           width={Dimensions.get("window").width - 32}
           height={240}
-          yAxisSuffix="mmol"
+          yAxisSuffix="kkal"
           yAxisInterval={1}
           chartConfig={{
             backgroundColor: "transparent",

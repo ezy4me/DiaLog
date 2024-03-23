@@ -103,7 +103,7 @@ export const DishModalForm = React.memo(
 
     const onDeleteDish = async (id: number) => {
       console.log(id);
-      
+
       await deleteDish(id);
       onClose && onClose();
       callBack && callBack();
@@ -189,15 +189,17 @@ export const DishModalForm = React.memo(
                     value={formData?.name || ""}
                     onChangeText={(text) => handleTitleChange(text)}
                   />
-                  <Button
-                    onPress={() => onDeleteDish(data.id)}
-                    p={2}
-                    colorScheme={"transparent"}
-                    borderRadius={100}
-                    leftIcon={
-                      <AntDesign name="delete" size={20} color={"red"} />
-                    }
-                  />
+                  {edit && (
+                    <Button
+                      onPress={() => onDeleteDish(data.id)}
+                      p={2}
+                      colorScheme={"transparent"}
+                      borderRadius={100}
+                      leftIcon={
+                        <AntDesign name="delete" size={20} color={"red"} />
+                      }
+                    />
+                  )}
                 </HStack>
 
                 <HStack

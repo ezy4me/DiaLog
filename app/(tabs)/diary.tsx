@@ -4,14 +4,18 @@ import { BloodSugarChart } from "@/components/BloodSugar/BloodSugarChart";
 import DiaryControls from "@/components/Diary/DiaryControls";
 import { Stack, VStack, Box } from "native-base";
 import { Dimensions } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InsulinDosageChart } from "@/components/Insulin/InsulinDosageChart";
 import NutritionList from "@/components/Nutrition/NutritionList";
 import { NutritionChart } from "@/components/Nutrition/NutritionChart";
+import useDishStore from "../store/dishStore";
 
 const Page = () => {
   const screenHeight = Dimensions.get("window").height;
   const [dataType, setDataType] = useState("glucose");
+
+
+  
 
   let dataListComponent;
   let chartComponent;
@@ -19,15 +23,15 @@ const Page = () => {
   switch (dataType) {
     case "glucose":
       dataListComponent = <BloodSugarList />;
-      chartComponent = <BloodSugarChart/>
+      chartComponent = <BloodSugarChart />;
       break;
     case "insulin":
       dataListComponent = <InsulinDosageList />;
-      chartComponent = <InsulinDosageChart/>
+      chartComponent = <InsulinDosageChart />;
       break;
     case "food":
       dataListComponent = <NutritionList />;
-      chartComponent = <NutritionChart />
+      chartComponent = <NutritionChart />;
       break;
     default:
       dataListComponent = null;
@@ -39,9 +43,7 @@ const Page = () => {
         borderRadius={0}
         _light={{ bg: "blueGray.200" }}
         _dark={{ bg: "coolGray.900" }}>
-        <Box px="4">
-          {chartComponent}
-        </Box>
+        <Box px="4">{chartComponent}</Box>
         <DiaryControls onDataTypeChange={setDataType} />
         <Box
           _light={{ bg: "light.100" }}
