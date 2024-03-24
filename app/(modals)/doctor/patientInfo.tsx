@@ -6,9 +6,10 @@ import PatientInsulinDosageList from "@/components/Doctor/InsulinDosage/PatientI
 import PatientNutritionList from "@/components/Doctor/Nutrition/PatientNutritionList";
 import convertToISODate from "@/utils/convertToISODate";
 import getCurrentDate from "@/utils/getCurrentDate";
-import { Entypo, Ionicons } from "@expo/vector-icons";
+import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
 import {
   Button,
+  Divider,
   HStack,
   ScrollView,
   Stack,
@@ -54,7 +55,7 @@ const Page = () => {
     <ScrollView maxH={"100%"}>
       <VStack space="2.5" p="4">
         <Stack
-          px={4}
+          px={2}
           py={2}
           w={"100%"}
           space={2}
@@ -66,16 +67,18 @@ const Page = () => {
             space={2}
             alignItems={"center"}
             justifyContent={"start"}>
-            <Ionicons
-              name={"person"}
+            <FontAwesome
+              name="user-circle"
               size={64}
-              color={colorMode == "light" ? "black" : "white"}
+              color={colorMode == "light" ? "#525252" : "white"}
             />
             <VStack space={2}>
               <Text>{patient.patient.profile.name}</Text>
+              <Divider />
               <Text>{patient.patient.email}</Text>
             </VStack>
           </HStack>
+          <Divider />
           <HStack w={"full"} alignItems={"center"} justifyContent={"flex-end"}>
             <Button
               w={40}

@@ -7,19 +7,19 @@ const PatientInsulinDosageList = ({ data }: any) => {
 
   return (
     <Box>
+      <Heading size={"sm"} p={4} borderRadius={16}>
+        Инъекции инсулина
+      </Heading>
       {data && data.length === 0 ? (
-        <Center h={"full"}>
+        <Center py={2}>
           <MaterialCommunityIcons
             name="database-clock"
             size={48}
-            color={colorMode == "light" ? "black" : "white"}
+            color={colorMode == "light" ? "#525252" : "white"}
           />
         </Center>
       ) : (
         <Box>
-          <Heading size={"sm"} p={4} borderRadius={16}>
-            Инъекции инсулина
-          </Heading>
           {data &&
             data.map((item: any) => (
               <PatientInsulinListItem key={item.id} item={item} />

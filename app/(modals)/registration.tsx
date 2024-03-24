@@ -42,7 +42,7 @@ const Page = () => {
     }
     else if (user?.role === "DOCTOR") {
       setStartUp(Promise.resolve(false));
-      router.push("/(tabs)/doctor");
+      router.push("/(tabs)/patients");
     }
   }, [user]);
 

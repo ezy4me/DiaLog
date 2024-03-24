@@ -70,14 +70,6 @@ const Layout = () => {
       iconName: "book",
       href: role === "DOCTOR" ? null : "book",
     },
-
-    {
-      name: "doctor",
-      headerTitle: "Дом",
-      tabBarLabel: "Дом",
-      iconName: "home",
-      href: role === "USER" ? null : "doctor",
-    },
     {
       name: "patients",
       headerTitle: "Пациенты",
