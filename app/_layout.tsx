@@ -245,11 +245,27 @@ function RootLayoutNav() {
             },
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="(modals)/doctor/patientInfo"
           options={{
             headerTitle: "Данные пациента",
             title: "Данные пациента",
+            presentation: "modal",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#818cf8",
+            },
+          }}
+        />
+         <Stack.Screen
+          name="(modals)/chat/chat"
+          options={{
+            headerTitle: "Чат",
+            title: "Чат",
             presentation: "modal",
             headerTitleAlign: "center",
             headerTitleStyle: {

@@ -7,6 +7,7 @@ import PatientNutritionList from "@/components/Doctor/Nutrition/PatientNutrition
 import convertToISODate from "@/utils/convertToISODate";
 import getCurrentDate from "@/utils/getCurrentDate";
 import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import {
   Button,
   Divider,
@@ -21,6 +22,7 @@ import { useEffect, useState } from "react";
 
 const Page = () => {
   const { colorMode } = useColorMode();
+  const router = useRouter()
 
   const [datePickerVisible, setDatePickerVisible] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
@@ -51,6 +53,11 @@ const Page = () => {
     fetchData();
   }, [selectedDate]);
 
+
+  const navigateToPage = (route: any) => {
+    router.push(route);
+  };
+
   return (
     <ScrollView maxH={"100%"}>
       <VStack space="2.5" p="4">
@@ -79,7 +86,20 @@ const Page = () => {
             </VStack>
           </HStack>
           <Divider />
-          <HStack w={"full"} alignItems={"center"} justifyContent={"flex-end"}>
+          <HStack
+            w={"full"}
+            alignItems={"center"}
+            justifyContent={"space-between"}>
+            <Button
+              w={20}
+              p={2}
+              colorScheme={"indigo"}
+              onPress={() => navigateToPage('/(modals)/chat/chat')}
+              borderRadius={100}
+              rightIcon={
+                <Ionicons name="chatbubble-ellipses" size={18} color="white" />
+              }
+              bg={"indigo.700"}/>
             <Button
               w={40}
               p={2}
