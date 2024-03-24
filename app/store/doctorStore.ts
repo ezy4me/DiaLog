@@ -11,6 +11,7 @@ interface DoctorActions {
   getPatients: (doctorId: number) => Promise<any>;
   getPatientInfo: (patientId: number, date: any) => Promise<any>;
   setPatient: (patient: any) => Promise<any>;
+  addPatient: (doctorId: number, token: string) => Promise<any>;
 }
 
 type DoctorStore = DoctorState & DoctorActions;
@@ -37,10 +38,16 @@ const useDoctorStore = create<DoctorStore>((set) => ({
     }
   },
 
+  addPatient: async (doctorId, token) => {
+    try {
+      await DoctorAPI.addPatient(doctorId, token);
+    } catch (error) {
+      console.error("Error add patient:", error);
+    }
+  },
+
   setPatient: async (patient) => {
     try {
-        console.log(patient);
-        
       set({ patient });
     } catch (error) {
       console.error("Error fetching patient data:", error);

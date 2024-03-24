@@ -1,6 +1,5 @@
 import { Box, Center, Heading, useColorMode } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import PatientBloodSugarItem from "../BloodSugar/PatientBloodSugarItem";
 import PatientNutritionItem from "./PatientNutritionItem";
 
 const PatientNutritionList = ({ data }: any) => {

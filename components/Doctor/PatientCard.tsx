@@ -21,7 +21,6 @@ const PatientCard = ({ patient }: any) => {
 
   const handlePatientId = async () => {
     await setPatient(patient);
-    
     router.push("/(modals)/doctor/patientInfo");
   };
 

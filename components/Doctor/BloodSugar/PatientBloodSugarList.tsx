@@ -1,4 +1,4 @@
-import { Box, Spinner, Center, useColorMode, Heading } from "native-base";
+import { Box, Center, useColorMode, Heading } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PatientBloodSugarItem from "./PatientBloodSugarItem";
 
@@ -20,9 +20,10 @@ const PatientBloodSugarList = ({ data }: any) => {
           <Heading size={"sm"} p={4} borderRadius={16}>
             Сахар в крови
           </Heading>
-          {data && data.map((item: any) => (
-            <PatientBloodSugarItem key={item.id} item={item} />
-          ))}
+          {data &&
+            data.map((item: any) => (
+              <PatientBloodSugarItem key={item.id} item={item} />
+            ))}
         </Box>
       )}
     </Box>

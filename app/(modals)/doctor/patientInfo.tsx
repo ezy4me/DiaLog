@@ -21,7 +21,6 @@ import { useEffect, useState } from "react";
 const Page = () => {
   const { colorMode } = useColorMode();
 
-  const { user } = useAuthStore();
   const [datePickerVisible, setDatePickerVisible] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
 
@@ -49,7 +48,6 @@ const Page = () => {
       );
     };
     fetchData();
-    console.log(patientInfo);
   }, [selectedDate]);
 
   return (

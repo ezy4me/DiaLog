@@ -19,10 +19,12 @@ import {
   Spinner,
 } from "native-base";
 import { useState, useEffect } from "react";
-import { Clipboard, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
+import * as Clipboard from 'expo-clipboard';
 
 const Page = () => {
   const { colorMode } = useColorMode();
+  
   const [loading, setLoading] = useState<boolean>(true);
   const { user } = useAuthStore();
   const { profile, getProfile, updateProfile } = useProfileStore((state) => ({
@@ -81,8 +83,8 @@ const Page = () => {
     await updateProfile(user.id, name, gender, height, weight, parseInt(type));
   };
 
-  const handleCopyToken = () => {
-    Clipboard.setString(token);
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(token);
   };
 
   return (
@@ -285,7 +287,7 @@ const Page = () => {
             placeholder="TOKEN"
             value={token}
             rightElement={
-              <TouchableOpacity onPress={handleCopyToken}>
+              <TouchableOpacity onPress={copyToClipboard}>
                 <Box
                   borderLeftWidth={1}
                   borderLeftColor={"muted.200"}

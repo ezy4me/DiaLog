@@ -20,9 +20,10 @@ const PatientInsulinDosageList = ({ data }: any) => {
           <Heading size={"sm"} p={4} borderRadius={16}>
             Инъекции инсулина
           </Heading>
-          {data && data.map((item: any) => (
-            <PatientInsulinListItem key={item.id} item={item} />
-          ))}
+          {data &&
+            data.map((item: any) => (
+              <PatientInsulinListItem key={item.id} item={item} />
+            ))}
         </Box>
       )}
     </Box>
