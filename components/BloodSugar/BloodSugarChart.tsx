@@ -1,6 +1,6 @@
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions, View } from "react-native";
-import { Center, Spinner, useColorMode } from "native-base";
+import { Center, useColorMode } from "native-base";
 import getCurrentDate from "@/utils/getCurrentDate";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -18,8 +18,6 @@ export function BloodSugarChart({ data }: any) {
       },
     ],
   };
-
-  console.log(chartData);
 
   return (
     <View style={{ width: "100%", height: 255 }}>

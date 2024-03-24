@@ -10,7 +10,6 @@ import {
   Text,
   Box,
   ScrollView,
-  Stack,
   Input,
   HStack,
   Select,
@@ -20,6 +19,7 @@ import {
   Spinner,
 } from "native-base";
 import { useState, useEffect } from "react";
+import { Clipboard, TouchableOpacity } from "react-native";
 
 const Page = () => {
   const { colorMode } = useColorMode();
@@ -30,6 +30,8 @@ const Page = () => {
     getProfile: state.getProfile,
     updateProfile: state.updateProfile,
   }));
+
+  const [token, setToken] = useState<string>("");
 
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -54,6 +56,7 @@ const Page = () => {
       setWeight(profile.weight);
       setHeight(profile.height);
       setGender(profile.gender);
+      setToken(profile.token);
       setType(profile.diabetesTypeId?.toString());
     }
   }, [profile]);
@@ -76,6 +79,10 @@ const Page = () => {
 
   const onUpdateProfile = async () => {
     await updateProfile(user.id, name, gender, height, weight, parseInt(type));
+  };
+
+  const handleCopyToken = () => {
+    Clipboard.setString(token);
   };
 
   return (
@@ -169,67 +176,70 @@ const Page = () => {
               />
             }
           />
+          {user.role === "USER" && (
+            <>
+              <Text px={2} fontWeight={"semibold"} fontSize={"md"}>
+                Данные пациента
+              </Text>
 
-          <Text px={2} fontWeight={"semibold"} fontSize={"md"}>
-            Данные пациента
-          </Text>
-
-          <Select
-            w={"100%"}
-            variant="rounded"
-            selectedValue={type}
-            placeholder="Тип диабета"
-            dropdownIcon={
-              <Box mr={2}>
-                <MaterialCommunityIcons
-                  name="chevron-down"
-                  size={24}
-                  color={colorMode == "light" ? "#525252" : "white"}
-                />
-              </Box>
-            }
-            _selectedItem={{
-              endIcon: (
-                <MaterialCommunityIcons
-                  name="check"
-                  size={24}
-                  color={colorMode == "light" ? "#525252" : "white"}
-                />
-              ),
-            }}
-            onValueChange={(itemValue) => setType(itemValue)}>
-            <Select.Item borderRadius={16} label="I тип" value="1" />
-            <Select.Item borderRadius={16} label="II тип" value="2" />
-            <Select.Item borderRadius={16} label="Не указан" value="3" />
-          </Select>
-          <Select
-            w={"100%"}
-            variant="rounded"
-            selectedValue={gender}
-            placeholder="Пол"
-            dropdownIcon={
-              <Box mr={2}>
-                <MaterialCommunityIcons
-                  name="chevron-down"
-                  size={24}
-                  color={colorMode == "light" ? "#525252" : "white"}
-                />
-              </Box>
-            }
-            _selectedItem={{
-              bg: "indigo.100",
-              endIcon: (
-                <MaterialCommunityIcons
-                  name="check"
-                  size={24}
-                  color={colorMode == "light" ? "#525252" : "white"}
-                />
-              ),
-            }}
-            onValueChange={(itemValue) => setGender(itemValue)}>
-            <Select.Item borderRadius={16} label="Мужской" value="М" />
-            <Select.Item borderRadius={16} label="Женский" value="Ж" />
-          </Select>
+              <Select
+                w={"100%"}
+                variant="rounded"
+                selectedValue={type}
+                placeholder="Тип диабета"
+                dropdownIcon={
+                  <Box mr={2}>
+                    <MaterialCommunityIcons
+                      name="chevron-down"
+                      size={24}
+                      color={colorMode == "light" ? "#525252" : "white"}
+                    />
+                  </Box>
+                }
+                _selectedItem={{
+                  endIcon: (
+                    <MaterialCommunityIcons
+                      name="check"
+                      size={24}
+                      color={colorMode == "light" ? "#525252" : "white"}
+                    />
+                  ),
+                }}
+                onValueChange={(itemValue) => setType(itemValue)}>
+                <Select.Item borderRadius={16} label="I тип" value="1" />
+                <Select.Item borderRadius={16} label="II тип" value="2" />
+                <Select.Item borderRadius={16} label="Не указан" value="3" />
+              </Select>
+              <Select
+                w={"100%"}
+                variant="rounded"
+                selectedValue={gender}
+                placeholder="Пол"
+                dropdownIcon={
+                  <Box mr={2}>
+                    <MaterialCommunityIcons
+                      name="chevron-down"
+                      size={24}
+                      color={colorMode == "light" ? "#525252" : "white"}
+                    />
+                  </Box>
+                }
+                _selectedItem={{
+                  bg: "indigo.100",
+                  endIcon: (
+                    <MaterialCommunityIcons
+                      name="check"
+                      size={24}
+                      color={colorMode == "light" ? "#525252" : "white"}
+                    />
+                  ),
+                }}
+                onValueChange={(itemValue) => setGender(itemValue)}>
+                <Select.Item borderRadius={16} label="Мужской" value="М" />
+                <Select.Item borderRadius={16} label="Женский" value="Ж" />
+              </Select>
+            </>
+          )}
           <HStack
             w={"100%"}
             justifyContent={"flex-start"}
@@ -269,6 +279,29 @@ const Page = () => {
               }
             />
           </HStack>
+          <Input
+            isDisabled
+            variant="rounded"
+            placeholder="TOKEN"
+            value={token}
+            rightElement={
+              <TouchableOpacity onPress={handleCopyToken}>
+                <Box
+                  borderLeftWidth={1}
+                  borderLeftColor={"muted.200"}
+                  p={2}
+                  borderRadius={16}
+                  children={
+                    <Entypo
+                      name="copy"
+                      size={18}
+                      color={colorMode == "light" ? "#525252" : "white"}
+                    />
+                  }
+                />
+              </TouchableOpacity>
+            }
+          />
           <Button
             borderRadius={100}
             colorScheme="indigo"

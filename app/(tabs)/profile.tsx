@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Text, Button, ScrollView, VStack, Center, Stack } from "native-base";
+import { Text, VStack, Center } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";

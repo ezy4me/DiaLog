@@ -3,7 +3,7 @@ import useDishStore from "@/app/store/dishStore";
 import useNutritionStore from "@/app/store/nutritionStore";
 import getCurrentDate from "@/utils/getCurrentDate";
 import getCurrentTime from "@/utils/getCurrentTime";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Box,
   Button,
@@ -39,7 +39,7 @@ export const NutritionModalForm = ({
     dishes: state.dishesData,
   }));
 
-  const user  = useAuthStore((state) => state.user);
+  const user = useAuthStore((state) => state.user);
 
   const { getDishes } = useDishStore((state) => ({
     getDishes: state.getDishes,
@@ -60,7 +60,7 @@ export const NutritionModalForm = ({
       return;
     }
 
-    await addNutrition(user.id,{
+    await addNutrition(user.id, {
       dishId: dishes.find((d: any) => d.name === selectedDish).id,
       nutritionTypeId: parseInt(selectedType),
       date: new Date(),
@@ -113,6 +113,36 @@ export const NutritionModalForm = ({
               </HStack>
             </Modal.Header>
             <Modal.Body>
+              <HStack mb={2} justifyContent={"space-between"} space={4}>
+                <Button
+                  colorScheme={"transparent"}
+                  flex="1"
+                  borderRadius={32}
+                  rightIcon={
+                    <Entypo
+                      name="calendar"
+                      size={18}
+                      color={colorMode == "light" ? "black" : "white"}
+                    />
+                  }
+                  bg={"emerald.500"}>
+                  {selectedDate}
+                </Button>
+                <Button
+                  colorScheme={"transparent"}
+                  flex="1"
+                  borderRadius={32}
+                  rightIcon={
+                    <Entypo
+                      name="clock"
+                      size={18}
+                      color={colorMode == "light" ? "black" : "white"}
+                    />
+                  }
+                  bg={"emerald.500"}>
+                  {selectedTime}
+                </Button>
+              </HStack>
               <Select
                 my={2}
                 w={"100%"}
@@ -167,7 +197,7 @@ export const NutritionModalForm = ({
                   ),
                 }}
                 onValueChange={(itemValue) => setSelectedDish(itemValue)}>
-                {dishes.map((d: any) => (
+                {dishes && dishes?.map((d: any) => (
                   <Select.Item
                     borderRadius={16}
                     key={d.id}

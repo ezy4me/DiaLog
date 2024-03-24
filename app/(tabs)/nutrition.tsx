@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import {
-  VStack,
-} from "native-base";
+import { VStack } from "native-base";
 import FoodList from "@/components/Food/FoodList";
 import NutritionControls from "@/components/Food/NutritionControls";
 import DishList from "@/components/Food/DishList";
-
-
 
 const Page = () => {
   const [dataType, setDataType] = useState("food");
@@ -24,7 +20,6 @@ const Page = () => {
       dataListComponent = null;
   }
 
-
   return (
     <VStack
       _light={{ bg: "coolGray.50" }}
@@ -35,7 +30,7 @@ const Page = () => {
       alignItems="center"
       space="2"
       px="4">
-      <NutritionControls onDataTypeChange={setDataType}/>
+      <NutritionControls onDataTypeChange={setDataType} />
       {dataListComponent}
     </VStack>
   );

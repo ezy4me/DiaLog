@@ -40,6 +40,10 @@ const Page = () => {
       setStartUp(Promise.resolve(false));
       router.push("/(tabs)");
     }
+    else if (user?.role === "DOCTOR") {
+      setStartUp(Promise.resolve(false));
+      router.push("/(tabs)/doctor");
+    }
   }, [user]);
 
   const onHandleRegister = async () => {

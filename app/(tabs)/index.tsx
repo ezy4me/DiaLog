@@ -1,14 +1,10 @@
 import { GlucoseModalForm } from "@/components/BloodSugar/GlucoseModalForm";
 import { InsulinModalForm } from "@/components/Insulin/InsulinModalForm";
-import { FoodModalForm } from "@/components/Food/FoodModalForm";
 import {
   Entypo,
   FontAwesome,
-  FontAwesome5,
-  Fontisto,
   Ionicons,
   MaterialCommunityIcons,
-  MaterialIcons,
 } from "@expo/vector-icons";
 import {
   Text,
@@ -17,12 +13,9 @@ import {
   ScrollView,
   HStack,
   Heading,
-  Stack,
   useColorMode,
   Divider,
 } from "native-base";
-import React, { useEffect } from "react";
-import { TouchableOpacity } from "react-native";
 import useAuthStore from "../store/authStore";
 import { NutritionModalForm } from "@/components/Nutrition/NutritionModalForm";
 

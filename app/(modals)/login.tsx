@@ -5,22 +5,14 @@ import {
   Center,
   FormControl,
   HStack,
-  Heading,
   Input,
-  VStack,
   Text,
   ScrollView,
-  Stack,
   useColorMode,
   AspectRatio,
   Image,
-  Divider,
 } from "native-base";
-import {
-  Entypo,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import useAppSettingsStore from "../store/appSettingsStore";
 import useAuthStore from "../store/authStore";
@@ -45,8 +37,10 @@ const Page = () => {
   useEffect(() => {
     if (user?.role === "USER") {
       setStartUp(Promise.resolve(false));
-      console.log(user);
       router.push("/(tabs)");
+    } else if (user?.role === "DOCTOR") {
+      setStartUp(Promise.resolve(false));
+      router.push("/(tabs)/doctor");
     }
   }, [user]);
 

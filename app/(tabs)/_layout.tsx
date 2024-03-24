@@ -1,9 +1,10 @@
 import { View, Text, ViewStyle } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "expo-router";
 import Colors from "@/constants/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useColorMode } from "native-base";
+import useAuthStore from "@/app/store/authStore";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
@@ -33,6 +34,58 @@ function TabBarIcon(props: {
 
 const Layout = () => {
   const { colorMode } = useColorMode();
+  const user = useAuthStore((state) => state.user);
+  const [role, setRole] = useState<string>("USER");
+
+  useEffect(() => {
+    if (user) setRole(user?.role!);
+  }, [user]);
+
+  const tabsInfo: any = [
+    {
+      name: "diary",
+      headerTitle: "Дневник",
+      tabBarLabel: "Дневник",
+      iconName: "google-analytics",
+      href: role === "DOCTOR" ? null : "diary",
+    },
+    {
+      name: "nutrition",
+      headerTitle: "Питание",
+      tabBarLabel: "Питание",
+      iconName: "food-apple",
+      href: role === "DOCTOR" ? null : "nutrition",
+    },
+    {
+      name: "index",
+      headerTitle: "Дом",
+      tabBarLabel: "Дом",
+      iconName: "home",
+      href: role === "DOCTOR" ? null : "/",
+    },
+    {
+      name: "book",
+      headerTitle: "Знания",
+      tabBarLabel: "Знания",
+      iconName: "book",
+      href: role === "DOCTOR" ? null : "book",
+    },
+
+    {
+      name: "doctor",
+      headerTitle: "Дом",
+      tabBarLabel: "Дом",
+      iconName: "home",
+      href: role === "USER" ? null : "doctor",
+    },
+    {
+      name: "patients",
+      headerTitle: "Пациенты",
+      tabBarLabel: "Пациенты",
+      href: role === "USER" ? null : "patients",
+      iconName: "account-supervisor",
+    },
+  ];
 
   return (
     <Tabs
@@ -63,56 +116,27 @@ const Layout = () => {
           padding: 2,
         },
       }}>
-      <Tabs.Screen
-        name="diary"
-        options={{
-          headerTitle: "Дневник",
-          tabBarLabel: "Дневник",
-          tabBarIcon: ({ focused, color, size }) => (
-            <TabBarIcon
-              name="google-analytics"
-              focused={focused}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="nutrition"
-        options={{
-          headerTitle: "Питание",
-          tabBarLabel: "Питание",
-          tabBarIcon: ({ focused, color, size }) => (
-            <TabBarIcon name="food-apple" focused={focused} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="index"
-        options={{
-          headerTitle: "Дом",
-          tabBarLabel: "Дом",
-          tabBarIcon: ({ focused, color, size }) => (
-            <TabBarIcon name="home" focused={focused} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="book"
-        options={{
-          headerTitle: "Знания",
-          tabBarLabel: "Знания",
-          tabBarIcon: ({ focused, color, size }) => (
-            <TabBarIcon name="book" focused={focused} color={color} />
-          ),
-        }}
-      />
+      {(tabsInfo || []).map((tab: any) => (
+        <Tabs.Screen
+          key={tab.name}
+          name={tab.name}
+          options={{
+            headerTitle: tab.headerTitle,
+            tabBarLabel: tab.tabBarLabel,
+            href: role === "USER" ? tab.href : tab.href,
+            tabBarIcon: ({ focused, color }) => (
+              <TabBarIcon name={tab.iconName} focused={focused} color={color} />
+            ),
+          }}
+        />
+      ))}
+
       <Tabs.Screen
         name="profile"
         options={{
           headerTitle: "Профиль",
           tabBarLabel: "Профиль",
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: ({ focused, color }) => (
             <TabBarIcon name="account" focused={focused} color={color} />
           ),
         }}

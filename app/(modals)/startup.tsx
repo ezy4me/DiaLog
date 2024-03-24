@@ -1,20 +1,4 @@
-import {
-  Box,
-  Button,
-  Center,
-  FormControl,
-  HStack,
-  Heading,
-  Input,
-  VStack,
-  Text,
-  ScrollView,
-  Stack,
-  useColorMode,
-  Image,
-  AspectRatio,
-} from "native-base";
-import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Box, VStack, useColorMode } from "native-base";
 import { useState } from "react";
 import CustomStepper from "../UI/CustomStepper";
 import { MainScreen } from "@/components/StartUp/MainScreen";
@@ -23,7 +7,6 @@ import { BloodSugarScreen } from "@/components/StartUp/BloodSugarScreen";
 import { NutritionScreen } from "@/components/StartUp/NutritionScreen";
 
 const Page = () => {
-  const { colorMode } = useColorMode();
   const [currentStep, setCurrentStep] = useState(0);
 
   const steps = [
@@ -36,9 +19,9 @@ const Page = () => {
     <Box key={2}>
       <BloodSugarScreen />
     </Box>,
-     <Box key={3}>
-     <NutritionScreen />
-   </Box>,
+    <Box key={3}>
+      <NutritionScreen />
+    </Box>,
   ];
 
   const handleNext = () => {

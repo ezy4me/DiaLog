@@ -7,7 +7,6 @@ import {
   useColorMode,
   Stack,
 } from "native-base";
-import React, { useEffect } from "react";
 import Colors from "@/constants/Colors";
 import {
   FontAwesome5,

@@ -1,37 +1,55 @@
-import React, { useEffect, useState } from "react";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions, View } from "react-native";
-import { Center, Spinner, useColorMode } from "native-base";
+import { Center, useColorMode } from "native-base";
 import getCurrentDate from "@/utils/getCurrentDate";
-import useAuthStore from "@/app/store/authStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import useNutritionStore from "@/app/store/nutritionStore";
 
 export function NutritionChart({ data }: any) {
   const { colorMode } = useColorMode();
 
   const totalCalories = (item: any) => {
-    const total = item.dish.foodDishes.reduce(
-      (total: any, dish: any) => total + (dish.food.energy * dish.weight) / 100,
-      0
-    );
-    return total.toFixed(0);
+    if (
+      data &&
+      Array.isArray(data) &&
+      item &&
+      item.dish &&
+      item.dish.foodDishes &&
+      Array.isArray(item.dish.foodDishes)
+    ) {
+      const t = item.dish.foodDishes.reduce((total: any, dish: any) => {
+        const energy = parseFloat(dish.food.energy);
+        const weight = parseFloat(dish.weight);
+        if (!isNaN(energy) && !isNaN(weight)) {
+          return total + (energy * weight) / 100;
+        } else {
+          return total;
+        }
+      }, 0);
+
+      return t !== undefined ? Math.round(t) : 0;
+    } else {
+      return 0;
+    }
   };
 
   const chartData = {
-    labels: data
-      ? data?.map((item: any) => getCurrentDate(item.date).substring(0, 5))
-      : [],
+    labels:
+      Array.isArray(data) && data.length > 0
+        ? data?.map((item: any) => getCurrentDate(item.date).substring(0, 5))
+        : [],
     datasets: [
       {
-        data: data ? data?.map((item: any) => totalCalories(item)) : [],
+        data:
+          Array.isArray(data) && data.length > 0
+            ? data?.map((item: any) => totalCalories(item))
+            : [],
       },
     ],
   };
 
   return (
     <View style={{ width: "100%", height: 255 }}>
-      {data?.length === 0 ? (
+      {Array.isArray(data) && data.length === 0 ? (
         <Center h={"full"}>
           <MaterialCommunityIcons
             name="database-clock"

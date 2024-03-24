@@ -20,6 +20,7 @@ import {
 } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Platform } from "react-native";
+import ConfirmAllert from "../Allerts/ConfirmAllert";
 
 export const DishModalForm = React.memo(
   ({
@@ -40,6 +41,8 @@ export const DishModalForm = React.memo(
     callBack?: () => void;
   }) => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+
     const { colorMode } = useColorMode();
 
     const products = useNutritionStore((state) => state.food);
@@ -101,13 +104,16 @@ export const DishModalForm = React.memo(
       }
     };
 
-    const onDeleteDish = async (id: number) => {
-      console.log(id);
+    const onHandleDelete = async () => {
+      setIsAlertOpen(true);
+    };
 
-      await deleteDish(id);
+    const onDeleteConfirmed = async () => {
+      await deleteDish(data.id);
       onClose && onClose();
       callBack && callBack();
       setModalVisible(false);
+      setIsAlertOpen(false);
     };
 
     const handleSave = () => {
@@ -191,7 +197,7 @@ export const DishModalForm = React.memo(
                   />
                   {edit && (
                     <Button
-                      onPress={() => onDeleteDish(data.id)}
+                      onPress={() => onHandleDelete()}
                       p={2}
                       colorScheme={"transparent"}
                       borderRadius={100}
@@ -301,6 +307,11 @@ export const DishModalForm = React.memo(
             </Modal.Content>
           </KeyboardAvoidingView>
         </Modal>
+        <ConfirmAllert
+          isOpen={isAlertOpen}
+          onClose={() => setIsAlertOpen(false)}
+          onConfirm={onDeleteConfirmed}
+        />
       </Box>
     );
   }

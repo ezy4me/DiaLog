@@ -8,7 +8,6 @@ import {
   Image,
   Spinner,
   ScrollView,
-  Stack,
 } from "native-base";
 import React, { useEffect, useState } from "react";
 
@@ -38,15 +37,6 @@ const BookInfo = () => {
     require("../../assets/images/food.png"),
     require("../../assets/images/fitness.png"),
     require("../../assets/images/blood-test.png"),
-  ];
-
-  const colors = [
-    "amber.200",
-    "pink.200",
-    "blue.200",
-    "violet.200",
-    "green.200",
-    "yellow.200",
   ];
 
   if (!data || !data.title) {
