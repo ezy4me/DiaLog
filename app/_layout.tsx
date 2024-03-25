@@ -1,11 +1,11 @@
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack, useRouter } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 
-import { NativeBaseProvider } from "native-base";
+import { Box, NativeBaseProvider } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { colorModeManager, theme } from "./theme";
@@ -78,7 +78,6 @@ const config = {
 
 function RootLayoutNav() {
   const router = useRouter();
-
   const startUp = useAppSettingsStore((state) => state.startUp);
 
   const { user, accessToken, getUser, getAccessToken } = useAuthStore(
@@ -95,6 +94,11 @@ function RootLayoutNav() {
       if (!user?.id) await getUser();
       if (!accessToken) {
         await getAccessToken();
+      }
+      if (user?.role === "USER") {
+        router.push("/(tabs)");
+      } else if (user?.role === "DOCTOR") {
+        router.push("/(tabs)/patients");
       }
     };
     fetchData();
@@ -261,7 +265,7 @@ function RootLayoutNav() {
             },
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="(modals)/chat/chat"
           options={{
             headerTitle: "Чат",

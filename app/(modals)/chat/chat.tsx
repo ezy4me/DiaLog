@@ -77,7 +77,8 @@ const Chat = () => {
   return (
     <VStack flex={1}>
       <ScrollView
-        p={4}
+        px={4}
+        pt={2}
         ref={scrollViewRef}
         contentContainerStyle={{ flexGrow: 1 }}
         keyboardShouldPersistTaps="handled"

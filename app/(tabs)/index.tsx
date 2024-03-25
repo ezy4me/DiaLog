@@ -34,6 +34,21 @@ const Page = () => {
           borderRadius={16}
           justifyContent={"space-between"}
           alignItems={"center"}>
+          <Box
+            borderRadius={100}
+            bg={{
+              linearGradient: {
+                colors: ["indigo.500", "indigo.600"],
+                start: [0, 0],
+                end: [1, 1],
+              },
+            }}
+            alignItems={"center"}
+            justifyContent={"center"}
+            w={32}
+            h={32}>
+            <FontAwesome name="user" size={48} color={"white"} />
+          </Box>
           <VStack
             p={4}
             flex={1}
@@ -83,21 +98,6 @@ const Page = () => {
               <Text fontSize={"sm"}> 0 kcal</Text>
             </HStack>
           </VStack>
-          <Box
-            borderRadius={100}
-            bg={{
-              linearGradient: {
-                colors: ["indigo.500", "indigo.600"],
-                start: [0, 0],
-                end: [1, 1],
-              },
-            }}
-            alignItems={"center"}
-            justifyContent={"center"}
-            w={32}
-            h={32}>
-            <FontAwesome name="user" size={48} color={"white"} />
-          </Box>
         </HStack>
 
         <Heading size={"sm"} p={4} borderRadius={16}>

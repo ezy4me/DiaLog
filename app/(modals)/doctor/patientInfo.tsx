@@ -1,12 +1,18 @@
 import useAuthStore from "@/app/store/authStore";
 import useDoctorStore from "@/app/store/doctorStore";
 import { CustomDatePicker } from "@/app/UI/CustomDatePicker";
+import ConfirmAllert from "@/components/Allerts/ConfirmAllert";
 import PatientBloodSugarList from "@/components/Doctor/BloodSugar/PatientBloodSugarList";
 import PatientInsulinDosageList from "@/components/Doctor/InsulinDosage/PatientInsulinDosageList";
 import PatientNutritionList from "@/components/Doctor/Nutrition/PatientNutritionList";
 import convertToISODate from "@/utils/convertToISODate";
 import getCurrentDate from "@/utils/getCurrentDate";
-import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
+import {
+  Entypo,
+  FontAwesome,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import {
   Button,
@@ -22,16 +28,21 @@ import { useEffect, useState } from "react";
 
 const Page = () => {
   const { colorMode } = useColorMode();
-  const router = useRouter()
+  const router = useRouter();
+
+  const { user } = useAuthStore();
 
   const [datePickerVisible, setDatePickerVisible] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<string>(getCurrentDate());
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
-  const { patient, patientInfo, getPatientInfo } = useDoctorStore((state) => ({
-    patient: state.patient,
-    patientInfo: state.patientInfo,
-    getPatientInfo: state.getPatientInfo,
-  }));
+  const { patient, patientInfo, getPatientInfo, deletePatient } =
+    useDoctorStore((state) => ({
+      patient: state.patient,
+      patientInfo: state.patientInfo,
+      getPatientInfo: state.getPatientInfo,
+      deletePatient: state.deletePatient,
+    }));
 
   const toggleDatePicker = () => {
     setDatePickerVisible(!datePickerVisible);
@@ -53,9 +64,18 @@ const Page = () => {
     fetchData();
   }, [selectedDate]);
 
-
   const navigateToPage = (route: any) => {
     router.push(route);
+  };
+
+  const onHandleDelete = async () => {
+    setIsAlertOpen(true);
+  };
+
+  const onDeleteConfirmed = async () => {
+    await deletePatient(user.id, patient.patientId);
+    navigateToPage('(tabs)/patients')
+    setIsAlertOpen(false);
   };
 
   return (
@@ -94,12 +114,13 @@ const Page = () => {
               w={20}
               p={2}
               colorScheme={"indigo"}
-              onPress={() => navigateToPage('/(modals)/chat/chat')}
+              onPress={() => navigateToPage("/(modals)/chat/chat")}
               borderRadius={100}
               rightIcon={
                 <Ionicons name="chatbubble-ellipses" size={18} color="white" />
               }
-              bg={"indigo.700"}/>
+              bg={"indigo.700"}
+            />
             <Button
               w={40}
               p={2}
@@ -110,6 +131,20 @@ const Page = () => {
               bg={"indigo.700"}>
               {selectedDate}
             </Button>
+            <Button
+              onPress={() => onHandleDelete()}
+              colorScheme={"red"}
+              bg={"transparent"}
+              borderRadius={100}
+              py={1}
+              leftIcon={
+                <MaterialCommunityIcons
+                  name="delete"
+                  size={24}
+                  color={"#ef4444"}
+                />
+              }
+            />
           </HStack>
         </Stack>
         {patientInfo && (
@@ -127,6 +162,11 @@ const Page = () => {
           />
         )}
       </VStack>
+      <ConfirmAllert
+        isOpen={isAlertOpen}
+        onClose={() => setIsAlertOpen(false)}
+        onConfirm={onDeleteConfirmed}
+      />
     </ScrollView>
   );
 };

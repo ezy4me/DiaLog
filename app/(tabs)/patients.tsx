@@ -28,7 +28,6 @@ const Page = () => {
     const fetchData = async () => {
       await getPatients(user?.id);
     };
-
     fetchData();
   }, [user]);
 

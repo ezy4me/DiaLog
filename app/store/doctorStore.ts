@@ -12,6 +12,7 @@ interface DoctorActions {
   getPatientInfo: (patientId: number, date: any) => Promise<any>;
   setPatient: (patient: any) => Promise<any>;
   addPatient: (doctorId: number, token: string) => Promise<any>;
+  deletePatient: (doctorId: number, patientId: number,) => Promise<any>;
 }
 
 type DoctorStore = DoctorState & DoctorActions;
@@ -43,6 +44,17 @@ const useDoctorStore = create<DoctorStore>((set) => ({
       await DoctorAPI.addPatient(doctorId, token);
     } catch (error) {
       console.error("Error add patient:", error);
+    }
+  },
+
+  deletePatient: async (doctorId, patientId) => {
+    try {
+      await DoctorAPI.deletePatient(doctorId, patientId);
+      const data = await DoctorAPI.getPatients(doctorId);
+      set({ patients: data });
+
+    } catch (error) {
+      console.error("Error delete patient:", error);
     }
   },
 

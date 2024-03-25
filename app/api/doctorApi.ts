@@ -31,4 +31,15 @@ export const DoctorAPI = {
       console.log(error);
     }
   },
+
+  async deletePatient(doctorId: number, patientId: number) {
+    try {
+      const response = await authInstance.delete(
+        `doctor` + `?doctorId=${doctorId}&patientId=${patientId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
